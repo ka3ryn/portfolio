@@ -1,5 +1,8 @@
 (function () {
 
+  // Disable on touch devices
+  if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
+
   // Traced from reference image (viewBox 0 0 32 34):
   // T=tip(2,2)  R=right-outer(28,18)  N=notch(22,22)  B=bottom(8,30)
   // N is close to R creating the tight concave angle seen in the image.
@@ -35,7 +38,7 @@
 
   var style = document.createElement('style');
   style.textContent = [
-    '* { cursor: none !important; }',
+    '*,*::before,*::after,*:hover,*:active,*:focus,svg,svg *{cursor:none!important}',
     '#cur-arrow { position:fixed; pointer-events:none; z-index:999999; opacity:0; }',
 
     '@keyframes glitter-out {',

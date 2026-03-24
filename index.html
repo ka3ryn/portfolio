@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kathryn's Portfolio</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <style>* { cursor: none !important; }</style>
+  <style>*,*::before,*::after,*:hover,*:active,*:focus,svg,svg *{cursor:none!important}</style>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -1546,6 +1546,106 @@
     background: linear-gradient(135deg, var(--cream), var(--lavender));
     box-shadow: 0 16px 48px rgba(0,0,0,0.06);
   }
+
+  /* ===== MOBILE RESPONSIVE ===== */
+  @media (max-width: 768px) {
+
+    /* --- Nav --- */
+    nav { padding: 16px 20px; }
+    nav.scrolled { padding: 12px 20px; }
+    .nav-links { display: none; }
+    .mobile-toggle { display: flex; }
+
+    /* Mobile menu overlay */
+    .nav-links.show {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--bg);
+      z-index: 998;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+    }
+    .nav-links.show li { list-style: none; }
+    .nav-links.show a {
+      font-size: 22px;
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'Playfair Display', serif;
+    }
+    .nav-links.show .nav-butterfly,
+    .nav-links.show .sparkles { display: none; }
+    .nav-links.show .dropdown { display: none; }
+
+    /* Hamburger → X */
+    .mobile-toggle { z-index: 999; position: relative; }
+    .mobile-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .mobile-toggle.open span:nth-child(2) { opacity: 0; }
+    .mobile-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* --- Garden intro --- */
+    .garden-header { padding: 0 20px; text-align: center; }
+    .garden-title { font-size: clamp(20px, 6vw, 32px); }
+    .garden-area {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      max-width: 320px;
+      margin-top: 28px;
+    }
+    .garden-plot { width: 80px; height: 120px; }
+    .garden-instruction { font-size: 13px; padding: 0 24px; text-align: center; }
+
+    /* --- Hero --- */
+    .hero { padding: 100px 20px 60px; }
+    .hero-content {
+      flex-direction: column;
+      gap: 32px;
+      text-align: center;
+      align-items: center;
+    }
+    .hero-visual { order: -1; }
+    .hero-image-wrapper { width: 180px; height: 180px; }
+    .hero-float-card { display: none; }
+    .hero-desc { margin: 0 auto; max-width: 100%; }
+    .hero-tags { justify-content: center; }
+    .hero-cta { justify-content: center; flex-wrap: wrap; }
+    .hero-scroll-prompt { justify-content: center; }
+    .magic-flower { display: none; }
+
+    /* --- Sections --- */
+    .about { padding: 40px 20px 80px; }
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    .experience { padding: 40px 20px 80px; }
+    .projects { padding: 40px 20px 80px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills { padding: 40px 20px 80px; }
+    .contact { padding: 60px 20px 80px; }
+    .section-header { padding-top: 60px; margin-bottom: 32px; }
+
+    /* --- Typography --- */
+    .section-title { font-size: clamp(26px, 7vw, 40px); }
+    .contact-headline { font-size: clamp(26px, 7vw, 48px); }
+
+    /* --- Experience timeline --- */
+    .timeline-item { flex-direction: column; gap: 16px; }
+    .timeline-logo { width: 48px; height: 48px; }
+
+    /* --- Skills grid --- */
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ===== SMALL PHONE (max-width: 480px) ===== */
+  @media (max-width: 480px) {
+    .garden-plot { width: 68px; height: 105px; }
+    .garden-area { max-width: 280px; gap: 6px; }
+    .hero-image-wrapper { width: 150px; height: 150px; }
+    .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+    .hero-cta { flex-direction: column; align-items: center; }
+    .skills-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -1638,7 +1738,7 @@
       </ul>
     </li>
   </ul>
-  <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">
+  <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show'); this.classList.toggle('open');" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
