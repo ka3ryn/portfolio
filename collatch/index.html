@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collatch — Kathryn Chiew</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --text: #1a1a1a;
+    --text-light: #6b6b6b;
+    --accent: #E8735A;
+    --accent-soft: #F4D1CB;
+    --lavender: #C8B6E2;
+    --sky: #A8D8EA;
+    --peach: #FFDAB9;
+    --sage: #C5D5CB;
+    --cream: #FFF8F0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ===== Floating butterflies + auras (same as main) ===== */
+  .floating-elements {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .butterfly-svg {
+    position: absolute;
+    opacity: 0;
+    animation: butterflyFloat 24s ease-in-out infinite, butterflyFadeIn 2s ease forwards;
+  }
+  .butterfly-svg:nth-child(1) { top: 8%; left: 5%; animation-delay: 0s, 0.5s; animation-duration: 28s, 2s; }
+  .butterfly-svg:nth-child(2) { top: 30%; right: 8%; animation-delay: -6s, 1s; animation-duration: 32s, 2s; }
+  .butterfly-svg:nth-child(3) { top: 60%; left: 3%; animation-delay: -14s, 0.3s; animation-duration: 26s, 2s; }
+  .butterfly-svg:nth-child(4) { top: 80%; right: 12%; animation-delay: -9s, 1.2s; animation-duration: 30s, 2s; }
+  .butterfly-svg:nth-child(5) { top: 45%; left: 55%; animation-delay: -20s, 0.7s; animation-duration: 34s, 2s; }
+
+  @keyframes butterflyFloat {
+    0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    10% { transform: translate(15px, -25px) rotate(8deg) scale(1.02); }
+    20% { transform: translate(40px, -15px) rotate(-3deg) scale(0.98); }
+    30% { transform: translate(25px, -50px) rotate(12deg) scale(1.04); }
+    40% { transform: translate(-10px, -35px) rotate(-5deg) scale(1); }
+    50% { transform: translate(-30px, -55px) rotate(6deg) scale(1.03); }
+    60% { transform: translate(-15px, -25px) rotate(-8deg) scale(0.97); }
+    70% { transform: translate(10px, -40px) rotate(10deg) scale(1.01); }
+    80% { transform: translate(30px, -20px) rotate(-4deg) scale(1.05); }
+    90% { transform: translate(10px, -10px) rotate(3deg) scale(0.99); }
+    100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  }
+  @keyframes butterflyFadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes wingFlutter { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.7); } }
+  .butterfly-svg .wing-left { animation: wingFlutter 1.2s ease-in-out infinite; transform-origin: right center; }
+  .butterfly-svg .wing-right { animation: wingFlutter 1.2s ease-in-out infinite 0.05s; transform-origin: left center; }
+
+  .cloud-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: drift 40s ease-in-out infinite;
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, 15px) scale(1.05); }
+    66% { transform: translate(-20px, -10px) scale(0.95); }
+  }
+
+  /* ===== Navigation ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250, 250, 248, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    transition: all 0.3s ease;
+  }
+  nav.scrolled {
+    padding: 14px 48px;
+    box-shadow: 0 1px 20px rgba(0,0,0,0.04);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--accent), #c75d8f, var(--lavender));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all 0.3s ease;
+  }
+  .nav-logo:hover {
+    background: linear-gradient(135deg, var(--lavender), var(--accent), #c75d8f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    transform: scale(1.03);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links li { position: relative; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 4px 0;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--lavender), var(--accent-soft), var(--sky));
+    transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: drop-shadow(0 0 4px rgba(200, 182, 226, 0.5));
+  }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* Each nav link unique accent on hover */
+  .nav-links > li:nth-child(1) a:hover { color: var(--accent); }
+  .nav-links > li:nth-child(2) a:hover { color: #c75d8f; }
+  .nav-links > li:nth-child(3) a:hover { color: #7c5db8; }
+  .nav-links > li:nth-child(4) a:hover { color: #4a8da8; }
+  .nav-links > li:nth-child(5) a:hover { color: #4a7a56; }
+  .nav-links > li:nth-child(6) a:hover { color: var(--accent); }
+
+  /* Butterfly that appears on hover */
+  .nav-links > li > a .nav-butterfly {
+    position: absolute;
+    right: -22px;
+    top: 50%;
+    transform: translateY(-50%) scale(0) rotate(-15deg);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+  }
+  .nav-links > li > a:hover .nav-butterfly {
+    transform: translateY(-50%) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+
+  /* Sparkle dots on hover */
+  .nav-links > li > a .sparkles {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+  }
+  .nav-links > li > a .sparkle {
+    position: absolute;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+  .nav-links > li > a .sparkle:nth-child(1) { top: -6px; left: 20%; background: var(--lavender); }
+  .nav-links > li > a .sparkle:nth-child(2) { bottom: -6px; right: 15%; background: var(--accent-soft); }
+  .nav-links > li > a .sparkle:nth-child(3) { top: 50%; left: -8px; background: var(--sky); }
+  .nav-links > li > a:hover .sparkle {
+    opacity: 0.8;
+    animation: sparkleFloat 1s ease-in-out infinite;
+  }
+  .nav-links > li > a:hover .sparkle:nth-child(1) { animation-delay: 0s; }
+  .nav-links > li > a:hover .sparkle:nth-child(2) { animation-delay: 0.2s; }
+  .nav-links > li > a:hover .sparkle:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes sparkleFloat {
+    0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+    50% { transform: translateY(-4px) scale(1.4); opacity: 1; }
+  }
+
+  /* Dropdown */
+  .has-dropdown { position: relative; }
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: white;
+    border-radius: 16px;
+    padding: 12px 8px;
+    min-width: 200px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.04);
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 200;
+  }
+  .has-dropdown:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+  .dropdown li a {
+    display: block;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: var(--text-light);
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    font-weight: 400;
+  }
+  .dropdown li a::after { display: none; }
+  .dropdown li a:hover {
+    background: var(--bg);
+    color: var(--accent);
+  }
+  .dropdown li a.dropdown-active {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .mobile-toggle span {
+    width: 22px; height: 1.5px;
+    background: var(--text);
+    transition: all 0.3s;
+  }
+  @media (max-width: 768px) {
+    .mobile-toggle { display: flex; }
+    .nav-links { display: none; }
+  }
+
+  /* ===== Skill Pills (for project meta) ===== */
+  .skill-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .skill-pill-sm {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 400;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.06);
+    color: var(--text-light);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+  .skill-pill-sm:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    border-color: var(--lavender);
+  }
+  .pill-emoji {
+    font-size: 13px;
+  }
+
+  /* ===== Content Wrapper ===== */
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .content-wide {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  /* ===== Project Hero ===== */
+  .project-hero {
+    padding-top: 140px;
+    padding-bottom: 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .project-hero-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .project-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(168, 216, 234, 0.2);
+    color: #4a8da8;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .project-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 5vw, 64px);
+    font-weight: 400;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+  .project-hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .project-hero-subtitle {
+    font-size: 18px;
+    color: var(--text-light);
+    line-height: 1.7;
+    max-width: 900px;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .project-meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px 48px;
+    align-items: start;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .meta-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+  .meta-value {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  /* ===== Hero Thumbnail ===== */
+  .hero-thumbnail {
+    margin-top: 48px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.06);
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1s;
+  }
+  .hero-thumbnail img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ===== Sections ===== */
+  .case-section {
+    padding: 48px 0;
+    position: relative;
+    scroll-margin-top: 100px;
+  }
+
+  #sec-solution {
+    padding: 24px 0;
+  }
+
+  .section-aura {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .case-section-label {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .case-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 3.5vw, 44px);
+    font-weight: 500;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .case-body {
+    font-size: 16px;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  .case-body p {
+    margin-bottom: 20px;
+  }
+
+  /* ===== Butterfly Divider ===== */
+  .butterfly-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 10px 0;
+    opacity: 0.25;
+  }
+  .butterfly-divider .dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--lavender);
+  }
+
+  /* ===== Insight Cards ===== */
+  .insight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  .insight-card {
+    background: white;
+    border-radius: 20px;
+    padding: 28px;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .insight-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 3px;
+    border-radius: 20px 20px 0 0;
+  }
+  .insight-card:nth-child(1)::before { background: var(--accent); }
+  .insight-card:nth-child(2)::before { background: var(--lavender); }
+  .insight-card:nth-child(3)::before { background: var(--sky); }
+  .insight-card:nth-child(4)::before { background: var(--sage); }
+
+  .insight-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+  }
+
+  /* Survey visual layout - flags + arrow + insights */
+  .survey-visual {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+    align-items: center;
+    margin-top: 32px;
+  }
+
+  .flags-block {
+    background: rgba(168, 216, 234, 0.22);
+    border-radius: 24px;
+    padding: 36px 32px;
+    text-align: center;
+  }
+
+  .flags-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .flag-item {
+    font-size: 36px;
+    line-height: 1;
+    transition: transform 0.3s ease;
+  }
+  .flag-item:hover {
+    transform: scale(1.2);
+  }
+
+  .flags-caption {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+  .flags-caption strong {
+    color: var(--text);
+  }
+
+  .survey-arrow {
+    font-size: 28px;
+    color: var(--text-light);
+    opacity: 0.4;
+  }
+
+  .insights-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .insights-stack-header {
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .insight-row {
+    background: rgba(200, 182, 226, 0.16);
+    border-radius: 14px;
+    padding: 16px 20px;
+    font-size: 15px;
+    color: var(--text-light);
+    line-height: 1.6;
+    transition: all 0.3s ease;
+  }
+  .insight-row:hover {
+    background: rgba(200, 182, 226, 0.26);
+    transform: translateX(4px);
+  }
+  .insight-row strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .insights-footer {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text);
+    margin-top: 4px;
+  }
+  .insights-footer span {
+    color: var(--accent);
+  }
+
+  @media (max-width: 768px) {
+    .survey-visual {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .survey-arrow {
+      transform: rotate(90deg);
+      text-align: center;
+    }
+    .flags-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .insight-icon {
+    font-size: 24px;
+    margin-bottom: 14px;
+  }
+
+  .insight-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-light);
+  }
+
+  .insight-text strong {
+    color: var(--text);
+  }
+
+  /* ===== Interview Profiles ===== */
+  .interview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  .interview-card {
+    background: white;
+    border-radius: 20px;
+    padding: 28px;
+    border: 1px solid rgba(0,0,0,0.05);
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .interview-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  .interview-avatar {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+
+  .interview-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .interview-flag {
+    font-size: 16px;
+  }
+
+  .interview-origin {
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .interview-detail {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  .interview-quote {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text);
+    margin-top: 12px;
+    padding: 16px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(200, 182, 226, 0.15), rgba(168, 216, 234, 0.15));
+    line-height: 1.6;
+  }
+  .interview-quote:first-of-type {
+    margin-top: 16px;
+  }
+
+  /* ===== HMW Statement ===== */
+  .hmw-block {
+    background: white;
+    border-radius: 24px;
+    padding: 40px 48px;
+    margin-top: 40px;
+    border: 1px solid rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+  }
+  .hmw-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--lavender), var(--accent-soft), var(--sky));
+  }
+
+  .hmw-label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .hmw-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 2.5vw, 30px);
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.5px;
+    color: var(--text);
+  }
+
+  .hmw-text em { color: var(--accent); font-style: italic; }
+
+  /* ===== User Stories ===== */
+  .user-stories {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .user-story {
+    background: white;
+    border-radius: 16px;
+    padding: 24px 28px;
+    border-left: 3px solid var(--lavender);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+    font-style: italic;
+  }
+
+  /* ===== Image Galleries ===== */
+  .gallery-row {
+    display: grid;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .gallery-row.cols-2 { grid-template-columns: 1fr 1fr; }
+  .gallery-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .gallery-row.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+  .gallery-item {
+    border-radius: 16px;
+    overflow: hidden;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+  }
+  .gallery-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .gallery-caption {
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--text-light);
+    text-align: center;
+  }
+
+  /* Phone mockup placeholder for wireframes */
+  .wireframe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+    margin: 32px 0;
+  }
+
+  .wireframe-phone {
+    background: white;
+    border-radius: 20px;
+    border: 1.5px solid rgba(0,0,0,0.08);
+    padding: 16px 12px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-light);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .wireframe-phone::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    border-radius: 4px;
+    background: rgba(0,0,0,0.06);
+  }
+  .wireframe-phone:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    border-color: var(--lavender);
+  }
+
+  .wireframe-phone .wf-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .wireframe-phone .wf-desc {
+    font-size: 10px;
+    color: #aaa;
+    line-height: 1.5;
+    padding: 0 8px;
+  }
+
+  /* ===== Version comparison ===== */
+  .version-block {
+    margin: 40px 0;
+  }
+
+  .version-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .version-label.v1 { background: rgba(244, 209, 203, 0.3); color: var(--accent); }
+  .version-label.v2 { background: rgba(200, 182, 226, 0.2); color: #7c5db8; }
+  .version-label.final { background: rgba(72, 187, 120, 0.15); color: #4a7a56; font-weight: 600; }
+
+  .version-desc {
+    font-size: 15px;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  /* ===== Feedback / Testing Cards ===== */
+  .feedback-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 32px 0;
+  }
+
+  .feedback-card {
+    background: white;
+    border-radius: 20px;
+    padding: 28px;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .feedback-issue {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .feedback-issue strong {
+    color: var(--text);
+  }
+
+  .feedback-solution {
+    font-size: 14px;
+    color: #4a7a56;
+    font-weight: 500;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+
+  /* ===== Color Palette Display ===== */
+  .palette-row {
+    display: flex;
+    gap: 16px;
+    margin: 24px 0;
+    flex-wrap: wrap;
+  }
+
+  .palette-swatch {
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.05);
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  .palette-swatch:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  }
+  .palette-label {
+    font-size: 11px;
+    color: var(--text-light);
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  /* ===== Conclusion / Why It Works ===== */
+  .conclusion-block {
+    background: white;
+    border-radius: 24px;
+    padding: 48px;
+    border: 1px solid rgba(0,0,0,0.05);
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .conclusion-block::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--lavender), var(--accent-soft), var(--sky));
+  }
+
+  .conclusion-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+  }
+
+  .conclusion-text {
+    font-size: 16px;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  /* ===== Back Link ===== */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 0 48px;
+    padding: 12px 0;
+    font-size: 13px;
+    color: var(--text-light);
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+  }
+  .back-link:hover {
+    color: var(--accent);
+    transform: translateX(-3px);
+  }
+  .back-link svg {
+    transition: transform 0.3s ease;
+  }
+  .back-link:hover svg {
+    transform: translateX(-2px);
+  }
+
+  /* ===== Next Project CTA ===== */
+  .next-project {
+    text-align: center;
+    padding: 80px 0 120px;
+  }
+
+  .next-label {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 12px;
+  }
+
+  .next-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  .next-title a {
+    text-decoration: none;
+    color: var(--text);
+    transition: color 0.3s;
+  }
+  .next-title a:hover { color: var(--accent); }
+
+  .next-blurb {
+    font-size: 15px;
+    color: var(--text-light);
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--text);
+    color: white;
+  }
+  .btn-primary:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(232, 115, 90, 0.25);
+  }
+
+  /* ===== Footer ===== */
+  footer {
+    text-align: center;
+    padding: 32px 48px;
+    font-size: 13px;
+    color: var(--text-light);
+    border-top: 1px solid rgba(0,0,0,0.04);
+  }
+  footer span { color: var(--accent); }
+
+  /* ===== Animations ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* placeholder for images user will add */
+  .img-placeholder {
+    background: linear-gradient(135deg, var(--cream), var(--accent-soft));
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    font-size: 13px;
+    min-height: 200px;
+    border: 1px dashed rgba(0,0,0,0.1);
+  }
+
+  /* ===== Phone Screen Carousel ===== */
+  .screen-carousel-wrapper {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 32px;
+  }
+
+  .screen-carousel {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    cursor: grab;
+  }
+  .screen-carousel:active { cursor: grabbing; }
+  .screen-carousel::-webkit-scrollbar { height: 6px; }
+  .screen-carousel::-webkit-scrollbar-track { background: transparent; }
+  .screen-carousel::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.12);
+    border-radius: 3px;
+  }
+  .screen-carousel::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
+
+  .screen-track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .screen-frame-phone {
+    flex-shrink: 0;
+    width: 220px;
+    border-radius: 38px;
+    border: 1px solid rgba(0,0,0,0.08);
+    scroll-snap-align: start;
+    overflow: hidden;
+  }
+  .screen-frame-phone img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .screen-frame-bezel {
+    flex-shrink: 0;
+    width: 220px;
+    scroll-snap-align: start;
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+  .screen-frame-bezel:hover {
+    transform: translateY(-6px);
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.12));
+  }
+  .screen-frame-bezel img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .pill-green {
+    display: inline-block;
+    background: rgba(180, 220, 180, 0.3);
+    color: #3a7a4a;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 12px;
+  }
+
+  /* ===== Prototype link pill ===== */
+  .proto-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.06);
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: 'DM Sans', sans-serif !important;
+    font-style: normal !important;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    vertical-align: middle;
+    margin-left: 12px;
+  }
+  .proto-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(232, 115, 90, 0.1);
+  }
+  .proto-link-nudge {
+    font-size: 12px;
+    color: var(--text-light);
+    font-style: italic;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    nav.scrolled { padding: 12px 24px; }
+    .project-hero-inner, .content, .content-wide { padding: 0 24px; }
+    .project-hero { padding-top: 100px; }
+    .interview-grid { grid-template-columns: 1fr; }
+    .feedback-grid { grid-template-columns: 1fr; }
+    .wireframe-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-row.cols-3 { grid-template-columns: 1fr; }
+    .gallery-row.cols-4 { grid-template-columns: 1fr 1fr; }
+    .hero-thumbnail { border-radius: 16px; }
+    .hmw-block { padding: 28px; }
+    .conclusion-block { padding: 28px; }
+    .project-meta { gap: 24px; }
+    .skill-pills { gap: 6px; }
+  }
+  /* ===== Section Progress Nav ===== */
+  .section-nav {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%) translateY(60px);
+    z-index: 90;
+    display: flex;
+    gap: 4px;
+    padding: 6px 8px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(244,209,203,0.12), rgba(200,182,226,0.1));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 100px;
+    border: 1px solid rgba(200, 182, 226, 0.2);
+    box-shadow: 0 4px 32px rgba(200, 182, 226, 0.15), 0 0 0 1px rgba(255,255,255,0.5) inset;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .section-nav.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .section-nav a {
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-light);
+    padding: 8px 16px;
+    border-radius: 100px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+    position: relative;
+  }
+  .section-nav a:hover {
+    color: var(--accent);
+    background: rgba(232, 115, 90, 0.08);
+    transform: translateY(-1px);
+  }
+  .section-nav a::before,
+  .section-nav a::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .section-nav a::before {
+    top: -2px;
+    left: 20%;
+    background: var(--lavender);
+  }
+  .section-nav a::after {
+    bottom: -2px;
+    right: 18%;
+    background: var(--accent-soft);
+  }
+  .section-nav a:hover::before {
+    opacity: 0.8;
+    transform: translateY(-3px);
+    animation: sparkleFloat 1.2s ease-in-out infinite;
+  }
+  .section-nav a:hover::after {
+    opacity: 0.7;
+    transform: translateY(3px);
+    animation: sparkleFloat 1.2s ease-in-out infinite 0.3s;
+  }
+  .section-nav a.active::before,
+  .section-nav a.active::after {
+    display: none;
+  }
+  .section-nav a.active {
+    background: linear-gradient(135deg, var(--accent), #c75d8f);
+    color: white;
+    box-shadow: 0 2px 12px rgba(232, 115, 90, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .section-nav {
+      gap: 2px;
+      padding: 5px 6px;
+    }
+    .section-nav a {
+      font-size: 10px;
+      padding: 6px 10px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating Background Elements -->
+<div class="floating-elements">
+  <div class="butterfly-svg" style="opacity: 0.10;">
+    <svg width="40" height="34" viewBox="0 0 48 40" fill="none">
+      <g class="wing-left"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C8B6E2" opacity="0.7"/><path d="M24 20C22 26 16 36 10 34C4 32 8 22 14 20C20 18 23 19 24 20Z" fill="#A8D8EA" opacity="0.5"/></g>
+      <g class="wing-right"><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C8B6E2" opacity="0.7"/><path d="M24 20C26 26 32 36 38 34C44 32 40 22 34 20C28 18 25 19 24 20Z" fill="#A8D8EA" opacity="0.5"/></g>
+    </svg>
+  </div>
+  <div class="butterfly-svg" style="opacity: 0.08;">
+    <svg width="30" height="25" viewBox="0 0 48 40" fill="none">
+      <g class="wing-left"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#F4D1CB" opacity="0.7"/></g>
+      <g class="wing-right"><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#F4D1CB" opacity="0.7"/></g>
+    </svg>
+  </div>
+  <div class="butterfly-svg" style="opacity: 0.12;">
+    <svg width="24" height="20" viewBox="0 0 48 40" fill="none">
+      <g class="wing-left"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#A8D8EA" opacity="0.8"/></g>
+      <g class="wing-right"><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#A8D8EA" opacity="0.8"/></g>
+    </svg>
+  </div>
+  <div class="butterfly-svg" style="opacity: 0.07;">
+    <svg width="36" height="30" viewBox="0 0 48 40" fill="none">
+      <g class="wing-left"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#FFDAB9" opacity="0.7"/></g>
+      <g class="wing-right"><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#FFDAB9" opacity="0.7"/></g>
+    </svg>
+  </div>
+  <div class="butterfly-svg" style="opacity: 0.09;">
+    <svg width="28" height="24" viewBox="0 0 48 40" fill="none">
+      <g class="wing-left"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C8B6E2" opacity="0.6"/></g>
+      <g class="wing-right"><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C8B6E2" opacity="0.6"/></g>
+    </svg>
+  </div>
+
+  <div class="cloud-shape" style="width: 500px; height: 280px; top: 2%; left: -8%; opacity: 0.05; background: linear-gradient(135deg, #C8B6E2, #A8D8EA);"></div>
+  <div class="cloud-shape" style="width: 400px; height: 200px; top: 35%; right: -10%; opacity: 0.04; background: linear-gradient(135deg, #FFDAB9, #F4D1CB);"></div>
+  <div class="cloud-shape" style="width: 550px; height: 280px; bottom: 10%; left: 15%; opacity: 0.04; background: linear-gradient(135deg, #A8D8EA, #C5D5CB);"></div>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="../index.html" class="nav-logo">kathryn.</a>
+  <ul class="nav-links">
+    <li><a href="../index.html#work-section">Work
+      <span class="sparkles"><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span></span>
+      <span class="nav-butterfly"><svg width="16" height="14" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#c75d8f" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#c75d8f" opacity="0.7"/></svg></span>
+    </a></li>
+    <li class="has-dropdown"><a href="../index.html#projects">Projects
+      <span class="sparkles"><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span></span>
+      <span class="nav-butterfly"><svg width="16" height="14" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#7c5db8" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#7c5db8" opacity="0.7"/></svg></span>
+    </a>
+      <ul class="dropdown">
+        <li><a href="../collatch/index.html" class="dropdown-active">Collatch</a></li>
+        <li><a href="../path-at-penn/index.html">Path@Penn</a></li>
+        <li><a href="../piggus-nimbus/index.html">Piggus Nimbus</a></li>
+      </ul>
+    </li>
+  </ul>
+  <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Section Progress Nav -->
+<div class="section-nav" id="sectionNav">
+  <a href="#sec-overview">Overview</a>
+  <a href="#sec-research">User Research</a>
+  <a href="#sec-ideation">Ideation</a>
+  <a href="#sec-wireframes">Wireframes</a>
+  <a href="#sec-testing">User Testing</a>
+  <a href="#sec-final">Final Design</a>
+</div>
+
+<!-- Back Link -->
+<a href="../index.html" class="back-link">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+  Back
+</a>
+
+<!-- ============================================ -->
+<!-- PROJECT HERO -->
+<!-- ============================================ -->
+<section class="project-hero">
+  <div class="project-hero-inner">
+    <div class="project-badge">
+      <svg width="14" height="12" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#4a8da8" opacity="0.6"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#4a8da8" opacity="0.6"/></svg>
+      UX Design · App Design
+    </div>
+    <h1 class="project-hero-title">Collatch</h1>
+    <p class="project-hero-subtitle">An app designed to help international students find U.S. colleges that align with their unique background, goals, and priorities.</p>
+  </div>
+
+  <!-- Thumbnail banner -->
+  <div class="content-wide">
+    <div class="hero-thumbnail">
+      <img src="images/collatch-thumbnail.png" alt="Collatch app screens showing welcome, match results, school details, and preferences views">
+    </div>
+  </div>
+
+  <!-- Project meta - below thumbnail -->
+  <div class="project-hero-inner" style="padding-top: 40px;">
+    <div class="project-meta">
+      <div class="meta-item">
+        <span class="meta-label">Role</span>
+        <span class="meta-value">UX Researcher & Designer</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Tools</span>
+        <span class="meta-value">Figma, Figjam</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Duration</span>
+        <span class="meta-value">10 Weeks</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Skills</span>
+        <div class="skill-pills">
+          <span class="skill-pill-sm"><span class="pill-emoji">🎨</span> High-Fidelity Design</span>
+          <span class="skill-pill-sm"><span class="pill-emoji">🔍</span> UX Research</span>
+          <span class="skill-pill-sm"><span class="pill-emoji">▶️</span> Interactive Prototyping</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- OVERVIEW -->
+<!-- ============================================ -->
+<section class="case-section" id="sec-overview">
+  <div class="section-aura" style="width: 400px; height: 400px; background: radial-gradient(circle, var(--lavender), transparent); top: -50px; right: -150px;"></div>
+  <div class="content">
+    <div class="reveal">
+      <p class="case-section-label">Overview</p>
+      <h2 class="case-section-title">The problem with college search for international students</h2>
+      <div class="case-body">
+        <p>One of the biggest challenges international students face when applying to U.S. universities is the fragmented and limited information available online that caters specifically to them.</p>
+        <p>Sites like TopUniversities and Niche exist and might seem like they provide good insights, but the content is garnered from data of the average student body where local students make up the majority. As an international student in a U.S. college myself, I remembered how so many things about my college were not as they seemed online — how different my expectations vs. realities were of the schools that I chose.</p>
+        <p>I wished that there was a way I could have found out more before committing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="butterfly-divider">
+  <span class="dot"></span><span class="dot"></span>
+  <svg width="20" height="17" viewBox="0 0 48 40" fill="none" opacity="0.5"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C8B6E2" opacity="0.6"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C8B6E2" opacity="0.6"/></svg>
+  <span class="dot"></span><span class="dot"></span>
+</div>
+
+<!-- ============================================ -->
+<!-- SOLUTION -->
+<!-- ============================================ -->
+<section class="case-section" id="sec-solution">
+  <div class="content">
+    <div class="reveal">
+      <p class="case-section-label">Solution</p>
+      <h2 class="case-section-title">A personalized college-matching app</h2>
+      <div class="case-body">
+        <p>To design an app that centralizes information specifically for international students and allows them to read and compare information about U.S. schools based on their personal goals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="butterfly-divider">
+  <span class="dot"></span>
+  <svg width="16" height="14" viewBox="0 0 48 40" fill="none" opacity="0.45"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#F4D1CB" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#F4D1CB" opacity="0.7"/></svg>
+  <span class="dot"></span>
+</div>
+
+<!-- ============================================ -->
+<!-- USER RESEARCH -->
+<!-- ============================================ -->
+<section class="case-section" id="sec-research">
+  <div class="section-aura" style="width: 500px; height: 500px; background: radial-gradient(circle, var(--sky), transparent); top: 100px; left: -200px;"></div>
+  <div class="content">
+    <div class="reveal">
+      <p class="case-section-label">User Research</p>
+      <h2 class="case-section-title">Understanding the international student experience</h2>
+      <div class="case-body">
+        <p>For this research, I surveyed international students who studied in the U.S. for either undergraduate or graduate programs. My target users were individuals who had already gone through the college search process, allowing me to dig deeper on how they felt during their decision-making phase versus how they felt in the schools they chose.</p>
+      </div>
+    </div>
+
+    <!-- Survey Insights -->
+    <div class="reveal" style="margin-top: 48px;">
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500; margin-bottom: 8px;">Survey Insights</h3>
+
+      <div class="survey-visual">
+        <!-- Left: Flags block -->
+        <div class="flags-block">
+          <div class="flags-grid">
+            <div class="flag-item">🇸🇬</div>
+            <div class="flag-item">🇲🇾</div>
+            <div class="flag-item">🇻🇳</div>
+            <div class="flag-item">🇨🇳</div>
+            <div class="flag-item">🇮🇩</div>
+            <div class="flag-item">🇰🇷</div>
+            <div class="flag-item">🇨🇦</div>
+            <div class="flag-item">🇹🇭</div>
+          </div>
+          <p class="flags-caption">I surveyed <strong>14</strong> international students from <strong>8 countries</strong> and discovered these main <span style="color: var(--accent); font-weight: 600;">pain points</span></p>
+        </div>
+
+        <!-- Arrow -->
+        <div class="survey-arrow">→</div>
+
+        <!-- Right: Stacked insights -->
+        <div class="insights-stack">
+          <p class="insights-stack-header">International students felt that ...</p>
+
+          <div class="insight-row">... choosing a U.S. college was <strong>overwhelming</strong> because no single tool helped match schools to their personal goals.</div>
+
+          <div class="insight-row">... rankings alone weren't enough, and wanted recommendations based on <strong>career outcomes</strong> or <strong>long-term goals</strong>.</div>
+
+          <div class="insight-row">... existing school recommendation sites <strong>didn't tailor to international students</strong>.</div>
+
+          <div class="insight-row">... information was <strong>scattered</strong> across too many platforms.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interview Insights -->
+    <div class="reveal" style="margin-top: 56px;">
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500; margin-bottom: 8px;">Interview Insights</h3>
+      <p style="font-size: 15px; color: var(--text-light); margin-bottom: 24px;">For the interviews, I spoke with 3 international students who studied in the U.S. at different academic stages to deeply understand their decision-making process, the criteria they used when choosing schools, and how their expectations compared to their lived experiences after enrolling.</p>
+
+      <div class="interview-grid">
+        <div class="interview-card">
+          <div class="interview-avatar" style="background: var(--accent-soft);">🧑‍💻</div>
+          <div class="interview-name">Jun <span class="interview-flag">🇲🇾</span></div>
+          <div class="interview-origin">Malaysia</div>
+          <div class="interview-detail">B.S. Software Engineering, Purdue University '24</div>
+          <div class="interview-quote">"<strong>Purdue had the best Mechanical Engineering program</strong> in the country so I decided to go for that."</div>
+          <div class="interview-quote">"I looked for programs where <strong>I could explore before choosing a specialization</strong>."</div>
+        </div>
+        <div class="interview-card">
+          <div class="interview-avatar" style="background: rgba(200,182,226,0.2);">👩‍🔬</div>
+          <div class="interview-name">Esther <span class="interview-flag">🇹🇼</span></div>
+          <div class="interview-origin">Taiwan</div>
+          <div class="interview-detail">B.S. Chemistry, Purdue University '24<br>Ph.D. Analytical Chemistry, Georgia Tech '30</div>
+          <div class="interview-quote">"… I cared more about the <strong>reputation of the school</strong> and the overall ranking."</div>
+          <div class="interview-quote">"<strong>I chose Chemistry because it suited my strengths</strong> and I was strong at it in high school."</div>
+        </div>
+        <div class="interview-card">
+          <div class="interview-avatar" style="background: rgba(168,216,234,0.2);">👩‍💼</div>
+          <div class="interview-name">Cecilia <span class="interview-flag">🇸🇬</span></div>
+          <div class="interview-origin">Singapore</div>
+          <div class="interview-detail">B.A. Economics, New York University '22<br>M.S. Integrated Product Design, UPenn '27</div>
+          <div class="interview-quote">"<strong>I ultimately chose Penn because of its prestige</strong> and accessibility among the other schools."</div>
+          <div class="interview-quote">"I <strong>prioritized interdisciplinary programs</strong> because I didn't know what I wanted to do."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Insight Statements -->
+    <div class="reveal" style="margin-top: 40px;">
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500; margin-bottom: 8px;">Insight Statements</h3>
+      <p style="font-size: 15px; color: var(--text-light); margin-bottom: 20px;">Based on my research, I developed an insight statement and a "How Might We" question that drove the direction of my design.</p>
+      <div class="user-stories">
+        <div class="user-story">As an international student, I want to be able to <strong>explore schools based on my personal priorities</strong>, so that I can choose a university that best aligns with what I want.</div>
+      </div>
+    </div>
+
+    <!-- HMW Statement -->
+    <div class="reveal">
+      <div class="hmw-block">
+        <p class="hmw-label">How Might We</p>
+        <p class="hmw-text">How might we <em>tailor school recommendations</em> based on international students' individual needs and constraints?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="butterfly-divider">
+  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  <svg width="22" height="18" viewBox="0 0 48 40" fill="none" opacity="0.5"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#A8D8EA" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#A8D8EA" opacity="0.7"/></svg>
+  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+</div>
+
+<!-- ============================================ -->
+<!-- IDEATION -->
+<!-- ============================================ -->
+<section class="case-section" id="sec-ideation">
+  <div class="section-aura" style="width: 400px; height: 400px; background: radial-gradient(circle, var(--peach), transparent); top: 0; right: -100px;"></div>
+  <div class="content">
+    <div class="reveal">
+      <p class="case-section-label">Ideation</p>
+      <h2 class="case-section-title">From sketches to wireframes</h2>
+      <div class="case-body">
+        <p>Drawing inspiration from dating apps, I wanted the user journey to start off with a questionnaire that allows the user to select the attributes that were most important to them. Questions were drawn directly from research which included ones that are not typically asked and to tailor specifically to international students.</p>
+      </div>
+    </div>
+
+    <!-- Brainstorming -->
+    <div class="reveal" style="margin-top: 40px;">
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; margin-bottom: 16px;">Brainstorming &amp; Initial Sketches</h3>
+      <div style="display: flex; gap: 16px; justify-content: center;">
+        <img src="images/sketch-1.png" alt="Brainstorming sketch 1" style="width: 219px; height: 331px; object-fit: cover; border: 1px solid #e0e0e0; border-radius: 8px; display: block;">
+        <img src="images/sketch-2.png" alt="Brainstorming sketch 2" style="width: 219px; height: 331px; object-fit: cover; border: 1px solid #e0e0e0; border-radius: 8px; display: block;">
+      </div>
+    </div>
+
+    <!-- Lo-fi wireframes -->
+    <div class="reveal" style="margin-top: 48px;">
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; margin-bottom: 8px;">Low-Fidelity Wireframes</h3>
+      <p style="font-size: 15px; color: var(--text-light); margin-bottom: 24px;">Next, I developed lo-fi wireframes based on the rough drawings of my design flow. This part was crucial as I wanted to get a good understanding of how I had to build out my questionnaire and school comparison pages.</p>
+      <div style="background: #e8e8e5; width: 100vw; position: relative; left: 50%; transform: translateX(-50%); padding: 24px 32px;">
+      <div class="screen-carousel-wrapper" style="left: 0; transform: none; width: 100%; padding: 0;">
+      <div class="screen-carousel">
+        <div class="screen-track">
+          <div class="screen-frame-phone"><img src="images/lofi-1.png" alt="Lo-fi screen 1"></div>
+          <div class="screen-frame-phone"><img src="images/lofi-2.png" alt="Lo-fi screen 2"></div>
+          <div class="screen-frame-phone"><img src="images/lofi-3.png" alt="Lo-fi screen 3"></div>
+          <div class="screen-frame-phone"><img src="images/lofi-4.png" alt="Lo-fi screen 4"></div>
+          <div class="screen-frame-phone"><img src="images/lofi-5.png" alt="Lo-fi screen 5"></div>
+          <div class="screen-frame-phone"><img src="images/lofi-6.png" alt="Lo-fi screen 6"></div>
+          <div class="screen-frame-phone"><img src="images/lofi-7.png" alt="Lo-fi screen 7"></div>
+          <div class="screen-frame-phone"><img src="images/lofi-8.png" alt="Lo-fi screen 8"></div>
+          <div class="screen-frame-phone"><img src="images/lofi-9.png" alt="Lo-fi screen 9"></div>
+          <div class="screen-frame-phone"><img src="images/lofi-10.png" alt="Lo-fi screen 10"></div>
+          <div class="screen-frame-phone"><img src="images/lofi-11.png" alt="Lo-fi screen 11"></div>
+          <div class="screen-frame-phone"><img src="images/lofi-12.png" alt="Lo-fi screen 12"></div>
+          <div class="screen-frame-phone"><img src="images/lofi-13.png" alt="Lo-fi screen 13"></div>
+          <div class="screen-frame-phone"><img src="images/lofi-14.png" alt="Lo-fi screen 14"></div>
+          <div class="screen-frame-phone"><img src="images/lofi-15.png" alt="Lo-fi screen 15"></div>
+        </div>
+      </div>
+      </div>
+      </div>
+      <p style="font-size: 12px; color: var(--text-light); margin-top: 10px; font-style: italic;">Swipe to view all screens →</p>
+    </div>
+  </div>
+</section>
+
+<div class="butterfly-divider">
+  <span class="dot"></span>
+  <svg width="18" height="15" viewBox="0 0 48 40" fill="none" opacity="0.45"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C8B6E2" opacity="0.6"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C8B6E2" opacity="0.6"/></svg>
+  <span class="dot"></span>
+</div>
+
+<!-- ============================================ -->
+<!-- HIGH-FIDELITY WIREFRAMES -->
+<!-- ============================================ -->
+<section class="case-section" id="sec-wireframes">
+  <div class="section-aura" style="width: 500px; height: 500px; background: radial-gradient(circle, var(--lavender), transparent); top: 0; left: -200px;"></div>
+  <div class="content">
+    <div class="reveal">
+      <p class="case-section-label">High-Fidelity Wireframes</p>
+      <h2 class="case-section-title">Bringing the design to life</h2>
+    </div>
+
+    <!-- Version 1 -->
+    <div class="version-block reveal">
+      <div class="version-label v1">Version 1 — Initial Pastel Palette</div>
+      <p class="version-desc">For the initial version, I played around with a pastel-like color palette as I wanted the site to feel inviting and youthful. For the questions and main components, I standardized them to purple, pink, and blue.</p>
+
+      <div style="background: #e8e8e5; width: 100vw; position: relative; left: 50%; transform: translateX(-50%); padding: 24px 32px; margin-top: 16px;">
+      <div class="screen-carousel-wrapper" style="left: 0; transform: none; width: 100%; padding: 0;">
+        <div class="screen-carousel">
+          <div class="screen-track">
+            <div class="screen-frame-phone"><img src="images/v1-1.png" alt="Version 1 screen 1"></div>
+            <div class="screen-frame-phone"><img src="images/v1-2.png" alt="Version 1 screen 2"></div>
+            <div class="screen-frame-phone"><img src="images/v1-3.png" alt="Version 1 screen 3"></div>
+            <div class="screen-frame-phone"><img src="images/v1-4.png" alt="Version 1 screen 4"></div>
+            <div class="screen-frame-phone"><img src="images/v1-5.png" alt="Version 1 screen 5"></div>
+            <div class="screen-frame-phone"><img src="images/v1-6.png" alt="Version 1 screen 6"></div>
+            <div class="screen-frame-phone"><img src="images/v1-7.png" alt="Version 1 screen 7"></div>
+            <div class="screen-frame-phone"><img src="images/v1-8.png" alt="Version 1 screen 8"></div>
+            <div class="screen-frame-phone"><img src="images/v1-9.png" alt="Version 1 screen 9"></div>
+            <div class="screen-frame-phone"><img src="images/v1-10.png" alt="Version 1 screen 10"></div>
+            <div class="screen-frame-phone"><img src="images/v1-11.png" alt="Version 1 screen 11"></div>
+            <div class="screen-frame-phone"><img src="images/v1-12.png" alt="Version 1 screen 12"></div>
+            <div class="screen-frame-phone"><img src="images/v1-13.png" alt="Version 1 screen 13"></div>
+            <div class="screen-frame-phone"><img src="images/v1-14.png" alt="Version 1 screen 14"></div>
+            <div class="screen-frame-phone"><img src="images/v1-15.png" alt="Version 1 screen 15"></div>
+            <div class="screen-frame-phone"><img src="images/v1-16.png" alt="Version 1 screen 16"></div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <p style="font-size: 12px; color: var(--text-light); margin-top: 10px; font-style: italic;">Swipe to view all screens →</p>
+    </div>
+
+    <!-- User Testing -->
+    <div class="reveal" id="sec-testing" style="margin-top: 56px; scroll-margin-top: 100px;">
+      <p class="case-section-label">User Testing &amp; Feedback</p>
+      <h2 class="case-section-title" style="font-size: 28px;">Iterating based on real feedback</h2>
+      <p style="font-size: 15px; color: var(--text-light); margin-bottom: 24px;">I did user testing with 6 individuals. Through these sessions, I gained a few key insights on what to change:</p>
+
+      <!-- Feedback Point 1 -->
+        <div class="feedback-card" style="margin-bottom: 24px;">
+          <div class="feedback-issue"><strong>Issue:</strong> Users mentioned their confusion with the buttons, stating there was not enough differentiation between the BACK and NEXT buttons. The shape of the buttons were also too similar to the text boxes.</div>
+          <div class="feedback-solution">✅ Clearer disabled/enabled buttons · Changed to pill-like shape</div>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 24px; margin-top: 20px; background: #f4f4f2; border-radius: 16px; padding: 20px;">
+            <div style="text-align: center;">
+              <p style="font-size: 12px; color: var(--text-light); margin-bottom: 8px;">Before</p>
+              <img src="images/feedback-1-before.png" alt="Before: button design" style="width: 180px; height: auto; border-radius: 38px; border: 1px solid rgba(0,0,0,0.08); display: block;">
+            </div>
+            <span style="font-size: 24px; color: var(--text-light);">→</span>
+            <div style="text-align: center;">
+              <p style="font-size: 12px; color: var(--text-light); margin-bottom: 8px;">After</p>
+              <div style="display: flex; gap: 12px;">
+                <img src="images/feedback-1-after-1.png" alt="After: button design 1" style="width: 180px; height: auto; border-radius: 38px; border: 1px solid rgba(0,0,0,0.08); display: block;">
+                <img src="images/feedback-1-after-2.png" alt="After: button design 2" style="width: 180px; height: auto; border-radius: 38px; border: 1px solid rgba(0,0,0,0.08); display: block;">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <!-- Feedback Point 2 -->
+        <div class="feedback-card">
+          <div class="feedback-issue"><strong>Issue:</strong> Users pointed out the % matches appeared again in the comparison page — they thought it should be removed since schools would've already been added to their respective categories. It added clutter to an already crammed screen.</div>
+          <div class="feedback-solution">✅ Removed the % bubbles · Clearer separations between categories</div>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 24px; margin-top: 20px; background: #f4f4f2; border-radius: 16px; padding: 20px;">
+            <div style="text-align: center;">
+              <p style="font-size: 12px; color: var(--text-light); margin-bottom: 8px;">Before</p>
+              <img src="images/feedback-2-before.png" alt="Before: comparison page" style="width: 180px; height: auto; border-radius: 38px; border: 1px solid rgba(0,0,0,0.08); display: block;">
+            </div>
+            <span style="font-size: 24px; color: var(--text-light);">→</span>
+            <div style="text-align: center;">
+              <p style="font-size: 12px; color: var(--text-light); margin-bottom: 8px;">After</p>
+              <img src="images/feedback-2-after.png" alt="After: comparison page" style="width: 180px; height: auto; border-radius: 38px; border: 1px solid rgba(0,0,0,0.08); display: block;">
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Version 2 -->
+    <div class="version-block reveal" style="margin-top: 56px;">
+      <div class="version-label v2">Version 2 — Refined Interactions</div>
+      <p class="version-desc">In between my interviews, I continuously iterated along the way. Version 2 kept the same pastel color palette as I worked towards changing other design features based on user feedback.</p>
+
+      <div style="background: #e8e8e5; width: 100vw; position: relative; left: 50%; transform: translateX(-50%); padding: 24px 32px; margin-top: 16px;">
+      <div class="screen-carousel-wrapper" style="left: 0; transform: none; width: 100%; padding: 0;">
+        <div class="screen-carousel">
+          <div class="screen-track">
+            <div class="screen-frame-phone"><img src="images/v2-1.png" alt="Version 2 screen 1"></div>
+            <div class="screen-frame-phone"><img src="images/v2-2.png" alt="Version 2 screen 2"></div>
+            <div class="screen-frame-phone"><img src="images/v2-3.png" alt="Version 2 screen 3"></div>
+            <div class="screen-frame-phone"><img src="images/v2-4.png" alt="Version 2 screen 4"></div>
+            <div class="screen-frame-phone"><img src="images/v2-5.png" alt="Version 2 screen 5"></div>
+            <div class="screen-frame-phone"><img src="images/v2-6.png" alt="Version 2 screen 6"></div>
+            <div class="screen-frame-phone"><img src="images/v2-7.png" alt="Version 2 screen 7"></div>
+            <div class="screen-frame-phone"><img src="images/v2-8.png" alt="Version 2 screen 8"></div>
+            <div class="screen-frame-phone"><img src="images/v2-9.png" alt="Version 2 screen 9"></div>
+            <div class="screen-frame-phone"><img src="images/v2-10.png" alt="Version 2 screen 10"></div>
+            <div class="screen-frame-phone"><img src="images/v2-11.png" alt="Version 2 screen 11"></div>
+            <div class="screen-frame-phone"><img src="images/v2-12.png" alt="Version 2 screen 12"></div>
+            <div class="screen-frame-phone"><img src="images/v2-13.png" alt="Version 2 screen 13"></div>
+            <div class="screen-frame-phone"><img src="images/v2-14.png" alt="Version 2 screen 14"></div>
+            <div class="screen-frame-phone"><img src="images/v2-15.png" alt="Version 2 screen 15"></div>
+            <div class="screen-frame-phone"><img src="images/v2-16.png" alt="Version 2 screen 16"></div>
+            <div class="screen-frame-phone"><img src="images/v2-17.png" alt="Version 2 screen 17"></div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <p style="font-size: 12px; color: var(--text-light); margin-top: 10px; font-style: italic;">Swipe to view all screens →</p>
+
+      <p class="version-desc" style="margin-top: 24px;">In addition to the feature changes, I knew I had to change the color palette as I felt that it was too playful for my app's idea. This brought me to my final design.</p>
+    </div>
+  </div>
+</section>
+
+<div class="butterfly-divider">
+  <span class="dot"></span><span class="dot"></span>
+  <svg width="20" height="17" viewBox="0 0 48 40" fill="none" opacity="0.55"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C5D5CB" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C5D5CB" opacity="0.7"/></svg>
+  <span class="dot"></span><span class="dot"></span>
+</div>
+
+<!-- ============================================ -->
+<!-- FINAL DESIGN -->
+<!-- ============================================ -->
+<section class="case-section" id="sec-final">
+  <div class="section-aura" style="width: 600px; height: 500px; background: radial-gradient(circle, var(--sky), transparent); top: -50px; right: -200px;"></div>
+  <div class="section-aura" style="width: 400px; height: 400px; background: radial-gradient(circle, var(--accent-soft), transparent); bottom: 0; left: -150px;"></div>
+  <div class="content">
+    <div class="reveal">
+      <p class="case-section-label">Final Design</p>
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+        <h2 class="case-section-title" style="margin: 0;">The polished product</h2>
+        <a href="https://www.figma.com/proto/0dLu77DwWmoaoJ29kzbGOG/Collatch?page-id=7%3A2297&node-id=8-1973&p=f&viewport=-193%2C271%2C0.16&t=PavkdJ9OrW2LRYtk-1&scaling=scale-down&content-scaling=fixed" target="_blank" class="proto-link" style="margin-left: 0;">🔗 Prototype Link</a><span class="proto-link-nudge">← click me!</span>
+      </div>
+      <p class="version-desc" style="margin-top: 20px;">I settled on one color and played around with its shades, resulting in a cleaner UI which significantly helped with making the app feel lighter. This also helped with the information-heavy pages, so the colors don't distract from the core content.</p>
+    </div>
+
+    <!-- 12 Main Screens -->
+    <div class="reveal" style="margin-top: 40px;">
+      <div class="version-label final">Question Screens</div>
+      <div class="screen-carousel-wrapper">
+        <div class="screen-carousel">
+          <div class="screen-track">
+            <div class="screen-frame-bezel"><img src="images/finalcollatch-1.png" alt="Final screen 1"></div>
+            <div class="screen-frame-bezel"><img src="images/finalcollatch-2.png" alt="Final screen 2"></div>
+            <div class="screen-frame-bezel"><img src="images/finalcollatch-3.png" alt="Final screen 3"></div>
+            <div class="screen-frame-bezel"><img src="images/finalcollatch-4.png" alt="Final screen 4"></div>
+            <div class="screen-frame-bezel"><img src="images/finalcollatch-5.png" alt="Final screen 5"></div>
+            <div class="screen-frame-bezel"><img src="images/finalcollatch-6.png" alt="Final screen 6"></div>
+            <div class="screen-frame-bezel"><img src="images/finalcollatch-7.png" alt="Final screen 7"></div>
+            <div class="screen-frame-bezel"><img src="images/finalcollatch-8.png" alt="Final screen 8"></div>
+            <div class="screen-frame-bezel"><img src="images/finalcollatch-9.png" alt="Final screen 9"></div>
+            <div class="screen-frame-bezel"><img src="images/finalcollatch-10.png" alt="Final screen 10"></div>
+            <div class="screen-frame-bezel"><img src="images/finalcollatch-11.png" alt="Final screen 11"></div>
+            <div class="screen-frame-bezel"><img src="images/finalcollatch-12.png" alt="Final screen 12"></div>
+          </div>
+        </div>
+      </div>
+      <p style="font-size: 12px; color: var(--text-light); margin-top: 10px; font-style: italic;">Swipe to view all screens →</p>
+    </div>
+
+    <!-- Loading Animation -->
+    <div class="reveal" style="margin-top: 48px;">
+      <div class="version-label final">Loading Animation</div>
+      <p class="version-desc">To bridge the gap between the questionnaire and results, I designed a clean dot loading animation — three dots pulsing in sequence to signal that Collatch is actively matching schools to the user's preferences. The minimalist approach keeps the experience feeling light and intentional.</p>
+      <div style="display: flex; justify-content: center; gap: 16px; margin-top: 20px;">
+        <div class="screen-frame-bezel"><img src="images/loadingcollatch-1.png" alt="Loading screen 1"></div>
+        <div class="screen-frame-bezel"><img src="images/loadingcollatch-2.png" alt="Loading screen 2"></div>
+        <div class="screen-frame-bezel"><img src="images/loadingcollatch-3.png" alt="Loading screen 3"></div>
+      </div>
+    </div>
+
+    <!-- Feature Screens -->
+    <div class="reveal" style="margin-top: 48px;">
+      <div class="version-label final">Feature Screens</div>
+      <p class="version-desc">The app ranks schools by percentage match based entirely on the student's choices during onboarding, so no two students see the same results. Upon clicking into a school, each criterion is color-coded in green, yellow, or red, giving students a clear picture of how well a school fits what they care about most. From there, students can save schools to their personal list as a Target, Reach, or Safety.</p>
+      <!-- 4 phones centered -->
+      <div style="display: flex; justify-content: center; gap: 16px; margin-top: 20px;">
+        <div class="screen-frame-bezel"><img src="images/featurecollatch-1.png" alt="Feature screen 1"></div>
+        <div class="screen-frame-bezel"><img src="images/featurecollatch-2.png" alt="Feature screen 2"></div>
+        <div class="screen-frame-bezel"><img src="images/featurecollatch-3.png" alt="Feature screen 3"></div>
+        <div class="screen-frame-bezel"><img src="images/featurecollatch-4.png" alt="Feature screen 4"></div>
+      </div>
+
+      <!-- Comparison + Profile -->
+      <!-- Text row -->
+      <div style="display: flex; gap: 40px; margin-top: 48px; align-items: flex-start;">
+        <div style="width: 260px;">
+          <div class="version-label final">Comparison</div>
+          <p class="version-desc">All saved schools sit side by side for easy comparison. In the prototype, swiping the criteria columns keeps all three sections in sync.</p>
+        </div>
+        <div style="width: 480px;">
+          <div class="version-label final">Profile</div>
+          <p class="version-desc">Students can revisit and adjust their preferences at any time, and the results will update to reflect their latest choices.</p>
+        </div>
+      </div>
+      <!-- Phone row -->
+      <div style="display: flex; gap: 40px; margin-top: 24px; align-items: flex-start;">
+        <div style="width: 260px;">
+          <div class="screen-frame-bezel"><img src="images/featurecollatch-5.png" alt="Comparison screen"></div>
+        </div>
+        <div style="width: 480px; display: flex; gap: 16px;">
+          <div class="screen-frame-bezel"><img src="images/featurecollatch-6.png" alt="Profile screen 1"></div>
+          <div class="screen-frame-bezel"><img src="images/featurecollatch-7.png" alt="Profile screen 2"></div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Colors & Fonts -->
+    <div class="reveal" style="margin-top: 48px;">
+      <div class="version-label final">Colors &amp; Fonts</div>
+      <div style="margin-top: 16px;">
+        <p style="font-size: 14px; font-weight: 500; margin-bottom: 16px;">Final Color Palette</p>
+        <div class="palette-row">
+          <div>
+            <div class="palette-swatch" style="background: #1a0a2e; width: 120px; height: 140px; border-radius: 12px;"></div>
+          </div>
+          <div>
+            <div class="palette-swatch" style="background: #2d1854; width: 120px; height: 140px; border-radius: 12px;"></div>
+          </div>
+          <div>
+            <div class="palette-swatch" style="background: #6c3ce0; width: 120px; height: 140px; border-radius: 12px;"></div>
+          </div>
+          <div>
+            <div class="palette-swatch" style="background: #7b6fd4; width: 120px; height: 140px; border-radius: 12px;"></div>
+          </div>
+          <div>
+            <div class="palette-swatch" style="background: #ddd6f3; width: 120px; height: 140px; border-radius: 12px;"></div>
+          </div>
+          <div>
+            <div class="palette-swatch" style="background: #e8e2f8; width: 120px; height: 140px; border-radius: 12px;"></div>
+          </div>
+        </div>
+        <div style="margin-top: 32px;">
+          <p style="font-size: 14px; font-weight: 500; margin-bottom: 12px;">Typography</p>
+          <p style="font-family: 'Nunito', sans-serif; font-size: 28px; font-weight: 700; color: #7b6fd4;">Nunito</p>
+          <p style="font-family: 'Nunito', sans-serif; font-size: 22px; font-weight: 400; color: var(--text-light);">Nunito</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="butterfly-divider">
+  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  <svg width="24" height="20" viewBox="0 0 48 40" fill="none" opacity="0.55"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#E8735A" opacity="0.5"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#E8735A" opacity="0.5"/></svg>
+  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+</div>
+
+<!-- ============================================ -->
+<!-- WHY IT WORKS -->
+<!-- ============================================ -->
+<section class="case-section" style="padding-top: 16px;">
+  <div class="content">
+    <div class="reveal">
+      <div class="conclusion-block">
+        <p class="case-section-label" style="margin-bottom: 16px;">Why My Solution Works</p>
+        <h3 class="conclusion-title">Designed around what actually matters</h3>
+        <p class="conclusion-text">This solution works because instead of pushing generic, ranking-driven recommendations like most existing platforms, it centers on international students and personalizes school matches around what actually matters to them — helping users find schools that genuinely fit their goals, priorities, and realities.</p>
+      </div>
+    </div>
+
+    <!-- Sign-off screens -->
+    <div class="reveal" style="display: flex; justify-content: center; gap: 16px; margin-top: 48px;">
+      <div class="screen-frame-bezel"><img src="images/collatchsignoff-1.png" alt="Sign-off screen 1"></div>
+      <div class="screen-frame-bezel"><img src="images/collatchsignoff-2.png" alt="Sign-off screen 2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- APPENDIX -->
+<!-- ============================================ -->
+<section class="case-section" id="sec-appendix">
+  <div class="content">
+    <div class="reveal">
+      <p class="case-section-label">Appendix</p>
+      <div style="display: flex; gap: 20px; margin-top: 32px; align-items: flex-start;">
+        <img src="images/collatchappendix-1.png" alt="Insight and HMW statements" style="width: 33%; border-radius: 6px; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 4px 16px rgba(0,0,0,0.10); transform: rotate(-1deg); display: block;">
+        <img src="images/collatchappendix-2.png" alt="Brainstorm and research board" style="width: 33%; border-radius: 6px; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 4px 16px rgba(0,0,0,0.10); transform: rotate(0.8deg); display: block; margin-top: 16px;">
+        <img src="images/collatchappendix-3.png" alt="User testing notes" style="width: 33%; border-radius: 6px; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 4px 16px rgba(0,0,0,0.10); transform: rotate(-0.5deg); display: block;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- NEXT PROJECT -->
+<!-- ============================================ -->
+<section class="next-project">
+  <div class="content">
+    <p class="next-label">Next Project</p>
+    <h2 class="next-title"><a href="../path-at-penn/index.html">Improving Path@Penn →</a></h2>
+    <p class="next-blurb">Redesigning class registration at the University of Pennsylvania.</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="position: relative; z-index: 2;">
+  <div style="display: flex; justify-content: center; align-items: center; gap: 8px; padding: 32px 0;">
+    <p style="font-size: 12px; color: var(--text-light); opacity: 0.5; letter-spacing: 0.5px;">Kathryn Chiew · 2026</p>
+    <svg width="18" height="15" viewBox="0 0 48 40" fill="none" opacity="0.4">
+      <path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#F4D1CB" opacity="0.7"/>
+      <path d="M24 20C22 26 16 36 10 34C4 32 8 22 14 20C20 18 23 19 24 20Z" fill="#FFDAB9" opacity="0.5"/>
+      <path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#F4D1CB" opacity="0.7"/>
+      <path d="M24 20C26 26 32 36 38 34C44 32 40 22 34 20C28 18 25 19 24 20Z" fill="#FFDAB9" opacity="0.5"/>
+    </svg>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Section nav: show after scrolling past hero, track active section
+  const sectionNav = document.getElementById('sectionNav');
+  const sectionLinks = sectionNav.querySelectorAll('a');
+  const sections = [
+    { id: 'sec-overview', el: document.getElementById('sec-overview') },
+    { id: 'sec-research', el: document.getElementById('sec-research') },
+    { id: 'sec-ideation', el: document.getElementById('sec-ideation') },
+    { id: 'sec-wireframes', el: document.getElementById('sec-wireframes') },
+    { id: 'sec-testing', el: document.getElementById('sec-testing') },
+    { id: 'sec-final', el: document.getElementById('sec-final') },
+  ].filter(s => s.el);
+
+  function updateSectionNav() {
+    const scrollY = window.scrollY;
+    const heroBottom = document.querySelector('.project-hero').offsetTop + document.querySelector('.project-hero').offsetHeight;
+
+    // Show/hide nav
+    if (scrollY > heroBottom - 100) {
+      sectionNav.classList.add('visible');
+    } else {
+      sectionNav.classList.remove('visible');
+    }
+
+    // Track active section
+    let current = '';
+    for (const section of sections) {
+      const top = section.el.getBoundingClientRect().top;
+      if (top < window.innerHeight * 0.4) {
+        current = section.id;
+      }
+    }
+    sectionLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+  }
+
+  window.addEventListener('scroll', updateSectionNav, { passive: true });
+  updateSectionNav();
+
+  // Smooth scroll for section nav links
+  sectionLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+<style>
+#work-popup {
+  position: fixed;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+  border-radius: 24px;
+  padding: 7px 16px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #444;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 9999;
+  white-space: nowrap;
+}
+#work-popup.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+</style>
+<div id="work-popup">updates in progress ✨</div>
+<script>
+(function() {
+  var popup = document.getElementById('work-popup');
+  var workLink = document.querySelector('a[href*="work-section"]');
+  if (workLink && popup) {
+    workLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      var dest = workLink.getAttribute('href');
+      popup.classList.add('show');
+      setTimeout(function() {
+        popup.classList.remove('show');
+      }, 1800);
+    });
+  }
+})();
+</script>
+<script src="../cursor.js"></script>
+
+</body>
+</html>
