@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 40" fill="none">
+  <!-- Upper wings (coral) -->
+  <path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#E8735A"/>
+  <path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#E8735A"/>
+  <!-- Lower wings (soft pink) -->
+  <path d="M24 20C22 26 16 36 10 34C4 32 8 22 14 20C20 18 23 19 24 20Z" fill="#c75d8f" opacity="0.75"/>
+  <path d="M24 20C26 26 32 36 38 34C44 32 40 22 34 20C28 18 25 19 24 20Z" fill="#c75d8f" opacity="0.75"/>
+  <!-- Body -->
+  <ellipse cx="24" cy="20" rx="1.5" ry="5" fill="#8B3A2A" opacity="0.6"/>
+</svg>
