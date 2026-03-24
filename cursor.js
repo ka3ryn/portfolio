@@ -36,7 +36,7 @@
   var style = document.createElement('style');
   style.textContent = [
     '* { cursor: none !important; }',
-    '#cur-arrow { position:fixed; pointer-events:none; z-index:999999; }',
+    '#cur-arrow { position:fixed; pointer-events:none; z-index:999999; opacity:0; }',
 
     '@keyframes glitter-out {',
     '  0%   { opacity:0.9; transform:translate(-50%,-50%) scale(1.1) rotate(0deg); }',
@@ -58,6 +58,15 @@
     mx = e.clientX; my = e.clientY;
     cursor.style.left = mx + 'px';
     cursor.style.top  = my + 'px';
+    cursor.style.opacity = '1';
+  });
+
+  document.addEventListener('mouseleave', function () {
+    cursor.style.opacity = '0';
+  });
+
+  document.addEventListener('mouseenter', function () {
+    cursor.style.opacity = '1';
   });
 
   function spawnGlitter(x, y) {
