@@ -151,9 +151,9 @@
   .nav-links a:hover::after { width: 100%; }
 
   /* Each nav link unique accent on hover */
-  .nav-links > li:nth-child(1) a:hover { color: var(--accent); }
+  .nav-links > li:nth-child(1) a:hover { color: #7c5db8; }
   .nav-links > li:nth-child(2) a:hover { color: #c75d8f; }
-  .nav-links > li:nth-child(3) a:hover { color: #7c5db8; }
+  .nav-links > li:nth-child(3) a:hover { color: var(--accent); }
   .nav-links > li:nth-child(4) a:hover { color: #4a8da8; }
   .nav-links > li:nth-child(5) a:hover { color: #4a7a56; }
   .nav-links > li:nth-child(6) a:hover { color: var(--accent); }
@@ -1485,7 +1485,6 @@
 <nav id="navbar">
   <a href="../" class="nav-logo">kathryn.</a>
   <ul class="nav-links">
-    <li><a href="../#work-section">Work<span class="sparkles"><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span></span><span class="nav-butterfly"><svg width="16" height="14" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#c75d8f" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#c75d8f" opacity="0.7"/></svg></span></a></li>
     <li class="has-dropdown"><a href="../#projects">Projects<span class="sparkles"><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span></span><span class="nav-butterfly"><svg width="16" height="14" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#7c5db8" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#7c5db8" opacity="0.7"/></svg></span></a>
       <ul class="dropdown">
         <li><a href="../collatch/">Collatch</a></li>
@@ -1493,6 +1492,8 @@
         <li><a href="../piggus-nimbus/">Piggus Nimbus</a></li>
       </ul>
     </li>
+    <li><a href="../#work-section">Work<span class="sparkles"><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span></span><span class="nav-butterfly"><svg width="16" height="14" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#c75d8f" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#c75d8f" opacity="0.7"/></svg></span></a></li>
+    <li><a href="../outside-of-work/">Outside of Work<span class="sparkles"><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span></span><span class="nav-butterfly"><svg width="16" height="14" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#E8735A" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#E8735A" opacity="0.7"/></svg></span></a></li>
   </ul>
   <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
