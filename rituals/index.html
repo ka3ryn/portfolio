@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html lang="en" style="cursor:none">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rituals Cosmetics — Kathryn's Portfolio</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>*,*::before,*::after,*:hover,*:active,*:focus,svg,svg *{cursor:none!important}</style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --text: #1a1a1a;
+    --text-light: #6b6b6b;
+    --accent: #E8735A;
+    --accent-soft: #F4D1CB;
+    --lavender: #C8B6E2;
+    --sky: #A8D8EA;
+    --peach: #FFDAB9;
+    --sage: #C5D5CB;
+    --cream: #FFF8F0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ===== Floating butterflies + auras (same as main) ===== */
+  .floating-elements {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .butterfly-svg {
+    position: absolute;
+    opacity: 0;
+    animation: butterflyFloat 24s ease-in-out infinite, butterflyFadeIn 2s ease forwards;
+  }
+  .butterfly-svg:nth-child(1) { top: 8%; left: 5%; animation-delay: 0s, 0.5s; animation-duration: 28s, 2s; }
+  .butterfly-svg:nth-child(2) { top: 30%; right: 8%; animation-delay: -6s, 1s; animation-duration: 32s, 2s; }
+  .butterfly-svg:nth-child(3) { top: 60%; left: 3%; animation-delay: -14s, 0.3s; animation-duration: 26s, 2s; }
+  .butterfly-svg:nth-child(4) { top: 80%; right: 12%; animation-delay: -9s, 1.2s; animation-duration: 30s, 2s; }
+  .butterfly-svg:nth-child(5) { top: 45%; left: 55%; animation-delay: -20s, 0.7s; animation-duration: 34s, 2s; }
+
+  @keyframes butterflyFloat {
+    0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    10% { transform: translate(15px, -25px) rotate(8deg) scale(1.02); }
+    20% { transform: translate(40px, -15px) rotate(-3deg) scale(0.98); }
+    30% { transform: translate(25px, -50px) rotate(12deg) scale(1.04); }
+    40% { transform: translate(-10px, -35px) rotate(-5deg) scale(1); }
+    50% { transform: translate(-30px, -55px) rotate(6deg) scale(1.03); }
+    60% { transform: translate(-15px, -25px) rotate(-8deg) scale(0.97); }
+    70% { transform: translate(10px, -40px) rotate(10deg) scale(1.01); }
+    80% { transform: translate(30px, -20px) rotate(-4deg) scale(1.05); }
+    90% { transform: translate(10px, -10px) rotate(3deg) scale(0.99); }
+    100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  }
+  @keyframes butterflyFadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes wingFlutter { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.7); } }
+  .butterfly-svg .wing-left { animation: wingFlutter 1.2s ease-in-out infinite; transform-origin: right center; }
+  .butterfly-svg .wing-right { animation: wingFlutter 1.2s ease-in-out infinite 0.05s; transform-origin: left center; }
+
+  .cloud-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: drift 40s ease-in-out infinite;
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, 15px) scale(1.05); }
+    66% { transform: translate(-20px, -10px) scale(0.95); }
+  }
+
+  /* ===== Navigation ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250, 250, 248, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    transition: all 0.3s ease;
+  }
+  nav.scrolled {
+    padding: 14px 48px;
+    box-shadow: 0 1px 20px rgba(0,0,0,0.04);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--accent), #c75d8f, var(--lavender));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all 0.3s ease;
+  }
+  .nav-logo:hover {
+    background: linear-gradient(135deg, var(--lavender), var(--accent), #c75d8f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    transform: scale(1.03);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links li { position: relative; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 4px 0;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--lavender), var(--accent-soft), var(--sky));
+    transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: drop-shadow(0 0 4px rgba(200, 182, 226, 0.5));
+  }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-links > li:nth-child(1) a:hover { color: var(--accent); }
+  .nav-links > li:nth-child(2) a:hover { color: #c75d8f; }
+  .nav-links > li:nth-child(3) a:hover { color: #7c5db8; }
+  .nav-links > li:nth-child(4) a:hover { color: #4a8da8; }
+  .nav-links > li:nth-child(5) a:hover { color: #4a7a56; }
+  .nav-links > li:nth-child(6) a:hover { color: var(--accent); }
+
+  .nav-links > li > a .nav-butterfly {
+    position: absolute;
+    right: -22px;
+    top: 50%;
+    transform: translateY(-50%) scale(0) rotate(-15deg);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+  }
+  .nav-links > li > a:hover .nav-butterfly {
+    transform: translateY(-50%) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+
+  .nav-links > li > a .sparkles {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+  }
+  .nav-links > li > a .sparkle {
+    position: absolute;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+  .nav-links > li > a .sparkle:nth-child(1) { top: -6px; left: 20%; background: var(--lavender); }
+  .nav-links > li > a .sparkle:nth-child(2) { bottom: -6px; right: 15%; background: var(--accent-soft); }
+  .nav-links > li > a .sparkle:nth-child(3) { top: 50%; left: -8px; background: var(--sky); }
+  .nav-links > li > a:hover .sparkle {
+    opacity: 0.8;
+    animation: sparkleFloat 1s ease-in-out infinite;
+  }
+  .nav-links > li > a:hover .sparkle:nth-child(1) { animation-delay: 0s; }
+  .nav-links > li > a:hover .sparkle:nth-child(2) { animation-delay: 0.2s; }
+  .nav-links > li > a:hover .sparkle:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes sparkleFloat {
+    0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+    50% { transform: translateY(-4px) scale(1.4); opacity: 1; }
+  }
+
+  /* Dropdown */
+  .has-dropdown { position: relative; }
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: white;
+    border-radius: 16px;
+    padding: 12px 8px;
+    min-width: 200px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.04);
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 200;
+  }
+  .has-dropdown:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+  .dropdown li a {
+    display: block;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: var(--text-light);
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    font-weight: 400;
+  }
+  .dropdown li a::after { display: none; }
+  .dropdown li a:hover {
+    background: var(--bg);
+    color: var(--accent);
+  }
+  .dropdown li a.dropdown-active {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .mobile-toggle span {
+    width: 22px; height: 1.5px;
+    background: var(--text);
+    transition: all 0.3s;
+  }
+  @media (max-width: 768px) {
+    .mobile-toggle { display: flex; }
+    .nav-links { display: none; }
+  }
+
+  /* ===== Skill Pills ===== */
+  .skill-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .skill-pill-sm {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 400;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.06);
+    color: var(--text-light);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+  .skill-pill-sm:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    border-color: var(--lavender);
+  }
+  .pill-emoji {
+    font-size: 13px;
+  }
+
+  /* ===== Content Wrapper ===== */
+  /* Widened from 960 to 1200: at 1920 the old container left 528px of dead
+     space on each side. Body copy is capped separately so lines stay readable. */
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  /* Hero thumbnail only. Must stay 960 to match .project-hero-inner — the title,
+     subtitle and meta sit at 960, so widening this alone broke the hero. */
+  .content-wide {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  /* ===== Project Hero ===== */
+  .project-hero {
+    padding-top: 140px;
+    padding-bottom: 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .project-hero-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .project-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(232, 115, 90, 0.15);
+    color: var(--accent);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .project-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 5vw, 64px);
+    font-weight: 400;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+  .project-hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .project-hero-subtitle {
+    font-size: 18px;
+    color: var(--text-light);
+    line-height: 1.7;
+    max-width: 640px;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  /* Grid, not flex: Role / Company / Duration are guaranteed to share row 1.
+     flex-wrap was dropping Duration onto a second row whenever the three values
+     together exceeded the 864px content width. Columns can shrink, so a long
+     value wraps inside its own column instead of breaking the row. */
+  .project-meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, auto));
+    justify-content: start;
+    gap: 22px 40px;
+    align-items: start;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+  /* Skills spans the full width on its own row beneath. */
+  .project-meta > .meta-item:last-child { grid-column: 1 / -1; }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .meta-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+  .meta-value {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  /* ===== Hero Thumbnail ===== */
+  .hero-thumbnail {
+    margin-top: 48px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.06);
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1s;
+  }
+  .hero-thumbnail img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ===== Sections ===== */
+  .case-section {
+    padding: 48px 0;
+    position: relative;
+    scroll-margin-top: 100px;
+  }
+
+  .section-aura {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .case-section-label {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  /* ===== Phase badge — marks Internship vs Full-time chapters ===== */
+  .section-label-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .section-label-row .case-section-label { margin-bottom: 0; }
+
+  .phase-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .phase-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.75;
+  }
+  /* Tinted fills. Full-time uses the nav's Work pink rather than an accent tone,
+     because the section label beside it is already --accent. */
+  .phase-badge.intern {
+    color: #7c5db8;
+    background: rgba(200, 182, 226, 0.22);
+  }
+  .phase-badge.fulltime {
+    color: #B8497C;
+    background: rgba(199, 93, 143, 0.15);
+  }
+
+  .case-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 3.5vw, 44px);
+    font-weight: 500;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  /* Matches the hero's measure (960 - 96 padding = 864) while living inside the
+     widened 1200px .content, so this block lines up with the section above it. */
+  /* Thin rule to separate a sub-section from the block above it. Uses the same
+     gradient as the butterfly divider, without the dots. */
+  .rule-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200,182,226,0.5), transparent);
+    margin: 56px 0 44px;
+  }
+
+  .hero-aligned { max-width: 864px; margin-left: auto; margin-right: auto; }
+
+  /* Only Go-to-Market Strategy, Brand Expansion and Digital were meant to widen.
+     Impact and the Approach block keep the original 960px measure. */
+  #sec-impact .content { max-width: 960px; }
+  /* Kept at its original 864px measure, but centred — otherwise it sits left
+     with a gap on the right inside the widened 1200px container. */
+  .approach-block { max-width: 864px; margin-left: auto; margin-right: auto; }
+
+  .case-body {
+    font-size: 16px;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  .case-body p {
+    margin-bottom: 20px;
+  }
+
+  /* ===== Butterfly Divider ===== */
+  /* Section divider. Was opacity:0.25 with 10px padding, which read as a smudge
+     between sections. Now uses the flanking gradient rule from the home page's
+     section divider, at full opacity with real breathing room. */
+  .butterfly-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 52px 48px;
+  }
+  .butterfly-divider::before,
+  .butterfly-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200,182,226,0.5), transparent);
+  }
+  .butterfly-divider .dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--lavender);
+    opacity: 0.85;
+  }
+  .butterfly-divider svg { opacity: 0.9 !important; }
+
+  @media (max-width: 768px) {
+    .butterfly-divider { padding: 36px 24px; }
+  }
+
+  /* ===== Insight Cards ===== */
+  .insight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  .insight-card {
+    background: white;
+    border-radius: 20px;
+    padding: 32px 30px;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .insight-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 3px;
+    border-radius: 20px 20px 0 0;
+  }
+  .insight-card:nth-child(1)::before { background: var(--accent); }
+  .insight-card:nth-child(2)::before { background: var(--lavender); }
+  .insight-card:nth-child(3)::before { background: var(--sky); }
+  .insight-card:nth-child(4)::before { background: var(--sage); }
+
+  .insight-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+  }
+
+  .insight-icon {
+    font-size: 24px;
+    margin-bottom: 14px;
+  }
+
+  .insight-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-light);
+  }
+
+  .insight-text strong {
+    color: var(--text);
+  }
+
+  /* ===== Key Insights — Clean Numbered List ===== */
+  .key-insights-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .key-insights-list.cols-1 { grid-template-columns: 1fr; gap: 12px; }
+
+  .key-insight-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 22px 24px;
+    border-radius: 16px;
+    background: white;
+    border: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    transition: all 0.3s ease;
+  }
+  .key-insight-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  }
+
+  .key-insight-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--accent-soft);
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 32px;
+    letter-spacing: -1px;
+  }
+
+  .key-insight-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .key-insight-content strong {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .key-insight-content span {
+    font-size: 13.5px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .key-insights-list { grid-template-columns: 1fr; }
+  }
+
+  /* ===== HMW Block ===== */
+  .hmw-block {
+    background: white;
+    border-radius: 24px;
+    padding: 40px 48px;
+    margin-top: 40px;
+    border: 1px solid rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+  }
+  .hmw-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--lavender), var(--accent-soft), var(--sky));
+  }
+
+  .hmw-label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .hmw-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 2.5vw, 30px);
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.5px;
+    color: var(--text);
+  }
+
+  .hmw-text em { color: var(--accent); font-style: italic; }
+
+  /* ===== Stat Cards ===== */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  .stat-card {
+    background: white;
+    border-radius: 20px;
+    padding: 32px 28px;
+    border: 1px solid rgba(0,0,0,0.05);
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 768px) {
+    .stat-grid { grid-template-columns: 1fr; max-width: 320px; margin-left: auto; margin-right: auto; }
+  }
+
+  /* ===== Version Labels ===== */
+  .version-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .version-label.v1 { background: rgba(244, 209, 203, 0.3); color: var(--accent); }
+  .version-label.v2 { background: rgba(200, 182, 226, 0.2); color: #7c5db8; }
+  .version-label.final { background: rgba(72, 187, 120, 0.15); color: #4a7a56; font-weight: 600; }
+
+  .version-desc {
+    font-size: 15px;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  /* ===== Image Galleries ===== */
+  .gallery-row {
+    display: grid;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .gallery-row.cols-2 { grid-template-columns: 1fr 1fr; }
+  .gallery-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  /* ===== Team photo inside the closing card =====
+     The photo bleeds to the card's own edges (negative margins cancel the 48px
+     padding) and fades into the white below it, so image and closing text read
+     as one object instead of two stacked boxes. */
+  /* ===== Image system =====
+     Each photo declares the aspect ratio it actually is, so object-fit only
+     enforces the box and never crops meaningfully. Sizes are capped by role,
+     because a 3:4 portrait at 40% of a wide viewport renders ~1000px tall. */
+  .photo {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+  .photo.is-portrait { aspect-ratio: 3 / 4; }   /* 1050x1400 */
+  .photo.is-square   { aspect-ratio: 1 / 1; }   /* 1397x1400 */
+  .photo.is-wide     { aspect-ratio: 16 / 9; }  /* 1400x774, 1080x586 */
+
+  /* A photo sitting beside body copy: never wider than a third of the column,
+     never so narrow it reads as a thumbnail. */
+  /* The photo is positioned absolutely inside its column, so it contributes
+     nothing to layout height. The row's height comes from the numbered cards,
+     and the photo crops to match — bottoms line up with no stretched gaps
+     between cards. */
+  /* A fixed 4:5 portrait frame keeps the photo in proportion instead of
+     stretching to whatever height the cards happen to be. 4:5 is close to the
+     files' native 3:4, so the crop is slight. Centred against the card stack. */
+  /* Height comes from the card stack beside it (the row is align-items:stretch),
+     so top and bottom line up exactly. The photo is absolutely positioned inside,
+     so it never drives the row height itself. At ~400 wide against a 3-card
+     stack the frame lands around 3:4 — still a true portrait, not a letterbox. */
+  /* Square frame. rituals-expansion-3 is natively 1397x1400, so a 1:1 box shows
+     it essentially whole — under half a percent is cropped. Centred against the
+     card stack so it keeps true proportions instead of stretching. */
+  .media-col {
+    flex: 0 0 clamp(300px, 40%, 470px);
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    aspect-ratio: 1 / 1;
+    align-self: center;
+  }
+  /* Digital has three short cards, so its photo needs a smaller frame to finish
+     near the bottom of card 03 rather than overshooting it. */
+  .media-col-sm { flex: 0 0 clamp(230px, 29%, 340px); }
+  .media-col .photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    object-fit: cover;
+    border-radius: 0;
+  }
+  /* Inside a stretched row the column has a definite height, so the photo fills
+     it and finishes level with the last numbered card. aspect-ratio is dropped
+     here — the row's height is the constraint instead. */
+  .media-col .photo {
+    aspect-ratio: auto;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  /* ===== Two-panel section: copy left, photos right ===== */
+  /* No 100vw escape. 100vw includes the vertical scrollbar, so it was wider than
+     the real content area and pushed the whole page off centre. Since the photos
+     are aligned to the content line anyway, a plain grid inside .content gives
+     the same result without the overflow. */
+  .panel-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+  /* .content is max-width:960 + 48px padding, so its text begins at
+     calc(50vw - 432px). Matching that puts this title on the same line as every
+     other section heading on the page. */
+  .panel-left  { padding: 0 clamp(24px, 3vw, 48px) 0 0; }
+  /* Centred against the taller left column, so the photos sit lower and the
+     panel reads as balanced rather than top-aligned. */
+  .panel-right {
+    /* Right padding mirrors .panel-left's calc(50vw - 552px), so the photo block
+       ends on the same line as the 1200px content box — i.e. flush with the
+       GTM photo above it. */
+    padding: 0 0 0 clamp(16px, 1.5vw, 24px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+  }
+
+  /* Photos carry the metrics on hover instead of separate stat blocks, which
+     were dictating the panel height and throwing the alignment out. */
+  .panel-photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: 0;
+    width: 100%;
+    /* Nudged down within the centred panel. The panel centres its content, so a
+       top margin shifts the block by half its value — ~40px lower here. */
+    margin-top: 80px;
+  }
+  .photo-metric {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 16px;
+    outline: none;
+  }
+  .photo-metric .photo { border-radius: 0; }
+  .photo-metric .metric {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px;
+    text-align: center;
+    background: rgba(26, 26, 26, 0.58);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .photo-metric:hover .metric,
+  .photo-metric:focus .metric,
+  .photo-metric:focus-within .metric { opacity: 1; }
+  .photo-metric .metric-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1;
+  }
+  .photo-metric .metric-label {
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.92);
+    max-width: 22ch;
+  }
+  /* Touch devices have no hover, so show the metric as a standing caption. */
+  @media (hover: none) {
+    .photo-metric .metric {
+      opacity: 1;
+      justify-content: flex-end;
+      background: linear-gradient(to top, rgba(26,26,26,0.78), rgba(26,26,26,0) 62%);
+    }
+    .photo-metric .metric-number { font-size: 30px; }
+  }
+
+  @media (max-width: 900px) {
+    .panel-split { grid-template-columns: 1fr; gap: 32px; }
+    .panel-left, .panel-right { padding: 0 24px; }
+  }
+
+  .conclusion-block.with-photo { padding-top: 0; }
+  .conclusion-photo {
+    position: relative;
+    margin: 0 -48px 30px;
+    line-height: 0;
+  }
+  .conclusion-photo img { border-radius: 0; }
+  /* Just enough to soften the seam into the card — not a wash over the photo.
+     Only the last 18% is touched, and it stays fully transparent until 60% of
+     that, so the image itself is never veiled. */
+  .conclusion-photo::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 18%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 60%, #fff 100%);
+    pointer-events: none;
+  }
+  @media (max-width: 768px) {
+    .conclusion-photo { margin: 0 -28px 24px; }
+    
+  }
+
+  @media (max-width: 768px) {
+  }
+
+  .gallery-item {
+    border-radius: 16px;
+    overflow: hidden;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+  }
+  .gallery-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .gallery-caption {
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--text-light);
+    text-align: center;
+  }
+
+  /* ===== Conclusion ===== */
+  .conclusion-block {
+    background: white;
+    border-radius: 24px;
+    padding: 48px;
+    border: 1px solid rgba(0,0,0,0.05);
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .conclusion-block::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--lavender), var(--accent-soft), var(--sky));
+  }
+
+  .conclusion-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+  }
+
+  .conclusion-text {
+    font-size: 16px;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  /* ===== Back Link ===== */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 0 48px;
+    padding: 12px 0;
+    font-size: 13px;
+    color: var(--text-light);
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+  }
+  .back-link:hover {
+    color: var(--accent);
+    transform: translateX(-3px);
+  }
+  .back-link svg {
+    transition: transform 0.3s ease;
+  }
+  .back-link:hover svg {
+    transform: translateX(-2px);
+  }
+
+  /* ===== Next Project CTA ===== */
+  .next-project {
+    text-align: center;
+    padding: 80px 0 120px;
+  }
+
+  .next-label {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 12px;
+  }
+
+  .next-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  .next-title a {
+    text-decoration: none;
+    color: var(--text);
+    transition: color 0.3s;
+  }
+  .next-title a:hover { color: var(--accent); }
+
+  .next-blurb {
+    font-size: 15px;
+    color: var(--text-light);
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* ===== Footer ===== */
+  footer {
+    text-align: center;
+    padding: 32px 48px;
+    font-size: 13px;
+    color: var(--text-light);
+    border-top: 1px solid rgba(0,0,0,0.04);
+  }
+  footer span { color: var(--accent); }
+
+  /* ===== Animations ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .role-card {
+    background: white;
+    border-radius: 24px;
+    padding: 36px 32px;
+    border: 1px solid rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .role-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--lavender), var(--accent-soft), var(--sky));
+  }
+  .role-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+  .role-card .role-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.3px;
+    color: var(--text);
+  }
+  .role-card .role-text em {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .img-placeholder {
+    background: linear-gradient(135deg, var(--cream), var(--accent-soft));
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    font-size: 13px;
+    min-height: 200px;
+    border: 1px dashed rgba(0,0,0,0.1);
+  }
+
+  /* ===== Section Progress Nav ===== */
+  .section-nav {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%) translateY(60px);
+    z-index: 90;
+    display: flex;
+    gap: 4px;
+    padding: 6px 8px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(244,209,203,0.12), rgba(200,182,226,0.1));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 100px;
+    border: 1px solid rgba(200, 182, 226, 0.2);
+    box-shadow: 0 4px 32px rgba(200, 182, 226, 0.15), 0 0 0 1px rgba(255,255,255,0.5) inset;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .section-nav.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .section-nav a {
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-light);
+    padding: 8px 16px;
+    border-radius: 100px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+    position: relative;
+  }
+  .section-nav a:hover {
+    color: var(--accent);
+    background: rgba(232, 115, 90, 0.08);
+    transform: translateY(-1px);
+  }
+  .section-nav a::before,
+  .section-nav a::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .section-nav a::before {
+    top: -2px;
+    left: 20%;
+    background: var(--lavender);
+  }
+  .section-nav a::after {
+    bottom: -2px;
+    right: 18%;
+    background: var(--accent-soft);
+  }
+  .section-nav a:hover::before {
+    opacity: 0.8;
+    transform: translateY(-3px);
+    animation: sparkleFloat 1.2s ease-in-out infinite;
+  }
+  .section-nav a:hover::after {
+    opacity: 0.7;
+    transform: translateY(3px);
+    animation: sparkleFloat 1.2s ease-in-out infinite 0.3s;
+  }
+  .section-nav a.active::before,
+  .section-nav a.active::after {
+    display: none;
+  }
+  .section-nav a.active {
+    background: linear-gradient(135deg, var(--accent), #c75d8f);
+    color: white;
+    box-shadow: 0 2px 12px rgba(232, 115, 90, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .section-nav {
+      gap: 2px;
+      padding: 5px 6px;
+    }
+    .section-nav a {
+      font-size: 10px;
+      padding: 6px 10px;
+    }
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    nav.scrolled { padding: 12px 24px; }
+    .project-hero-inner, .content, .content-wide { padding: 0 24px; }
+    .project-hero { padding-top: 100px; }
+    .hero-thumbnail { border-radius: 16px; }
+    .hmw-block { padding: 28px; }
+    .conclusion-block { padding: 28px; }
+    /* Four columns can't survive a phone width — let them wrap again. */
+    .project-meta { grid-template-columns: 1fr; gap: 20px; }
+    .skill-pills { gap: 6px; }
+    .gallery-row.cols-3 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating Background Elements -->
+<div class="floating-elements">
+  <div class="butterfly-svg" style="opacity: 0.10;">
+    <svg width="40" height="34" viewBox="0 0 48 40" fill="none">
+      <g class="wing-left"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C8B6E2" opacity="0.7"/><path d="M24 20C22 26 16 36 10 34C4 32 8 22 14 20C20 18 23 19 24 20Z" fill="#A8D8EA" opacity="0.5"/></g>
+      <g class="wing-right"><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C8B6E2" opacity="0.7"/><path d="M24 20C26 26 32 36 38 34C44 32 40 22 34 20C28 18 25 19 24 20Z" fill="#A8D8EA" opacity="0.5"/></g>
+    </svg>
+  </div>
+  <div class="butterfly-svg" style="opacity: 0.08;"><svg width="30" height="25" viewBox="0 0 48 40" fill="none"><g class="wing-left"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#F4D1CB" opacity="0.7"/></g><g class="wing-right"><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#F4D1CB" opacity="0.7"/></g></svg></div>
+  <div class="butterfly-svg" style="opacity: 0.12;"><svg width="24" height="20" viewBox="0 0 48 40" fill="none"><g class="wing-left"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#A8D8EA" opacity="0.8"/></g><g class="wing-right"><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#A8D8EA" opacity="0.8"/></g></svg></div>
+  <div class="butterfly-svg" style="opacity: 0.07;"><svg width="36" height="30" viewBox="0 0 48 40" fill="none"><g class="wing-left"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#FFDAB9" opacity="0.7"/></g><g class="wing-right"><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#FFDAB9" opacity="0.7"/></g></svg></div>
+  <div class="butterfly-svg" style="opacity: 0.09;"><svg width="28" height="24" viewBox="0 0 48 40" fill="none"><g class="wing-left"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C8B6E2" opacity="0.6"/></g><g class="wing-right"><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C8B6E2" opacity="0.6"/></g></svg></div>
+  <div class="cloud-shape" style="width: 500px; height: 280px; top: 2%; left: -8%; opacity: 0.05; background: linear-gradient(135deg, #C8B6E2, #A8D8EA);"></div>
+  <div class="cloud-shape" style="width: 400px; height: 200px; top: 35%; right: -10%; opacity: 0.04; background: linear-gradient(135deg, #FFDAB9, #F4D1CB);"></div>
+  <div class="cloud-shape" style="width: 550px; height: 280px; bottom: 10%; left: 15%; opacity: 0.04; background: linear-gradient(135deg, #A8D8EA, #C5D5CB);"></div>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="../" class="nav-logo">kathryn.</a>
+  <ul class="nav-links">
+    <li class="has-dropdown"><a href="../#projects">Projects
+      <span class="sparkles"><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span></span>
+      <span class="nav-butterfly"><svg width="16" height="14" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#7c5db8" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#7c5db8" opacity="0.7"/></svg></span>
+    </a>
+      <ul class="dropdown">
+        <li><a href="../collatch/">Collatch</a></li>
+        <li><a href="../path-at-penn/">Path@Penn</a></li>
+        <li><a href="../piggus-nimbus/">Piggus Nimbus</a></li>
+      </ul>
+    </li>
+    <li class="has-dropdown"><a href="../#work-section">Work
+      <span class="sparkles"><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span></span>
+      <span class="nav-butterfly"><svg width="16" height="14" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#c75d8f" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#c75d8f" opacity="0.7"/></svg></span>
+    </a>
+      <ul class="dropdown">
+        <li><a href="../rituals/" class="dropdown-active">Rituals Cosmetics</a></li>
+      </ul>
+    </li>
+    <li><a href="../outside-of-work/">Outside of Work
+      <span class="sparkles"><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span></span>
+      <span class="nav-butterfly"><svg width="16" height="14" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#E8735A" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#E8735A" opacity="0.7"/></svg></span>
+    </a></li>
+  </ul>
+  <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Section Progress Nav -->
+<div class="section-nav" id="sectionNav">
+  <a href="#sec-overview">Strategy</a>
+  <a href="#sec-expansion">Expansion</a>
+  <a href="#sec-digital">Digital</a>
+  <a href="#sec-impact">Impact</a>
+</div>
+
+<!-- Back Link -->
+<a href="../" class="back-link">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+  Back
+</a>
+
+<!-- ============================================ -->
+<!-- PROJECT HERO -->
+<!-- ============================================ -->
+<section class="project-hero">
+  <div class="project-hero-inner">
+    <div class="project-badge">
+      <svg width="14" height="12" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#E8735A" opacity="0.6"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#E8735A" opacity="0.6"/></svg>
+      Go-to-Market · Market Expansion
+    </div>
+    <h1 class="project-hero-title">Bringing <em>Rituals</em> to Southeast Asia</h1>
+    <p class="project-hero-subtitle" style="max-width: 100%;">Part of the core pioneer team that took Rituals from zero to 4 stores across Southeast Asia in under 6 months.</p>
+  </div>
+
+  <div class="content-wide">
+    <div class="hero-thumbnail">
+      <img src="images/rituals-thumbnail.jpg" alt="Rituals storefront on opening day, framed with cherry blossom, with the launch team at the entrance">
+    </div>
+  </div>
+
+  <div class="project-hero-inner" style="padding-top: 40px;">
+    <div class="project-meta">
+      <div class="meta-item">
+        <span class="meta-label">Role</span>
+        <span class="meta-value">Intern → Marketing Executive</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Company</span>
+        <span class="meta-value">Rituals Cosmetics (Under Valiram Group)</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Duration</span>
+        <span class="meta-value">3-Month Internship → 6-Month Full-Time</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Skills</span>
+        <div class="skill-pills">
+          <span class="skill-pill-sm"><span class="pill-emoji">🚀</span> Go-to-Market Strategy</span>
+          <span class="skill-pill-sm"><span class="pill-emoji">📊</span> Market Research</span>
+          <span class="skill-pill-sm"><span class="pill-emoji">🛒</span> Omnichannel Retail Strategy</span>
+          <span class="skill-pill-sm"><span class="pill-emoji">📣</span> Marketing &amp; PR</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- GO-TO-MARKET STRATEGY -->
+<!-- ============================================ -->
+<section class="case-section" id="sec-overview">
+  <div class="section-aura" style="width: 400px; height: 400px; background: radial-gradient(circle, var(--lavender), transparent); top: -50px; right: -150px;"></div>
+  <div class="content">
+    <div class="reveal hero-aligned">
+      <h2 class="case-section-title">From Europe to Southeast Asia</h2>
+      <div class="case-body">
+        <p>My time at Rituals Cosmetics was one of the most formative experiences in my career as I saw the brand come to life from the ground up, first scoping the market opportunity as an intern and then returning full-time to manage the launch.</p>
+      </div>
+    </div>
+
+    <div class="reveal hero-aligned" style="margin-top: 28px;">
+      <p style="font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 18px;">My Role</p>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+        <div class="role-card">
+          <p class="role-text">Part of the <em>core pioneer team</em> that built the brand in Southeast Asia from scratch</p>
+        </div>
+        <div class="role-card">
+          <p class="role-text"><em>Lead marketing representative</em> supporting the Regional General Manager</p>
+        </div>
+        <div class="role-card">
+          <p class="role-text">Owned <em>brand and launch execution end to end</em>, aligning marketing, PR, retail, and merchandising teams.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule-divider"></div>
+
+    <!-- Label sits inside the left column, so the photo spans the full height
+         of the block rather than starting level with card 01 -->
+    <div class="reveal">
+      <!-- Label and description sit above the row at full section width, matching
+           how the Digital section is built. Inside the left column they wrapped at
+           ~600px while the same paragraph in Digital wrapped at 1104px. -->
+      <div class="section-label-row" style="margin-bottom: 18px;">
+        <p class="case-section-label">Go-to-Market Strategy</p>
+        <span class="phase-badge intern">Internship</span>
+      </div>
+      <div class="case-body" style="margin-bottom: 28px;">
+        <p>Rituals was already an established and iconic European bath and beauty brand, with a recognized identity and a large consumer base familiar with its products. Entering Southeast Asia meant protecting that identity while accounting for local regulations, product requirements, and a market that shops differently from Europe.</p>
+      </div>
+      <div class="media-row" style="display: flex; gap: 24px; align-items: stretch;">
+        <div style="flex: 1.1;">
+          <div class="key-insights-list cols-1">
+            <div class="key-insight-item">
+              <span class="key-insight-num">01</span>
+              <div class="key-insight-content">
+                <strong>Built the go-to-market strategy</strong>
+                <span>Sized the market, mapped the competitive landscape, and defined the segmentation and channel strategy behind Rituals' Southeast Asia entry.</span>
+              </div>
+            </div>
+            <div class="key-insight-item">
+              <span class="key-insight-num">02</span>
+              <div class="key-insight-content">
+                <strong>Mapped Southeast Asian consumer behavior</strong>
+                <span>Benchmarked how the region shops for beauty, online and in store, against Rituals' 1,000+ store European base.</span>
+              </div>
+            </div>
+            <div class="key-insight-item">
+              <span class="key-insight-num">03</span>
+              <div class="key-insight-content">
+                <strong>Presented findings to the global strategy team</strong>
+                <span>Shaped the regional launch approach around local regulations, product certifications, labeling, and campaign messaging adapted within global brand guidelines.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+              <div class="media-col">
+          <img class="photo is-square" src="images/rituals-expansion-3.jpg" alt="Rituals brand philosophy standee at the launch event">
+        </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<div class="butterfly-divider">
+  <span class="dot"></span><span class="dot"></span>
+  <svg width="20" height="17" viewBox="0 0 48 40" fill="none" opacity="0.5"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C8B6E2" opacity="0.6"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C8B6E2" opacity="0.6"/></svg>
+  <span class="dot"></span><span class="dot"></span>
+</div>
+
+<!-- ============================================ -->
+<!-- BRAND EXPANSION -->
+<!-- ============================================ -->
+<section class="case-section" id="sec-expansion">
+  <div class="content">
+    <div class="reveal">
+      <!-- Frame to frame: copy left, stats + photos right -->
+      <div class="panel-split">
+        <div class="panel-left">
+          <div class="section-label-row">
+            <p class="case-section-label">Brand Expansion</p>
+            <span class="phase-badge fulltime">Marketing Executive</span>
+          </div>
+          <h2 class="case-section-title" style="margin-bottom: 28px;">4 store openings in under 6 months</h2>
+
+          <div class="key-insights-list cols-1">
+            <div class="key-insight-item">
+              <span class="key-insight-num">01</span>
+              <div class="key-insight-content">
+                <strong>Launched 4 retail locations</strong>
+                <span>Across Malaysia and Singapore.</span>
+              </div>
+            </div>
+            <div class="key-insight-item">
+              <span class="key-insight-num">02</span>
+              <div class="key-insight-content">
+                <strong>Elevated the in-store customer experience</strong>
+                <span>Worked with the merchandising team on how each store looked and felt to customers.</span>
+              </div>
+            </div>
+            <div class="key-insight-item">
+              <span class="key-insight-num">03</span>
+              <div class="key-insight-content">
+                <strong>Secured sites and in-mall visibility</strong>
+                <span>Partnered with mall leasing teams on site selection and negotiated in-mall advertising space for launches.</span>
+              </div>
+            </div>
+            <div class="key-insight-item">
+              <span class="key-insight-num">04</span>
+              <div class="key-insight-content">
+                <strong>Planned and executed 2 PR launch events</strong>
+                <span>In East Malaysia and Singapore.</span>
+              </div>
+            </div>
+            <div class="key-insight-item">
+              <span class="key-insight-num">05</span>
+              <div class="key-insight-content">
+                <strong>Drove influencer, press, and publication campaigns</strong>
+                <span>Generated buzz around new store openings and sustained brand visibility across channels, highlighting different beauty collections monthly.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-right">
+          <div class="panel-photos">
+            <figure class="photo-metric" tabindex="0">
+              <img class="photo is-portrait" src="images/rituals-expansion-1.jpg" alt="Rituals storefront ahead of opening day, Malaysia">
+              <figcaption class="metric">
+                <span class="metric-number">2x</span>
+                <span class="metric-label">event attendance vs. target at launches</span>
+              </figcaption>
+            </figure>
+            <figure class="photo-metric" tabindex="0">
+              <img class="photo is-portrait" src="images/rituals-product.jpg" alt="Ritual of Ayurveda rose and product vial in store">
+              <figcaption class="metric">
+                <span class="metric-number">110%</span>
+                <span class="metric-label">of sales target during the launch period</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="butterfly-divider">
+  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  <svg width="22" height="18" viewBox="0 0 48 40" fill="none" opacity="0.5"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#A8D8EA" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#A8D8EA" opacity="0.7"/></svg>
+  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+</div>
+
+<!-- ============================================ -->
+<!-- DIGITAL & E-COMMERCE -->
+<!-- ============================================ -->
+<section class="case-section" id="sec-digital">
+  <div class="section-aura" style="width: 400px; height: 400px; background: radial-gradient(circle, var(--peach), transparent); top: 0; right: -100px;"></div>
+  <div class="content">
+    <div class="reveal">
+      <div class="section-label-row">
+        <p class="case-section-label">Digital &amp; E-Commerce</p>
+        <span class="phase-badge fulltime">Marketing Executive</span>
+      </div>
+      <h2 class="case-section-title">Building Rituals' presence online</h2>
+      <div class="case-body">
+        <p>Beyond opening physical stores, we launched localized websites for Malaysia and Singapore and laid the foundation for an omnichannel path-to-purchase strategy across both markets.</p>
+      </div>
+    </div>
+
+    <!-- What I did — numbered points beside an image, matching the other sections -->
+    <div class="reveal" style="margin-top: 28px;">
+      <div class="media-row" style="display: flex; flex-direction: row-reverse; gap: 24px; align-items: stretch;">
+        <div style="flex: 1.1;">
+          <div class="key-insights-list cols-1">
+            <div class="key-insight-item">
+              <span class="key-insight-num">01</span>
+              <div class="key-insight-content">
+                <strong>Launched localized e-commerce sites</strong>
+                <span>Worked with engineering, e-commerce, and merchandising to ship sites for Malaysia and Singapore.</span>
+              </div>
+            </div>
+            <div class="key-insight-item">
+              <span class="key-insight-num">02</span>
+              <div class="key-insight-content">
+                <strong>Localized content, pricing, and currency</strong>
+                <span>Managed the per-market setup with the Regional General Manager.</span>
+              </div>
+            </div>
+            <div class="key-insight-item">
+              <span class="key-insight-num">03</span>
+              <div class="key-insight-content">
+                <strong>Ran A/B testing on ads and newsletters</strong>
+                <span>Optimized for both ongoing brand marketing and store launch campaigns.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+              <div class="media-col media-col-sm">
+          <img class="photo is-portrait" src="images/rituals-expansion-4.jpg" alt="Guests and the team at the Rituals launch event backdrop">
+        </div>
+</div>
+    </div>
+
+    <!-- Approach — three cards. Short measure reads far better than full-width bullets. -->
+    <div class="reveal approach-block" style="margin-top: 72px;">
+      <p class="case-section-label">Approach</p>
+      <div class="insight-grid" style="margin-top: 22px;">
+        <div class="insight-card">
+          <p class="insight-text"><strong>Two distinct audiences.</strong> Tailored messaging for brand-aware European travelers and new-to-Rituals shoppers.</p>
+        </div>
+        <div class="insight-card">
+          <p class="insight-text"><strong>Awareness and conversion.</strong> Targeted campaigns to build awareness with new customers and convert existing ones.</p>
+        </div>
+        <div class="insight-card">
+          <p class="insight-text"><strong>Online into in-store.</strong> Bridged digital and physical touchpoints so online discovery drove store visits and purchases.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Where online discovery landed: the physical store.
+         Held to 960px to match the team photo in the Impact card below, which
+         spans its 864px card plus a 48px bleed each side. -->
+    <div class="reveal" style="margin-top: 72px; max-width: 864px; margin-left: auto; margin-right: auto;">
+      <img class="photo is-wide" src="images/rituals-expansion-2.jpg" alt="Rituals store interior with the full product range merchandised">
+    </div>
+
+  </div>
+</section>
+
+<div class="butterfly-divider">
+  <span class="dot"></span>
+  <svg width="18" height="15" viewBox="0 0 48 40" fill="none" opacity="0.45"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C8B6E2" opacity="0.6"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C8B6E2" opacity="0.6"/></svg>
+  <span class="dot"></span>
+</div>
+
+
+<!-- ============================================ -->
+<!-- IMPACT & REFLECTION -->
+<!-- ============================================ -->
+<section class="case-section" id="sec-impact" style="padding-top: 16px;">
+  <div class="content">
+    <div class="reveal">
+      <div class="conclusion-block with-photo">
+        <div class="conclusion-photo">
+          <img class="photo is-wide" src="images/rituals-footer.jpg" alt="The full Rituals Malaysia store team at a launch">
+        </div>
+        <p class="case-section-label" style="margin-bottom: 16px;">Impact &amp; Reflection</p>
+        <h3 class="conclusion-title">From 0 to 10+ stores across three countries</h3>
+        <p class="conclusion-text">Today, Rituals has more than 10 store locations across Malaysia, Singapore, and Thailand — built on the go-to-market strategy and launch playbook developed during the initial expansion. This experience taught me what it means to own a product from zero: deeply understanding your market, aligning cross-functional stakeholders around a shared vision, and moving fluidly between research, strategy, and execution to deliver results under real constraints.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- NEXT PROJECT -->
+<!-- ============================================ -->
+<section class="next-project">
+  <div class="content">
+    <p class="next-label">Next Project</p>
+    <h2 class="next-title"><a href="../collatch/">Collatch →</a></h2>
+    <p class="next-blurb">An app that matches international students with their ideal U.S. college.</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="position: relative; z-index: 2;">
+  <div style="display: flex; justify-content: center; align-items: center; gap: 8px; padding: 32px 0;">
+    <p style="font-size: 12px; color: var(--text-light); opacity: 0.5; letter-spacing: 0.5px;">Kathryn Chiew · 2026</p>
+    <svg width="18" height="15" viewBox="0 0 48 40" fill="none" opacity="0.4">
+      <path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#F4D1CB" opacity="0.7"/>
+      <path d="M24 20C22 26 16 36 10 34C4 32 8 22 14 20C20 18 23 19 24 20Z" fill="#FFDAB9" opacity="0.5"/>
+      <path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#F4D1CB" opacity="0.7"/>
+      <path d="M24 20C26 26 32 36 38 34C44 32 40 22 34 20C28 18 25 19 24 20Z" fill="#FFDAB9" opacity="0.5"/>
+    </svg>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  const sectionNav = document.getElementById('sectionNav');
+  const sectionLinks = sectionNav.querySelectorAll('a');
+  const sections = [
+    { id: 'sec-overview', el: document.getElementById('sec-overview') },
+    { id: 'sec-expansion', el: document.getElementById('sec-expansion') },
+    { id: 'sec-digital', el: document.getElementById('sec-digital') },
+    { id: 'sec-impact', el: document.getElementById('sec-impact') },
+  ].filter(s => s.el);
+
+  function updateSectionNav() {
+    const scrollY = window.scrollY;
+    const heroBottom = document.querySelector('.project-hero').offsetTop + document.querySelector('.project-hero').offsetHeight;
+    sectionNav.classList.toggle('visible', scrollY > heroBottom - 100);
+    let current = '';
+    for (const section of sections) {
+      if (section.el.getBoundingClientRect().top < window.innerHeight * 0.4) current = section.id;
+    }
+    sectionLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', updateSectionNav, { passive: true });
+  updateSectionNav();
+
+  sectionLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+<style>
+#work-popup {
+  position: fixed;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+  border-radius: 24px;
+  padding: 7px 16px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #444;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 9999;
+  white-space: nowrap;
+}
+#work-popup.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+</style>
+<div id="work-popup">updates in progress ✨</div>
+<script>
+(function() {
+  var popup = document.getElementById('work-popup');
+  var workLink = document.querySelector('a[href*="work-section"]');
+  if (workLink && popup) {
+    workLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      var dest = workLink.getAttribute('href');
+      popup.classList.add('show');
+      setTimeout(function() {
+        popup.classList.remove('show');
+      }, 1800);
+    });
+  }
+})();
+</script>
+<script src="../cursor.js"></script>
+
+</body>
+</html>
