@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" style="cursor:none">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Path@Penn — Kathryn's Portfolio</title>
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-<style>*,*::before,*::after,*:hover,*:active,*:focus,svg,svg *{cursor:none!important}</style>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -1461,6 +1460,18 @@
     }
   }
 </style>
+<style id="cursor-css">
+/* The original arrow cursor: 32x34, #FF9575 over #D45A38, flat, no outline.
+   One cursor everywhere, exactly as the old cursor.js drew it.
+   Inlined on purpose: it used to be injected by cursor.js, and a stale cached
+   copy of that file made it impossible to tell whether a fix had reached the
+   browser. Inline always ships with the page.
+   ONE plain url() per rule, never image-set(): Chrome accepts image-set in the
+   cursor property, wins the cascade with it, then paints nothing.
+   The trailing , auto is the safety net: a rejected image falls back to the
+   system cursor instead of leaving no cursor at all. */
+html, body, * { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAiCAYAAAA+stv/AAABqklEQVR4nOyXPVLDMBCFdz25AnSEC5DeHc4pmAncgKFMhs52y9DCCQjXsNK5DxeI6cIdLLx25LEVyT+KYlPwmtiy1vvN7tMmcWBkOTCySoDtg+vBCCoBkIO/f77j/G0VwIAqATiHzT7Zwc/3zufvy2goEKdyxegjh0gSL0Pyh4DA6s3XwuXi+nJ6DRdXU7EtxMeXAM6gOsC9GwEHTwcBacrw6ZWBRTUew8ITyeGO++CgdW/UKkBHEVOI5E31SpShVtrSaRDVKyFkx6QoL1SNKEtdifw1xtU4BpCM2BkCs2PMcdMX5KgFNJCaAtTtoECC7t8WR7HCWmL0EAVJBrHsPNInYCiCIKk9IUBW0DY7ULXY5oOq9MaspdGa9OTfA83tENJ7QwnAEUKwDqGWsQdUEKS+c0JZgdlHzMAQoqgEFhWk2ZDyedNsQN2DPkaU3shu1vG863ZrLRBqG2SytKegrxHzGIBw9hkHfWKsVMAksRA2PWz6ZjxEM6qUqWlJk7YESiNaSNwJgJKgBJCXe21WbpWwbcN24QaIcEvuNu3zSQDn1t/5c/oPMJZ+AQAA//+NeKn2AAAABklEQVQDAFjBz2wg0FamAAAAAElFTkSuQmCC") 2 2, auto; }
+</style>
 </head>
 <body>
 
@@ -1487,8 +1498,9 @@
   <ul class="nav-links">
     <li class="has-dropdown"><a href="../#projects">Projects<span class="sparkles"><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span></span><span class="nav-butterfly"><svg width="16" height="14" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#7c5db8" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#7c5db8" opacity="0.7"/></svg></span></a>
       <ul class="dropdown">
-        <li><a href="../collatch/">Collatch</a></li>
+        <li><a href="../alienation/">Alienation</a></li>
         <li><a href="../path-at-penn/" class="dropdown-active">Path@Penn</a></li>
+        <li><a href="../collatch/">Collatch</a></li>
         <li><a href="../piggus-nimbus/">Piggus Nimbus</a></li>
       </ul>
     </li>
@@ -2090,8 +2102,8 @@
 <section class="next-project">
   <div class="content">
     <p class="next-label">Next Project</p>
-    <h2 class="next-title"><a href="../piggus-nimbus/">Piggus Nimbus →</a></h2>
-    <p class="next-blurb">A rotating night light that makes bedtime easier for parents and children.</p>
+    <h2 class="next-title"><a href="../collatch/">Collatch →</a></h2>
+    <p class="next-blurb">An app that matches international students with their ideal U.S. college.</p>
   </div>
 </section>
 
@@ -2193,7 +2205,8 @@
   }
 })();
 </script>
-<script src="../cursor.js"></script>
+
+<script src="../cursor.js?v=4"></script>
 
 </body>
 </html>

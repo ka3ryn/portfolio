@@ -1,0 +1,2864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alienation · Kathryn's Portfolio</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --text: #1a1a1a;
+    --text-light: #6b6b6b;
+    --accent: #E8735A;
+    --accent-soft: #F4D1CB;
+    --lavender: #C8B6E2;
+    --sky: #A8D8EA;
+    --peach: #FFDAB9;
+    --sage: #C5D5CB;
+    --cream: #FFF8F0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ===== Floating butterflies + auras (same as main) ===== */
+  .floating-elements {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .butterfly-svg {
+    position: absolute;
+    opacity: 0;
+    animation: butterflyFloat 24s ease-in-out infinite, butterflyFadeIn 2s ease forwards;
+  }
+  .butterfly-svg:nth-child(1) { top: 8%; left: 5%; animation-delay: 0s, 0.5s; animation-duration: 28s, 2s; }
+  .butterfly-svg:nth-child(2) { top: 30%; right: 8%; animation-delay: -6s, 1s; animation-duration: 32s, 2s; }
+  .butterfly-svg:nth-child(3) { top: 60%; left: 3%; animation-delay: -14s, 0.3s; animation-duration: 26s, 2s; }
+  .butterfly-svg:nth-child(4) { top: 80%; right: 12%; animation-delay: -9s, 1.2s; animation-duration: 30s, 2s; }
+  .butterfly-svg:nth-child(5) { top: 45%; left: 55%; animation-delay: -20s, 0.7s; animation-duration: 34s, 2s; }
+
+  @keyframes butterflyFloat {
+    0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    10% { transform: translate(15px, -25px) rotate(8deg) scale(1.02); }
+    20% { transform: translate(40px, -15px) rotate(-3deg) scale(0.98); }
+    30% { transform: translate(25px, -50px) rotate(12deg) scale(1.04); }
+    40% { transform: translate(-10px, -35px) rotate(-5deg) scale(1); }
+    50% { transform: translate(-30px, -55px) rotate(6deg) scale(1.03); }
+    60% { transform: translate(-15px, -25px) rotate(-8deg) scale(0.97); }
+    70% { transform: translate(10px, -40px) rotate(10deg) scale(1.01); }
+    80% { transform: translate(30px, -20px) rotate(-4deg) scale(1.05); }
+    90% { transform: translate(10px, -10px) rotate(3deg) scale(0.99); }
+    100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  }
+  @keyframes butterflyFadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes wingFlutter { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.7); } }
+  .butterfly-svg .wing-left { animation: wingFlutter 1.2s ease-in-out infinite; transform-origin: right center; }
+  .butterfly-svg .wing-right { animation: wingFlutter 1.2s ease-in-out infinite 0.05s; transform-origin: left center; }
+
+  .cloud-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: drift 40s ease-in-out infinite;
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, 15px) scale(1.05); }
+    66% { transform: translate(-20px, -10px) scale(0.95); }
+  }
+
+  /* ===== Navigation ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250, 250, 248, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    transition: all 0.3s ease;
+  }
+  nav.scrolled {
+    padding: 14px 48px;
+    box-shadow: 0 1px 20px rgba(0,0,0,0.04);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--accent), #c75d8f, var(--lavender));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all 0.3s ease;
+  }
+  .nav-logo:hover {
+    background: linear-gradient(135deg, var(--lavender), var(--accent), #c75d8f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    transform: scale(1.03);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links li { position: relative; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 4px 0;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--lavender), var(--accent-soft), var(--sky));
+    transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: drop-shadow(0 0 4px rgba(200, 182, 226, 0.5));
+  }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* Each nav link unique accent on hover */
+  .nav-links > li:nth-child(1) a:hover { color: #7c5db8; }
+  .nav-links > li:nth-child(2) a:hover { color: #c75d8f; }
+  .nav-links > li:nth-child(3) a:hover { color: var(--accent); }
+  .nav-links > li:nth-child(4) a:hover { color: #4a8da8; }
+  .nav-links > li:nth-child(5) a:hover { color: #4a7a56; }
+  .nav-links > li:nth-child(6) a:hover { color: var(--accent); }
+
+  /* Butterfly that appears on hover */
+  .nav-links > li > a .nav-butterfly {
+    position: absolute;
+    right: -22px;
+    top: 50%;
+    transform: translateY(-50%) scale(0) rotate(-15deg);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+  }
+  .nav-links > li > a:hover .nav-butterfly {
+    transform: translateY(-50%) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+
+  /* Sparkle dots on hover */
+  .nav-links > li > a .sparkles {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+  }
+  .nav-links > li > a .sparkle {
+    position: absolute;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+  .nav-links > li > a .sparkle:nth-child(1) { top: -6px; left: 20%; background: var(--lavender); }
+  .nav-links > li > a .sparkle:nth-child(2) { bottom: -6px; right: 15%; background: var(--accent-soft); }
+  .nav-links > li > a .sparkle:nth-child(3) { top: 50%; left: -8px; background: var(--sky); }
+  .nav-links > li > a:hover .sparkle {
+    opacity: 0.8;
+    animation: sparkleFloat 1s ease-in-out infinite;
+  }
+  .nav-links > li > a:hover .sparkle:nth-child(1) { animation-delay: 0s; }
+  .nav-links > li > a:hover .sparkle:nth-child(2) { animation-delay: 0.2s; }
+  .nav-links > li > a:hover .sparkle:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes sparkleFloat {
+    0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+    50% { transform: translateY(-4px) scale(1.4); opacity: 1; }
+  }
+
+  /* Dropdown */
+  .has-dropdown { position: relative; }
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: white;
+    border-radius: 16px;
+    padding: 12px 8px;
+    min-width: 200px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.04);
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 200;
+  }
+  .has-dropdown:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+  .dropdown li a {
+    display: block;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: var(--text-light);
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    font-weight: 400;
+  }
+  .dropdown li a::after { display: none; }
+  .dropdown li a:hover {
+    background: var(--bg);
+    color: var(--accent);
+  }
+  .dropdown li a.dropdown-active {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .mobile-toggle span {
+    width: 22px; height: 1.5px;
+    background: var(--text);
+    transition: all 0.3s;
+  }
+  @media (max-width: 768px) {
+    .mobile-toggle { display: flex; }
+    .nav-links { display: none; }
+  }
+
+  /* ===== Skill Pills (for project meta) ===== */
+  .skill-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .skill-pill-sm {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 400;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.06);
+    color: var(--text-light);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+  .skill-pill-sm:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    border-color: var(--lavender);
+  }
+  .pill-emoji {
+    font-size: 13px;
+  }
+
+  /* ===== Content Wrapper ===== */
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .content-wide {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  /* ===== Project Hero ===== */
+  .project-hero {
+    padding-top: 140px;
+    padding-bottom: 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .project-hero-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .project-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(168, 216, 234, 0.2);
+    color: #4a8da8;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .project-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 5vw, 64px);
+    font-weight: 400;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+  .project-hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .project-hero-subtitle {
+    font-size: 18px;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .project-meta {
+    display: grid;
+    /* auto tracks + start, so each column hugs its text and they pack left,
+       instead of four equal columns leaving Tools stranded on the right */
+    grid-template-columns: repeat(4, auto);
+    justify-content: start;
+    gap: 28px 52px;
+    align-items: start;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+  /* Skills sit on their own row under the four facts */
+  .meta-item.meta-skills { grid-column: 1 / -1; }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .meta-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+  .meta-value {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  /* ===== Hero Thumbnail ===== */
+  .hero-thumbnail {
+    margin-top: 48px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.06);
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1s;
+  }
+  .hero-thumbnail img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ===== Sections ===== */
+  .case-section {
+    padding: 76px 0;
+    position: relative;
+    scroll-margin-top: 100px;
+    /* The .section-aura blobs are positioned with negative right offsets, so
+       without this they hang past the page edge and add ~150px of width the
+       page has to absorb, which drags the whole content column left of centre.
+       Clip them here. Safe because nothing on this page is full-bleed. */
+    overflow: hidden;
+  }
+
+  #sec-solution {
+    padding: 24px 0;
+  }
+
+  .section-aura {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .case-section-label {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  /* Chapter number on the seven top-level sections only. Sub-blocks
+     (Ideation, Prioritization, Character Design …) keep a bare label, so the
+     numbering marks the spine of the page rather than every heading. */
+  .sec-num {
+    display: inline-block;
+    margin-right: 12px;
+    padding-right: 12px;
+    border-right: 1px solid rgba(200, 182, 226, 0.35);
+    color: var(--lavender);
+  }
+
+  .case-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 3.5vw, 44px);
+    font-weight: 500;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .case-body {
+    font-size: 16px;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  .case-body p {
+    margin-bottom: 20px;
+  }
+
+  /* ===== Butterfly Divider ===== */
+  /* A real rule across the text column with the butterfly sitting on it,
+     rather than a few dots floating in the middle. The gradient fades the
+     line out at both ends so the boundary reads without drawing a hard box. */
+  /* A real rule across the text column with the butterfly sitting on it,
+     rather than a few dots floating in the middle. The line holds its weight
+     across most of the span and only fades at the outer edges, so the
+     boundary is legible without drawing a hard box. */
+  .butterfly-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 34px 48px;
+    opacity: 1;
+  }
+  .butterfly-divider::before,
+  .butterfly-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+  }
+  .butterfly-divider::before {
+    background: linear-gradient(90deg, transparent 0%, rgba(212, 196, 235, 0.30) 18%, rgba(212, 196, 235, 0.62) 100%);
+  }
+  .butterfly-divider::after {
+    background: linear-gradient(90deg, rgba(212, 196, 235, 0.62) 0%, rgba(212, 196, 235, 0.30) 82%, transparent 100%);
+  }
+  .butterfly-divider svg { opacity: 0.95; }
+  .butterfly-divider .dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--lavender);
+    opacity: 0.8;
+  }
+
+  /* ===== Insight Cards ===== */
+  .insight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  .insight-card {
+    background: white;
+    border-radius: 20px;
+    padding: 28px;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .insight-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 3px;
+    border-radius: 20px 20px 0 0;
+  }
+  .insight-card:nth-child(1)::before { background: transparent; }
+  .insight-card:nth-child(2)::before { background: transparent; }
+  .insight-card:nth-child(3)::before { background: transparent; }
+  .insight-card:nth-child(4)::before { background: transparent; }
+
+  .insight-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+  }
+
+  /* Competitor screenshots in the Initial Ideas cards. Deliberately light in
+     both themes — these are other people's products, pinned up against the
+     galaxy background, so they intentionally skip the dark override. */
+  .competitor-shot {
+    height: 220px;
+    margin-bottom: 20px;
+    padding: 14px;
+    border-radius: 12px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .competitor-shot img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* Survey visual layout - flags + arrow + insights */
+  .survey-visual {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+    align-items: center;
+    margin-top: 32px;
+  }
+
+  .flags-block {
+    background: rgba(168, 216, 234, 0.22);
+    border-radius: 24px;
+    padding: 36px 32px;
+    text-align: center;
+  }
+
+  .flags-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .flag-item {
+    font-size: 36px;
+    line-height: 1;
+    transition: transform 0.3s ease;
+  }
+  .flag-item:hover {
+    transform: scale(1.2);
+  }
+
+  .flags-caption {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+  .flags-caption strong {
+    color: var(--text);
+  }
+
+  .survey-arrow {
+    font-size: 28px;
+    color: var(--text-light);
+    opacity: 0.4;
+  }
+
+  /* Three components side by side, each led by an icon for its theme. */
+  .insights-stack {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .insights-stack-header {
+    grid-column: 1 / -1;
+    font-size: 15px;
+    color: var(--text-light);
+    margin-bottom: 4px;
+  }
+
+  .insight-row {
+    background: rgba(200, 182, 226, 0.16);
+    border-radius: 14px;
+    padding: 24px 22px;
+    font-size: 14.5px;
+    color: var(--text-light);
+    line-height: 1.6;
+    transition: all 0.3s ease;
+  }
+  .insight-row:hover {
+    background: rgba(200, 182, 226, 0.26);
+    transform: translateY(-4px);
+  }
+  /* Line icons, drawn inline like the butterflies, rather than emoji —
+     emoji render as full-colour OS glyphs and fight the palette. */
+  .insight-svg {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin: 0 auto 16px;
+    color: var(--accent);
+  }
+  .insight-svg svg { width: 100%; height: 100%; display: block; }
+  .insight-row strong {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  @media (max-width: 768px) {
+    .insights-stack { grid-template-columns: 1fr; }
+  }
+
+  .insights-footer {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text);
+    margin-top: 4px;
+  }
+  .insights-footer span {
+    color: var(--accent);
+  }
+
+  @media (max-width: 768px) {
+    .survey-visual {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .survey-arrow {
+      transform: rotate(90deg);
+      text-align: center;
+    }
+    .flags-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .insight-icon {
+    font-size: 24px;
+    margin-bottom: 14px;
+  }
+
+  .insight-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-light);
+  }
+
+  .insight-text strong {
+    color: var(--text);
+  }
+
+  /* ===== Interview Profiles ===== */
+  .interview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  .interview-card {
+    background: white;
+    border-radius: 20px;
+    padding: 28px;
+    border: 1px solid rgba(0,0,0,0.05);
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .interview-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  .interview-avatar {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+
+  .interview-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .interview-flag {
+    font-size: 16px;
+  }
+
+  .interview-origin {
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .interview-detail {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  .interview-quote {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text);
+    margin-top: 12px;
+    padding: 16px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(200, 182, 226, 0.15), rgba(168, 216, 234, 0.15));
+    line-height: 1.6;
+  }
+  .interview-quote:first-of-type {
+    margin-top: 16px;
+  }
+
+  /* Copy on the left, artefact on the right. */
+  /* Two dense artefacts stacked, in a band wider than the text column so each
+     gets the full width to itself. Same min() break-out as .process-wide, so
+     it stays clear of the scrollbar. Never put .reveal on this element. */
+  .artifact-stack {
+    width: min(1020px, calc(100vw - 56px));
+    margin-left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 24px;
+  }
+  .artifact-stack .research-artifact { margin-top: 0; }
+  @media (max-width: 768px) {
+    .artifact-stack {
+      width: 100%;
+      margin-left: 0;
+      transform: none;
+    }
+  }
+
+  /* ===== Feature screen carousels =====
+     Same metrics as collatch's .screen-carousel: 220px frames, 16px gap,
+     one line that scrolls horizontally rather than wrapping.
+     Never put .reveal on .compare-rows — it animates transform. */
+  /* Three passes at the look, side by side, each captioned with the ask that
+     produced it. */
+  .vibe-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    align-items: start;
+    margin-top: 24px;
+  }
+  .vibe-row figure { margin: 0; }
+  .vibe-row img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+  }
+  .vibe-step {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .vibe-row figcaption {
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-light);
+  }
+  @media (max-width: 768px) {
+    .vibe-row { grid-template-columns: 1fr; gap: 28px; }
+  }
+
+  /* Full-bleed band, matching collatch's .screen-carousel-wrapper. */
+  .compare-rows {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 32px;
+    margin-top: 18px;
+  }
+  /* The scroll container. Scrolling is native — trackpad, shift+wheel or the
+     scrollbar. `cursor: grab` is decorative, there is no drag-to-scroll JS. */
+  .compare-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    cursor: grab;
+  }
+  .compare-scroll:active { cursor: grabbing; }
+  .compare-scroll::-webkit-scrollbar { height: 6px; }
+  .compare-scroll::-webkit-scrollbar-track { background: transparent; }
+  .compare-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.16);
+    border-radius: 3px;
+  }
+  .compare-scroll::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.28); }
+  /* The track. Gap and padding are collatch's .screen-track exactly.
+     The auto margins centre a row that fits the screen — the 5-screen rows
+     sit centred under the text column instead of hugging the left edge. When
+     max-content is wider than the container the auto margins resolve to 0, so
+     a long row still starts flush left and scrolls right in the normal way,
+     with nothing stranded off the left edge. */
+  .compare-row {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: flex-start;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  /* 220px fixed, exactly collatch's .screen-frame-bezel. */
+  .compare-row > * {
+    flex-shrink: 0;
+    width: 220px;
+    scroll-snap-align: start;
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+  .compare-row > *:hover {
+    transform: translateY(-6px);
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.45));
+  }
+  /* These exports carry a wide transparent margin — the device is only 75.9%
+     of the PNG's width, where collatch's bezels are 96.9%. Left at width:100%
+     the phone would render 167px inside a 220px box against collatch's 213px,
+     which is exactly why these read as smaller. So the image is scaled to
+     281px and the dead margin pulled back off every side, landing the device
+     at 213px in a 220px box — collatch's geometry to the pixel. Every screen
+     shares these proportions at both export sizes (837x1516 and 419x758), so
+     one rule covers all of them. 281 - 30.5 - 30.5 = 220, so the slide still
+     occupies its 220px and the 16px gap stays true. */
+  .compare-row img {
+    width: 281px;
+    max-width: none;
+    height: auto;
+    display: block;
+    margin: -31px -30.5px;
+  }
+  @media (max-width: 768px) {
+    .compare-rows { width: 100%; left: auto; transform: none; padding: 0; }
+  }
+
+  /* ===== Compact process blocks =====
+     A label, a title, one line of context, one artefact. Deliberately
+     low-text: the artefact is the evidence, the line just frames it.
+     The image sits in a band wider than the 960 text column because these
+     are dense boards that need the room. Same min()/translateX technique as
+     .character-evolution — never the 100vw escape trick, and never put
+     .reveal on .process-wide (it would cancel the translateX). */
+  .process-block { margin-top: 52px; }
+  .process-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .process-wide {
+    width: min(1180px, calc(100vw - 64px));
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px;
+  }
+  .process-wide .research-artifact { margin-top: 0; }
+  /* Narrow variant, matching the board in the Overview, for the boards that
+     do not need the full band. */
+  .process-narrow {
+    max-width: 620px;
+    margin: 20px auto 0;
+  }
+  .process-narrow .research-artifact { margin-top: 0; }
+  @media (max-width: 768px) {
+    .process-wide { width: 100%; margin-left: 0; transform: none; }
+  }
+
+  /* ===== Character line-up + AI prompt cards =====
+     .prompt-card is reusable: the same treatment is intended for the other
+     sections that document what was prompted to get a design. */
+  /* Copy left, the tall reference board right, so its height is absorbed
+     beside the text instead of pushing the section down. */
+  /* Three beats side by side, in a band wider than the 960 text column.
+     Deliberately NOT the 100vw escape trick: min() against the viewport keeps
+     it clear of the scrollbar, so it cannot push the page off centre the way
+     a full-bleed element does. Never put .reveal on this element — .reveal
+     animates transform and would cancel the translateX below. */
+  .character-evolution {
+    width: min(1180px, calc(100vw - 64px));
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    align-items: stretch;
+  }
+  .character-step {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;   /* stops the version pill stretching full width */
+  }
+  .character-step .research-artifact { width: 100%; }
+  .character-step .version-desc {
+    font-size: 14px;
+    margin-bottom: 18px;
+  }
+  /* centres each image in whatever space its column has left, so a short one
+     does not read as bottom-aligned next to a tall one */
+  .character-step .research-artifact {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  /* The options sheet is already dark artwork, so it gets no white panel. */
+  .research-artifact.on-dark {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  @media (max-width: 768px) {
+    .character-evolution {
+      width: 100%;
+      margin-left: 0;
+      transform: none;
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+    .character-step .research-artifact { margin-top: 0; }
+  }
+
+  .prompt-card {
+    margin-top: 24px;
+    padding: 20px 24px;
+    border-radius: 16px;
+    background: rgba(200, 182, 226, 0.14);
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+  .prompt-card-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .prompt-card p {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .prompt-card p + p { margin-top: 12px; }
+
+  /* ===== HMW Statement =====
+     This is the hinge of the whole case study, so it gets a treatment nothing
+     else on the page has: a full gradient ring instead of a hairline border,
+     a glow bleeding in from the corner, and an oversized question mark set
+     into the background. */
+  .hmw-block {
+    position: relative;
+    margin-top: 48px;
+    padding: 46px 52px 48px;
+    border-radius: 28px;
+    /* gradient ring: flat fill on padding-box, gradient on border-box */
+    background:
+      linear-gradient(#fff, #fff) padding-box,
+      linear-gradient(135deg, var(--lavender), var(--accent-soft), var(--sky)) border-box;
+    border: 1.5px solid transparent;
+    box-shadow: 0 20px 60px rgba(200, 182, 226, 0.22);
+    overflow: hidden;
+  }
+  /* glow bleeding in from the top right */
+  .hmw-block::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-soft), transparent 70%);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  /* keeps the copy above the glow */
+  .hmw-inner { position: relative; z-index: 1; }
+
+  .hmw-label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .hmw-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 2.5vw, 30px);
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.5px;
+    color: var(--text);
+  }
+
+  .hmw-text em { color: var(--accent); font-style: italic; }
+
+  /* ===== User Stories ===== */
+  .user-stories {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* Parents and children side by side, so the two groups can be compared
+     rather than scrolled past one after the other. */
+  .quote-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 36px;
+  }
+  .quote-col { display: flex; flex-direction: column; }
+  .quote-col-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(200, 182, 226, 0.25);
+  }
+  .quote-col-intro {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-light);
+    margin-bottom: 18px;
+  }
+  .quote-col .user-stories { margin-top: 0; }
+  @media (max-width: 768px) {
+    .quote-columns { grid-template-columns: 1fr; gap: 28px; }
+  }
+
+  .user-story {
+    background: white;
+    border-radius: 16px;
+    padding: 24px 28px;
+    border-left: 3px solid var(--lavender);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+    font-style: italic;
+  }
+
+  .user-story-attr {
+    display: block;
+    margin-top: 12px;
+    font-style: normal;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: var(--text-light);
+  }
+
+  /* ===== Image Galleries ===== */
+  .gallery-row {
+    display: grid;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .gallery-row.cols-2 { grid-template-columns: 1fr 1fr; }
+  .gallery-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .gallery-row.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+  .gallery-item {
+    border-radius: 16px;
+    overflow: hidden;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+  }
+  .gallery-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .gallery-caption {
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--text-light);
+    text-align: center;
+  }
+
+  /* Phone mockup placeholder for wireframes */
+  .wireframe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+    margin: 32px 0;
+  }
+
+  .wireframe-phone {
+    background: white;
+    border-radius: 20px;
+    border: 1.5px solid rgba(0,0,0,0.08);
+    padding: 16px 12px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-light);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .wireframe-phone::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    border-radius: 4px;
+    background: rgba(0,0,0,0.06);
+  }
+  .wireframe-phone:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    border-color: var(--lavender);
+  }
+
+  .wireframe-phone .wf-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .wireframe-phone .wf-desc {
+    font-size: 10px;
+    color: #aaa;
+    line-height: 1.5;
+    padding: 0 8px;
+  }
+
+  /* ===== Version comparison ===== */
+  .version-block {
+    margin: 40px 0;
+  }
+
+  .version-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .version-label.v1 { background: rgba(244, 209, 203, 0.3); color: var(--accent); }
+  .version-label.v2 { background: rgba(200, 182, 226, 0.2); color: #7c5db8; }
+  .version-label.final { background: rgba(72, 187, 120, 0.15); color: #4a7a56; font-weight: 600; }
+  /* the four core-feature chips, one colour so they read as a set */
+  .version-label.feature { background: rgba(168, 216, 234, 0.38); color: #3d7f99; }
+
+  .version-desc {
+    font-size: 15px;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  /* ===== Feedback / Testing Cards ===== */
+  .feedback-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 32px 0;
+  }
+
+  .feedback-card {
+    background: white;
+    border-radius: 20px;
+    padding: 28px;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .feedback-issue {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .feedback-issue strong {
+    color: var(--text);
+  }
+
+  .feedback-solution {
+    font-size: 14px;
+    color: #4a7a56;
+    font-weight: 500;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+
+  /* ===== Color Palette Display ===== */
+  .palette-row {
+    display: flex;
+    gap: 16px;
+    margin: 24px 0;
+    flex-wrap: wrap;
+  }
+
+  .palette-swatch {
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.05);
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  .palette-swatch:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  }
+  .palette-label {
+    font-size: 11px;
+    color: var(--text-light);
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  /* ===== Conclusion / Why It Works ===== */
+  .conclusion-block {
+    background: white;
+    border-radius: 24px;
+    padding: 48px;
+    border: 1px solid rgba(0,0,0,0.05);
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .conclusion-block::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--lavender), var(--accent-soft), var(--sky));
+  }
+
+  .conclusion-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+  }
+
+  .conclusion-text {
+    font-size: 16px;
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+
+  /* ===== Back Link ===== */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 0 48px;
+    padding: 12px 0;
+    font-size: 13px;
+    color: var(--text-light);
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+  }
+  .back-link:hover {
+    color: var(--accent);
+    transform: translateX(-3px);
+  }
+  .back-link svg {
+    transition: transform 0.3s ease;
+  }
+  .back-link:hover svg {
+    transform: translateX(-2px);
+  }
+
+  /* ===== Next Project CTA ===== */
+  .next-project {
+    text-align: center;
+    padding: 80px 0 120px;
+  }
+
+  .next-label {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 12px;
+  }
+
+  .next-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  .next-title a {
+    text-decoration: none;
+    color: var(--text);
+    transition: color 0.3s;
+  }
+  .next-title a:hover { color: var(--accent); }
+
+  .next-blurb {
+    font-size: 15px;
+    color: var(--text-light);
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--text);
+    color: white;
+  }
+  .btn-primary:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(232, 115, 90, 0.25);
+  }
+
+  /* ===== Footer ===== */
+  footer {
+    text-align: center;
+    padding: 32px 48px;
+    font-size: 13px;
+    color: var(--text-light);
+    border-top: 1px solid rgba(0,0,0,0.04);
+  }
+  footer span { color: var(--accent); }
+
+  /* ===== Animations ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* placeholder for images user will add */
+  .img-placeholder {
+    background: linear-gradient(135deg, var(--cream), var(--accent-soft));
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    font-size: 13px;
+    min-height: 200px;
+    border: 1px dashed rgba(0,0,0,0.1);
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    nav.scrolled { padding: 12px 24px; }
+    .project-hero-inner, .content, .content-wide { padding: 0 24px; }
+    .project-hero { padding-top: 100px; }
+    .interview-grid { grid-template-columns: 1fr; }
+    .feedback-grid { grid-template-columns: 1fr; }
+    .wireframe-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-row.cols-3 { grid-template-columns: 1fr; }
+    .gallery-row.cols-4 { grid-template-columns: 1fr 1fr; }
+    .hero-thumbnail { border-radius: 16px; }
+    .hmw-block { padding: 28px; }
+    .conclusion-block { padding: 28px; }
+    .project-meta { grid-template-columns: 1fr 1fr; gap: 24px; }
+    .skill-pills { gap: 6px; }
+  }
+  /* ===== Numbered Learning List ===== */
+  .learning-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .learning-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 24px;
+    background: white;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+  }
+  .learning-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  }
+  .learning-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--lavender);
+    min-width: 32px;
+  }
+  .learning-icon {
+    font-size: 18px;
+    min-width: 24px;
+  }
+  .learning-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  @media (max-width: 768px) {
+    .learning-list { grid-template-columns: 1fr; }
+  }
+
+  /* ===== Zigzag Phase Layout ===== */
+  .phase-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  .phase-row.flipped .phase-text { order: 2; }
+  .phase-row.flipped .phase-image { order: 1; }
+
+  .phase-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .phase-image {
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  @media (max-width: 768px) {
+    .phase-row {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .phase-row.flipped .phase-text { order: 1; }
+    .phase-row.flipped .phase-image { order: 2; }
+  }
+
+  /* ===== Section Progress Nav ===== */
+  .section-nav {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%) translateY(60px);
+    z-index: 90;
+    display: flex;
+    gap: 4px;
+    padding: 6px 8px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(244,209,203,0.12), rgba(200,182,226,0.1));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 100px;
+    border: 1px solid rgba(200, 182, 226, 0.2);
+    box-shadow: 0 4px 32px rgba(200, 182, 226, 0.15), 0 0 0 1px rgba(255,255,255,0.5) inset;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .section-nav.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .section-nav a {
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-light);
+    padding: 8px 16px;
+    border-radius: 100px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+    position: relative;
+  }
+  .section-nav a:hover {
+    color: var(--accent);
+    background: rgba(232, 115, 90, 0.08);
+    transform: translateY(-1px);
+  }
+  .section-nav a::before,
+  .section-nav a::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .section-nav a::before {
+    top: -2px;
+    left: 20%;
+    background: var(--lavender);
+  }
+  .section-nav a::after {
+    bottom: -2px;
+    right: 18%;
+    background: var(--accent-soft);
+  }
+  .section-nav a:hover::before {
+    opacity: 0.8;
+    transform: translateY(-3px);
+    animation: sparkleFloat 1.2s ease-in-out infinite;
+  }
+  .section-nav a:hover::after {
+    opacity: 0.7;
+    transform: translateY(3px);
+    animation: sparkleFloat 1.2s ease-in-out infinite 0.3s;
+  }
+  .section-nav a.active::before,
+  .section-nav a.active::after {
+    display: none;
+  }
+  .section-nav a.active {
+    background: linear-gradient(135deg, var(--accent), #c75d8f);
+    color: white;
+    box-shadow: 0 2px 12px rgba(232, 115, 90, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .section-nav {
+      gap: 2px;
+      padding: 5px 6px;
+    }
+    .section-nav a {
+      font-size: 10px;
+      padding: 6px 10px;
+    }
+  }
+</style>
+<style>
+  /* Captions under the feature-row screens. */
+  .phone-caption {
+    font-size: 12px;
+    color: var(--text-light);
+    text-align: center;
+    margin-top: 6px;
+  }
+  /* ===== Assumption → reality rows ===== */
+  .assumption-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .assumption-row {
+    display: grid;
+    grid-template-columns: 1fr 32px 1fr;
+    gap: 16px;
+    align-items: center;
+  }
+  .assumption-card {
+    background: rgba(200, 182, 226, 0.14);
+    border-radius: 16px;
+    padding: 20px 24px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-light);
+  }
+  .reality-card {
+    background: white;
+    border: 1px solid var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: 16px;
+    padding: 20px 24px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .reality-card strong { color: var(--accent); }
+  .assumption-arrow {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 18px;
+  }
+  .ab-labels {
+    display: grid;
+    grid-template-columns: 1fr 32px 1fr;
+    gap: 16px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-top: 24px;
+  }
+
+  /* ===== Before / after pairs ===== */
+  .ba-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 20px;
+    background: #f4f4f2;
+    border-radius: 16px;
+    padding: 24px 20px;
+  }
+  .ba-col { text-align: center; }
+  .ba-col p {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .ba-col img {
+    width: 170px;
+    height: auto;
+    display: block;
+  }
+  .ba-arrow { font-size: 22px; color: var(--text-light); }
+
+  /* A real artefact from the interviews, shown as-is with a caption. */
+  .research-artifact {
+    margin: 24px 0 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+  .research-artifact img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .research-artifact figcaption {
+    padding: 14px 20px 16px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text-light);
+  }
+  .research-artifact figcaption strong {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  /* Figures called out in prose, so counts and durations are scannable. */
+  .num {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  @media (max-width: 768px) {
+    .assumption-row, .ab-labels { grid-template-columns: 1fr; }
+    .assumption-arrow { transform: rotate(90deg); }
+    .ba-row { flex-direction: column; }
+    .ba-arrow { transform: rotate(90deg); }
+    .learning-list { grid-template-columns: 1fr; }
+  }
+</style>
+
+<!-- ============================================================ -->
+<!-- GALAXY THEME, this page only.                                -->
+<!-- Star field, nebulae and shooting-star keyframes are lifted    -->
+<!-- from the Alienation prototype so the case study matches the   -->
+<!-- app. Everything below overrides the shared light theme; it     -->
+<!-- must stay LAST in <head> so it wins on source order.           -->
+<!-- ============================================================ -->
+<style>
+  :root {
+    --bg: #0D0620;
+    --text: #FFD4E0;
+    --text-light: rgba(255, 212, 224, 0.58);
+    --accent: #FF8FA8;
+    --accent-soft: rgba(255, 141, 168, 0.18);
+    --lavender: #C44DFF;
+    --sky: #3DBCAC;
+    --peach: #FFD700;
+    --sage: #3DBCAC;
+    --cream: rgba(60, 25, 80, 0.35);
+    /* card surface + hairline, reused everywhere below */
+    --surface: rgba(60, 25, 80, 0.34);
+    --surface-hi: rgba(60, 25, 80, 0.52);
+    --hairline: rgba(255, 141, 168, 0.12);
+  }
+
+  body {
+    background: linear-gradient(180deg, #1A0A2E 0%, #2D1248 55%, #3A1540 100%) fixed;
+    color: var(--text);
+  }
+  ::selection { background: rgba(232, 56, 92, 0.35); color: #fff; }
+
+  /* ===== Star field ===== */
+  .star-s {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: starDrift 20s linear infinite, twinkle 3s ease-in-out infinite;
+  }
+  @keyframes twinkle { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.75; } }
+  @keyframes starDrift {
+    0%   { transform: translateY(0) translateX(0); }
+    100% { transform: translateY(30px) translateX(-15px); }
+  }
+
+  /* ===== Nebulae (replace the pastel cloud blobs) ===== */
+  .cloud-shape { display: none; }
+  /* No `filter: blur()` here on purpose. These are radial gradients that already
+     fade to transparent, so the blur added almost nothing visually but forced the
+     browser to re-rasterise a 520px layer on every frame of nebulaFloat, four
+     times over. That is what starved the custom cursor. */
+  .nebula {
+    position: absolute;
+    border-radius: 50%;
+    animation: nebulaFloat 12s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+  @keyframes nebulaFloat {
+    0%, 100% { transform: translate(0, 0) scale(1);       opacity: 0.3; }
+    25%      { transform: translate(15px, -10px) scale(1.05); opacity: 0.5; }
+    50%      { transform: translate(-10px, 15px) scale(1.1);  opacity: 0.6; }
+    75%      { transform: translate(10px, 5px) scale(1.02);   opacity: 0.4; }
+  }
+
+  /* ===== Shooting stars ===== */
+  .shooting-star {
+    position: absolute;
+    width: 100px; height: 1px;
+    opacity: 0;
+    transform: rotate(35deg);
+    transform-origin: right center;
+  }
+  .shooting-star::before {
+    content: '';
+    position: absolute; right: 0; top: -1px;
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 6px 2px rgba(255,255,255,0.6);
+  }
+  .shooting-star::after {
+    content: '';
+    position: absolute; right: 3px; top: 0;
+    width: 0; height: 1px;
+    background: linear-gradient(270deg, rgba(255,255,255,0.7), rgba(196,77,255,0.2), transparent);
+  }
+  @keyframes shoot1 { 0% { opacity:0; top:5%;  left:-10%; } 2% { opacity:1; } 3% { opacity:1; } 15% { opacity:0; top:25%; left:70%; } 100% { opacity:0; } }
+  @keyframes shoot2 { 0% { opacity:0; top:12%; left:-15%; } 2% { opacity:1; } 3% { opacity:1; } 12% { opacity:0; top:28%; left:65%; } 100% { opacity:0; } }
+  @keyframes shoot3 { 0% { opacity:0; top:2%;  left:-5%;  } 2% { opacity:1; } 3% { opacity:1; } 18% { opacity:0; top:30%; left:75%; } 100% { opacity:0; } }
+  @keyframes shoot4 { 0% { opacity:0; top:55%; left:-10%; } 2% { opacity:1; } 4% { opacity:1; } 16% { opacity:0; top:78%; left:68%; } 100% { opacity:0; } }
+  @keyframes shoot5 { 0% { opacity:0; top:70%; left:-12%; } 2% { opacity:1; } 4% { opacity:1; } 14% { opacity:0; top:92%; left:60%; } 100% { opacity:0; } }
+  .shooting-star.ss1 { animation: shoot1 6s  ease-out infinite; animation-delay: 2s;   }
+  .shooting-star.ss2 { animation: shoot2 8s  ease-out infinite; animation-delay: 5.5s; }
+  .shooting-star.ss3 { animation: shoot3 10s ease-out infinite; animation-delay: 9s;   }
+  .shooting-star.ss4 { animation: shoot4 9s  ease-out infinite; animation-delay: 3.5s; }
+  .shooting-star.ss5 { animation: shoot5 12s ease-out infinite; animation-delay: 7s;   }
+  .shooting-star.ss1::after { width: 80px; }
+  .shooting-star.ss2::after { width: 60px; }
+  .shooting-star.ss3::after { width: 70px; }
+  .shooting-star.ss4::after { width: 90px; }
+  .shooting-star.ss5::after { width: 65px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .star-s, .nebula, .shooting-star, .butterfly-svg { animation: none !important; }
+    .shooting-star { display: none; }
+  }
+
+  /* Butterflies stay, but dimmed so the stars carry the sky */
+  .butterfly-svg { filter: saturate(1.4); }
+
+  /* ===== Chrome: nav, dropdowns, section nav, back link ===== */
+  nav {
+    background: rgba(20, 8, 38, 0.82);
+    border-bottom: 1px solid rgba(255, 141, 168, 0.10);
+  }
+  nav.scrolled { box-shadow: 0 1px 24px rgba(0,0,0,0.45); }
+  .nav-links a { color: rgba(255, 212, 224, 0.62); }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links > li:nth-child(1) a:hover { color: #C9A0FF; }
+  .nav-links > li:nth-child(2) a:hover { color: #FF8FA8; }
+  .nav-links > li:nth-child(3) a:hover { color: #6FE3D2; }
+  .mobile-toggle span { background: var(--text); }
+
+  .dropdown {
+    background: rgba(28, 12, 50, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  }
+  .dropdown li a { color: rgba(255, 212, 224, 0.62); }
+  .dropdown li a:hover { background: rgba(255, 141, 168, 0.10); color: var(--text); }
+
+  .section-nav {
+    background: rgba(28, 12, 50, 0.88);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 4px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,141,168,0.06) inset;
+  }
+  .section-nav a { color: rgba(255, 212, 224, 0.55); }
+  .section-nav a:hover { color: var(--text); background: rgba(255,141,168,0.10); }
+  .section-nav a.active {
+    background: linear-gradient(135deg, #E8385C, #C44DFF);
+    color: #fff;
+    box-shadow: 0 2px 14px rgba(232, 56, 92, 0.4);
+  }
+
+  .back-link { color: var(--text-light); }
+  .back-link:hover { color: var(--accent); }
+
+  /* ===== Hero ===== */
+  .project-badge {
+    background: rgba(196, 77, 255, 0.16);
+    color: #D7A8FF;
+    border: 1px solid rgba(196, 77, 255, 0.22);
+  }
+  .hero-thumbnail {
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    border: 1px solid var(--hairline);
+  }
+  .meta-value { color: var(--text); }
+  .skill-pill-sm {
+    background: rgba(255, 141, 168, 0.07);
+    border: 1px solid var(--hairline);
+    color: rgba(255, 212, 224, 0.72);
+  }
+  .skill-pill-sm:hover { background: rgba(255, 141, 168, 0.14); }
+
+  /* ===== Card surfaces ===== */
+  .insight-card,
+  .interview-card,
+  .hmw-block,
+  .gallery-item,
+  .feedback-card,
+  .conclusion-block,
+  .learning-item,
+  .reality-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+  }
+
+  /* HMW keeps its gradient ring here — the rule above would otherwise flatten
+     it back to the same hairline every other card uses. */
+  .hmw-block {
+    background:
+      linear-gradient(var(--surface-hi), var(--surface-hi)) padding-box,
+      linear-gradient(135deg, rgba(200, 182, 226, 0.60), rgba(255, 143, 168, 0.60), rgba(168, 216, 234, 0.45)) border-box;
+    border: 1.5px solid transparent;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+  }
+  .hmw-block::before { opacity: 0.18; }
+  .prompt-card {
+    background: rgba(196, 77, 255, 0.10);
+    border: 1px solid var(--hairline);
+  }
+  .insight-card:hover,
+  .learning-item:hover,
+  .gallery-item:hover { background: var(--surface-hi); }
+  /* Quote cards sit a step above the other surfaces: a top-lit gradient gives the
+     box form without flattening it into a grey slab, and the brighter hairline is
+     what actually makes the edge readable (1.05:1 -> 1.53:1 against the fill). */
+  .user-story {
+    background: linear-gradient(180deg, rgba(120, 70, 165, 0.62), rgba(100, 55, 142, 0.50));
+    border: 1px solid rgba(255, 180, 200, 0.30);
+    border-left: 3px solid var(--lavender);
+    color: var(--text);
+    box-shadow: 0 2px 20px rgba(10, 4, 26, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  }
+  .user-story-attr { color: rgba(255, 212, 224, 0.72); }
+  .insight-text strong, .case-body strong, .interview-quote { color: var(--text); }
+  .insight-row { background: rgba(196, 77, 255, 0.10); }
+  .insights-footer { color: var(--text); }
+  .interview-quote {
+    background: linear-gradient(135deg, rgba(196,77,255,0.14), rgba(232,56,92,0.10));
+  }
+
+  /* ===== Assumption → reality ===== */
+  .assumption-card { background: rgba(255, 255, 255, 0.05); }
+  .reality-card {
+    border: 1px solid rgba(232, 56, 92, 0.35);
+    border-left: 3px solid #E8385C;
+  }
+  .reality-card strong { color: var(--accent); }
+
+  /* ===== Research artefact ===== */
+  .research-artifact { background: var(--surface); border: 1px solid var(--hairline); }
+
+  /* ===== Before / after ===== */
+  .ba-row { background: rgba(13, 6, 32, 0.55); border: 1px solid var(--hairline); }
+
+  /* ===== Feedback cards ===== */
+  .feedback-issue { color: var(--text-light); }
+  .feedback-issue strong { color: var(--text); }
+  .feedback-solution {
+    color: #6FE3D2;
+    border-top: 1px solid var(--hairline);
+  }
+
+  /* ===== Version / step labels ===== */
+  .version-label.v1    { background: rgba(232, 56, 92, 0.16);  color: #FF8FA8; }
+  .version-label.v2    { background: rgba(196, 77, 255, 0.16); color: #D7A8FF; }
+  .version-label.final { background: rgba(61, 188, 172, 0.16); color: #6FE3D2; }
+  .version-label.feature { background: rgba(120, 200, 240, 0.18); color: #A8D8EA; }
+
+  /* ===== Palette swatches ===== */
+  .palette-swatch { border: 1px solid rgba(255,255,255,0.14); }
+
+  /* ===== Carousels ===== */
+
+  /* ===== Dividers, next project, footer ===== */
+  .butterfly-divider { opacity: 0.5; }
+  .butterfly-divider .dot { background: var(--lavender); }
+  .next-title a { color: var(--text); }
+  .next-title a:hover { color: var(--accent); }
+  footer { border-top: 1px solid var(--hairline); }
+</style>
+<style id="cursor-css">
+/* The original arrow cursor: 32x34, #FF9575 over #D45A38, flat, no outline.
+   One cursor everywhere, exactly as the old cursor.js drew it.
+   Inlined on purpose: it used to be injected by cursor.js, and a stale cached
+   copy of that file made it impossible to tell whether a fix had reached the
+   browser. Inline always ships with the page.
+   ONE plain url() per rule, never image-set(): Chrome accepts image-set in the
+   cursor property, wins the cascade with it, then paints nothing.
+   The trailing , auto is the safety net: a rejected image falls back to the
+   system cursor instead of leaving no cursor at all. */
+html, body, * { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAiCAYAAAA+stv/AAABqklEQVR4nOyXPVLDMBCFdz25AnSEC5DeHc4pmAncgKFMhs52y9DCCQjXsNK5DxeI6cIdLLx25LEVyT+KYlPwmtiy1vvN7tMmcWBkOTCySoDtg+vBCCoBkIO/f77j/G0VwIAqATiHzT7Zwc/3zufvy2goEKdyxegjh0gSL0Pyh4DA6s3XwuXi+nJ6DRdXU7EtxMeXAM6gOsC9GwEHTwcBacrw6ZWBRTUew8ITyeGO++CgdW/UKkBHEVOI5E31SpShVtrSaRDVKyFkx6QoL1SNKEtdifw1xtU4BpCM2BkCs2PMcdMX5KgFNJCaAtTtoECC7t8WR7HCWmL0EAVJBrHsPNInYCiCIKk9IUBW0DY7ULXY5oOq9MaspdGa9OTfA83tENJ7QwnAEUKwDqGWsQdUEKS+c0JZgdlHzMAQoqgEFhWk2ZDyedNsQN2DPkaU3shu1vG863ZrLRBqG2SytKegrxHzGIBw9hkHfWKsVMAksRA2PWz6ZjxEM6qUqWlJk7YESiNaSNwJgJKgBJCXe21WbpWwbcN24QaIcEvuNu3zSQDn1t/5c/oPMJZ+AQAA//+NeKn2AAAABklEQVQDAFjBz2wg0FamAAAAAElFTkSuQmCC") 2 2, auto; }
+</style>
+</head>
+<body>
+
+<!-- Floating Background Elements -->
+<div class="floating-elements">
+  <div class="butterfly-svg" style="opacity: 0.10;">
+    <svg width="40" height="34" viewBox="0 0 48 40" fill="none">
+      <g class="wing-left"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C8B6E2" opacity="0.7"/><path d="M24 20C22 26 16 36 10 34C4 32 8 22 14 20C20 18 23 19 24 20Z" fill="#A8D8EA" opacity="0.5"/></g>
+      <g class="wing-right"><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C8B6E2" opacity="0.7"/><path d="M24 20C26 26 32 36 38 34C44 32 40 22 34 20C28 18 25 19 24 20Z" fill="#A8D8EA" opacity="0.5"/></g>
+    </svg>
+  </div>
+  <div class="butterfly-svg" style="opacity: 0.08;">
+    <svg width="30" height="25" viewBox="0 0 48 40" fill="none">
+      <g class="wing-left"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#F4D1CB" opacity="0.7"/></g>
+      <g class="wing-right"><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#F4D1CB" opacity="0.7"/></g>
+    </svg>
+  </div>
+  <div class="butterfly-svg" style="opacity: 0.12;">
+    <svg width="24" height="20" viewBox="0 0 48 40" fill="none">
+      <g class="wing-left"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#A8D8EA" opacity="0.8"/></g>
+      <g class="wing-right"><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#A8D8EA" opacity="0.8"/></g>
+    </svg>
+  </div>
+  <div class="butterfly-svg" style="opacity: 0.07;">
+    <svg width="36" height="30" viewBox="0 0 48 40" fill="none">
+      <g class="wing-left"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#FFDAB9" opacity="0.7"/></g>
+      <g class="wing-right"><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#FFDAB9" opacity="0.7"/></g>
+    </svg>
+  </div>
+  <div class="butterfly-svg" style="opacity: 0.09;">
+    <svg width="28" height="24" viewBox="0 0 48 40" fill="none">
+      <g class="wing-left"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C8B6E2" opacity="0.6"/></g>
+      <g class="wing-right"><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C8B6E2" opacity="0.6"/></g>
+    </svg>
+  </div>
+
+
+  <!-- ===== Galaxy sky: nebulae, star field, shooting stars ===== -->
+  <div class="nebula" style="width:520px;height:520px;background:radial-gradient(circle, rgba(196,77,255,0.18) 0%, rgba(196,77,255,0.09) 32%, rgba(196,77,255,0.029) 58%, transparent 76%);top:-120px;left:-140px;animation-delay:0s;"></div>
+  <div class="nebula" style="width:440px;height:440px;background:radial-gradient(circle, rgba(232,56,92,0.14) 0%, rgba(232,56,92,0.07) 32%, rgba(232,56,92,0.022) 58%, transparent 76%);top:30%;right:-120px;animation-delay:4s;"></div>
+  <div class="nebula" style="width:380px;height:380px;background:radial-gradient(circle, rgba(61,188,172,0.11) 0%, rgba(61,188,172,0.055) 32%, rgba(61,188,172,0.018) 58%, transparent 76%);bottom:8%;left:20%;animation-delay:8s;"></div>
+  <div class="nebula" style="width:460px;height:460px;background:radial-gradient(circle, rgba(196,77,255,0.12) 0%, rgba(196,77,255,0.06) 32%, rgba(196,77,255,0.019) 58%, transparent 76%);bottom:-140px;right:5%;animation-delay:6s;"></div>
+
+  <div class="star-field">
+    <div class="star-s" style="width:2.5px;height:2.5px;top:45.24%;left:55.98%;opacity:0.48;animation-delay:0s,8.6s;animation-duration:20s,2.6s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:80.39%;left:47.58%;opacity:0.3;animation-delay:0s,3.0s;animation-duration:20s,2.4s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:80.96%;left:69.34%;opacity:0.55;animation-delay:0s,4.0s;animation-duration:20s,3.2s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:73.89%;left:65.01%;opacity:0.67;animation-delay:0s,0.6s;animation-duration:20s,2.3s"></div>
+    <div class="star-s" style="width:2.5px;height:2.5px;top:87.96%;left:59.96%;opacity:0.41;animation-delay:0s,5.9s;animation-duration:20s,2.6s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:23.36%;left:29.42%;opacity:0.58;animation-delay:0s,4.6s;animation-duration:20s,2.8s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:99.77%;left:99.57%;opacity:0.6;animation-delay:0s,3.2s;animation-duration:20s,2.7s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:28.9%;left:7.02%;opacity:0.45;animation-delay:0s,8.5s;animation-duration:20s,3.1s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:95.8%;left:84.73%;opacity:0.36;animation-delay:0s,9.3s;animation-duration:20s,2.3s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:37.55%;left:70.89%;opacity:0.29;animation-delay:0s,6.3s;animation-duration:20s,4.0s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:26.98%;left:8.71%;opacity:0.26;animation-delay:0s,4.1s;animation-duration:20s,4.3s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:13.46%;left:70.7%;opacity:0.28;animation-delay:0s,8.0s;animation-duration:20s,2.6s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:55.93%;left:44.74%;opacity:0.74;animation-delay:0s,7.7s;animation-duration:20s,3.2s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:38.38%;left:39.49%;opacity:0.25;animation-delay:0s,8.6s;animation-duration:20s,4.4s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:59.27%;left:99.79%;opacity:0.36;animation-delay:0s,3.9s;animation-duration:20s,4.2s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:64.18%;left:10.03%;opacity:0.36;animation-delay:0s,2.6s;animation-duration:20s,4.0s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:32.9%;left:29.63%;opacity:0.29;animation-delay:0s,2.1s;animation-duration:20s,3.7s"></div>
+    <div class="star-s" style="width:2.5px;height:2.5px;top:1.55%;left:36.87%;opacity:0.31;animation-delay:0s,5.9s;animation-duration:20s,4.1s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:13.57%;left:38.61%;opacity:0.41;animation-delay:0s,2.3s;animation-duration:20s,3.6s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:72.54%;left:15.85%;opacity:0.59;animation-delay:0s,3.9s;animation-duration:20s,3.3s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:7.85%;left:4.74%;opacity:0.27;animation-delay:0s,9.6s;animation-duration:20s,2.7s"></div>
+    <div class="star-s" style="width:2.5px;height:2.5px;top:70.46%;left:25.7%;opacity:0.4;animation-delay:0s,1.8s;animation-duration:20s,3.9s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:6.88%;left:22.84%;opacity:0.39;animation-delay:0s,9.2s;animation-duration:20s,2.7s"></div>
+    <div class="star-s" style="width:2.5px;height:2.5px;top:1.66%;left:26.92%;opacity:0.37;animation-delay:0s,0.5s;animation-duration:20s,2.8s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:53.1%;left:97.31%;opacity:0.43;animation-delay:0s,8.9s;animation-duration:20s,4.5s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:65.69%;left:69.12%;opacity:0.54;animation-delay:0s,9.2s;animation-duration:20s,3.3s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:35.75%;left:31.18%;opacity:0.26;animation-delay:0s,6.4s;animation-duration:20s,3.3s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:73.05%;left:31.89%;opacity:0.29;animation-delay:0s,5.5s;animation-duration:20s,3.9s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:90.02%;left:73.71%;opacity:0.65;animation-delay:0s,9.2s;animation-duration:20s,3.0s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:68.51%;left:90.08%;opacity:0.72;animation-delay:0s,0.3s;animation-duration:20s,3.3s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:1.45%;left:66.23%;opacity:0.54;animation-delay:0s,6.1s;animation-duration:20s,2.4s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:63.94%;left:99.33%;opacity:0.61;animation-delay:0s,3.9s;animation-duration:20s,3.9s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:58.1%;left:44.05%;opacity:0.51;animation-delay:0s,5.1s;animation-duration:20s,2.9s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:8.77%;left:2.23%;opacity:0.5;animation-delay:0s,6.1s;animation-duration:20s,4.3s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:25.58%;left:1.13%;opacity:0.32;animation-delay:0s,6.1s;animation-duration:20s,3.4s"></div>
+    <div class="star-s" style="width:2.5px;height:2.5px;top:75.38%;left:34.25%;opacity:0.5;animation-delay:0s,2.4s;animation-duration:20s,3.1s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:25.06%;left:63.42%;opacity:0.69;animation-delay:0s,3.8s;animation-duration:20s,3.5s"></div>
+    <div class="star-s" style="width:2.5px;height:2.5px;top:31.65%;left:13.62%;opacity:0.43;animation-delay:0s,9.0s;animation-duration:20s,2.3s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:6.41%;left:98.04%;opacity:0.31;animation-delay:0s,4.7s;animation-duration:20s,4.3s"></div>
+    <div class="star-s" style="width:2.5px;height:2.5px;top:83.09%;left:38.25%;opacity:0.59;animation-delay:0s,7.2s;animation-duration:20s,4.1s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:62.48%;left:32.03%;opacity:0.39;animation-delay:0s,6.1s;animation-duration:20s,3.8s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:28.11%;left:35.42%;opacity:0.57;animation-delay:0s,4.1s;animation-duration:20s,2.6s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:76.92%;left:26.64%;opacity:0.65;animation-delay:0s,9.8s;animation-duration:20s,2.5s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:10.9%;left:53.54%;opacity:0.73;animation-delay:0s,6.8s;animation-duration:20s,2.7s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:47.51%;left:17.87%;opacity:0.63;animation-delay:0s,5.3s;animation-duration:20s,2.3s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:22.65%;left:77.86%;opacity:0.45;animation-delay:0s,7.9s;animation-duration:20s,4.3s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:8.72%;left:93.26%;opacity:0.31;animation-delay:0s,4.5s;animation-duration:20s,3.6s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:91.0%;left:37.68%;opacity:0.48;animation-delay:0s,6.5s;animation-duration:20s,2.7s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:72.19%;left:81.83%;opacity:0.36;animation-delay:0s,9.0s;animation-duration:20s,4.5s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:97.74%;left:53.7%;opacity:0.38;animation-delay:0s,7.2s;animation-duration:20s,2.2s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:50.47%;left:3.71%;opacity:0.53;animation-delay:0s,7.7s;animation-duration:20s,3.3s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:2.84%;left:80.91%;opacity:0.46;animation-delay:0s,0.4s;animation-duration:20s,3.4s"></div>
+    <div class="star-s" style="width:2.5px;height:2.5px;top:68.66%;left:91.6%;opacity:0.32;animation-delay:0s,5.2s;animation-duration:20s,3.9s"></div>
+    <div class="star-s" style="width:2.5px;height:2.5px;top:84.0%;left:68.94%;opacity:0.54;animation-delay:0s,6.9s;animation-duration:20s,3.9s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:43.94%;left:55.88%;opacity:0.51;animation-delay:0s,8.4s;animation-duration:20s,3.5s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:31.17%;left:38.12%;opacity:0.4;animation-delay:0s,1.4s;animation-duration:20s,3.5s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:27.3%;left:49.76%;opacity:0.52;animation-delay:0s,5.0s;animation-duration:20s,3.6s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:2.78%;left:96.94%;opacity:0.52;animation-delay:0s,9.9s;animation-duration:20s,2.5s"></div>
+    <div class="star-s" style="width:2.5px;height:2.5px;top:9.32%;left:16.68%;opacity:0.46;animation-delay:0s,9.6s;animation-duration:20s,4.3s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:26.92%;left:47.32%;opacity:0.42;animation-delay:0s,9.0s;animation-duration:20s,4.4s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:92.0%;left:52.5%;opacity:0.35;animation-delay:0s,6.2s;animation-duration:20s,4.3s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:12.95%;left:77.93%;opacity:0.27;animation-delay:0s,1.6s;animation-duration:20s,2.2s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:28.41%;left:72.36%;opacity:0.56;animation-delay:0s,1.0s;animation-duration:20s,3.9s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:12.28%;left:51.05%;opacity:0.61;animation-delay:0s,7.0s;animation-duration:20s,4.2s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:2.33%;left:63.3%;opacity:0.52;animation-delay:0s,8.6s;animation-duration:20s,3.4s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:21.83%;left:21.62%;opacity:0.37;animation-delay:0s,7.4s;animation-duration:20s,4.1s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:90.27%;left:31.59%;opacity:0.7;animation-delay:0s,1.9s;animation-duration:20s,4.0s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:19.45%;left:9.69%;opacity:0.32;animation-delay:0s,0.9s;animation-duration:20s,3.1s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:43.48%;left:94.12%;opacity:0.35;animation-delay:0s,6.3s;animation-duration:20s,4.0s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:9.61%;left:56.99%;opacity:0.71;animation-delay:0s,9.7s;animation-duration:20s,2.5s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:50.57%;left:75.82%;opacity:0.65;animation-delay:0s,4.8s;animation-duration:20s,2.3s"></div>
+    <div class="star-s" style="width:2.5px;height:2.5px;top:76.2%;left:61.34%;opacity:0.32;animation-delay:0s,1.8s;animation-duration:20s,2.7s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:84.02%;left:99.03%;opacity:0.54;animation-delay:0s,1.3s;animation-duration:20s,3.8s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:7.76%;left:9.67%;opacity:0.48;animation-delay:0s,5.2s;animation-duration:20s,3.2s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:60.09%;left:1.32%;opacity:0.67;animation-delay:0s,1.8s;animation-duration:20s,3.2s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:73.93%;left:40.53%;opacity:0.55;animation-delay:0s,0.9s;animation-duration:20s,4.0s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:32.37%;left:8.48%;opacity:0.53;animation-delay:0s,1.9s;animation-duration:20s,3.5s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:34.1%;left:76.24%;opacity:0.71;animation-delay:0s,7.4s;animation-duration:20s,4.0s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:81.46%;left:40.56%;opacity:0.69;animation-delay:0s,6.9s;animation-duration:20s,4.0s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:76.52%;left:40.57%;opacity:0.29;animation-delay:0s,3.4s;animation-duration:20s,3.3s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:1.06%;left:35.56%;opacity:0.37;animation-delay:0s,9.4s;animation-duration:20s,3.7s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:33.78%;left:65.98%;opacity:0.52;animation-delay:0s,3.9s;animation-duration:20s,4.5s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:64.23%;left:70.13%;opacity:0.74;animation-delay:0s,0.2s;animation-duration:20s,3.6s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:73.88%;left:25.66%;opacity:0.5;animation-delay:0s,7.6s;animation-duration:20s,3.7s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:1.08%;left:25.86%;opacity:0.7;animation-delay:0s,5.5s;animation-duration:20s,3.4s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:96.71%;left:56.8%;opacity:0.57;animation-delay:0s,8.1s;animation-duration:20s,2.4s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:59.75%;left:75.92%;opacity:0.44;animation-delay:0s,9.4s;animation-duration:20s,3.1s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:97.01%;left:85.57%;opacity:0.46;animation-delay:0s,4.9s;animation-duration:20s,2.9s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:39.86%;left:31.24%;opacity:0.49;animation-delay:0s,2.7s;animation-duration:20s,4.3s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:66.36%;left:74.77%;opacity:0.26;animation-delay:0s,2.5s;animation-duration:20s,2.3s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:15.66%;left:75.46%;opacity:0.28;animation-delay:0s,3.2s;animation-duration:20s,3.1s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:58.17%;left:72.31%;opacity:0.29;animation-delay:0s,9.1s;animation-duration:20s,3.2s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:47.76%;left:97.32%;opacity:0.27;animation-delay:0s,1.0s;animation-duration:20s,4.1s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:90.95%;left:14.44%;opacity:0.55;animation-delay:0s,1.2s;animation-duration:20s,3.6s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:45.57%;left:20.37%;opacity:0.43;animation-delay:0s,1.5s;animation-duration:20s,3.0s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:13.98%;left:41.7%;opacity:0.57;animation-delay:0s,6.8s;animation-duration:20s,3.0s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:74.39%;left:81.51%;opacity:0.73;animation-delay:0s,7.3s;animation-duration:20s,2.7s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:11.39%;left:89.27%;opacity:0.39;animation-delay:0s,6.1s;animation-duration:20s,3.9s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:69.9%;left:19.0%;opacity:0.63;animation-delay:0s,1.9s;animation-duration:20s,2.8s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:97.97%;left:91.57%;opacity:0.56;animation-delay:0s,0.1s;animation-duration:20s,2.8s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:2.69%;left:3.8%;opacity:0.52;animation-delay:0s,0.7s;animation-duration:20s,2.4s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:67.63%;left:55.06%;opacity:0.49;animation-delay:0s,3.5s;animation-duration:20s,3.0s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:49.44%;left:13.34%;opacity:0.65;animation-delay:0s,4.5s;animation-duration:20s,4.1s"></div>
+    <div class="star-s" style="width:2.5px;height:2.5px;top:83.8%;left:76.89%;opacity:0.46;animation-delay:0s,2.6s;animation-duration:20s,4.1s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:36.89%;left:65.37%;opacity:0.4;animation-delay:0s,7.6s;animation-duration:20s,4.1s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:18.39%;left:65.38%;opacity:0.48;animation-delay:0s,3.2s;animation-duration:20s,3.5s"></div>
+    <div class="star-s" style="width:2.5px;height:2.5px;top:43.2%;left:56.8%;opacity:0.4;animation-delay:0s,7.8s;animation-duration:20s,2.4s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:21.33%;left:66.21%;opacity:0.6;animation-delay:0s,4.9s;animation-duration:20s,4.0s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:32.79%;left:88.17%;opacity:0.43;animation-delay:0s,7.3s;animation-duration:20s,3.0s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:11.74%;left:70.93%;opacity:0.47;animation-delay:0s,8.0s;animation-duration:20s,2.9s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:31.76%;left:39.96%;opacity:0.29;animation-delay:0s,8.3s;animation-duration:20s,2.3s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:67.7%;left:58.48%;opacity:0.62;animation-delay:0s,3.7s;animation-duration:20s,3.1s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:15.48%;left:59.11%;opacity:0.34;animation-delay:0s,7.6s;animation-duration:20s,4.2s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:28.15%;left:2.22%;opacity:0.52;animation-delay:0s,5.7s;animation-duration:20s,4.4s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:65.12%;left:80.43%;opacity:0.54;animation-delay:0s,3.1s;animation-duration:20s,3.5s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:33.45%;left:27.36%;opacity:0.7;animation-delay:0s,0.8s;animation-duration:20s,3.7s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:14.39%;left:74.58%;opacity:0.37;animation-delay:0s,2.2s;animation-duration:20s,4.0s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:52.16%;left:76.47%;opacity:0.43;animation-delay:0s,8.1s;animation-duration:20s,3.0s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:13.67%;left:48.8%;opacity:0.6;animation-delay:0s,9.1s;animation-duration:20s,3.1s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:82.62%;left:66.67%;opacity:0.65;animation-delay:0s,8.3s;animation-duration:20s,4.2s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:95.78%;left:64.03%;opacity:0.61;animation-delay:0s,8.0s;animation-duration:20s,3.2s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:42.05%;left:14.62%;opacity:0.75;animation-delay:0s,3.8s;animation-duration:20s,2.6s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:20.44%;left:42.49%;opacity:0.39;animation-delay:0s,8.9s;animation-duration:20s,3.3s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:73.08%;left:30.35%;opacity:0.64;animation-delay:0s,1.8s;animation-duration:20s,2.3s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:45.88%;left:58.41%;opacity:0.41;animation-delay:0s,2.0s;animation-duration:20s,3.0s"></div>
+    <div class="star-s" style="width:2.5px;height:2.5px;top:58.84%;left:60.0%;opacity:0.55;animation-delay:0s,2.2s;animation-duration:20s,2.6s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:28.11%;left:17.25%;opacity:0.56;animation-delay:0s,9.4s;animation-duration:20s,3.5s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:85.34%;left:48.48%;opacity:0.71;animation-delay:0s,3.4s;animation-duration:20s,3.5s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:95.7%;left:48.26%;opacity:0.45;animation-delay:0s,2.2s;animation-duration:20s,2.5s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:79.83%;left:97.6%;opacity:0.64;animation-delay:0s,0.6s;animation-duration:20s,4.3s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:89.22%;left:87.41%;opacity:0.48;animation-delay:0s,2.5s;animation-duration:20s,3.2s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:87.48%;left:41.58%;opacity:0.32;animation-delay:0s,9.1s;animation-duration:20s,4.1s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:13.11%;left:74.17%;opacity:0.51;animation-delay:0s,0.5s;animation-duration:20s,3.5s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:17.83%;left:20.43%;opacity:0.66;animation-delay:0s,0.8s;animation-duration:20s,2.8s"></div>
+    <div class="star-s" style="width:2.5px;height:2.5px;top:71.65%;left:9.72%;opacity:0.6;animation-delay:0s,0.8s;animation-duration:20s,3.9s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:54.34%;left:50.6%;opacity:0.64;animation-delay:0s,4.2s;animation-duration:20s,4.3s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:9.09%;left:82.63%;opacity:0.27;animation-delay:0s,4.1s;animation-duration:20s,3.3s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:94.66%;left:96.39%;opacity:0.41;animation-delay:0s,0.8s;animation-duration:20s,2.9s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:46.72%;left:71.51%;opacity:0.29;animation-delay:0s,1.4s;animation-duration:20s,3.7s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:67.59%;left:74.66%;opacity:0.58;animation-delay:0s,0.1s;animation-duration:20s,3.1s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:71.0%;left:23.75%;opacity:0.48;animation-delay:0s,0.1s;animation-duration:20s,4.5s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:79.95%;left:20.67%;opacity:0.4;animation-delay:0s,3.8s;animation-duration:20s,3.4s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:29.82%;left:33.74%;opacity:0.53;animation-delay:0s,0.9s;animation-duration:20s,2.6s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:37.65%;left:10.96%;opacity:0.72;animation-delay:0s,5.6s;animation-duration:20s,3.9s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:33.17%;left:82.69%;opacity:0.3;animation-delay:0s,6.2s;animation-duration:20s,2.5s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:63.04%;left:17.92%;opacity:0.45;animation-delay:0s,8.4s;animation-duration:20s,3.6s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:9.01%;left:22.66%;opacity:0.74;animation-delay:0s,4.3s;animation-duration:20s,4.0s"></div>
+    <div class="star-s" style="width:1px;height:1px;top:34.17%;left:82.33%;opacity:0.57;animation-delay:0s,7.7s;animation-duration:20s,4.1s"></div>
+    <div class="star-s" style="width:2px;height:2px;top:38.59%;left:33.14%;opacity:0.56;animation-delay:0s,7.3s;animation-duration:20s,3.6s"></div>
+    <div class="star-s" style="width:1.5px;height:1.5px;top:31.77%;left:78.88%;opacity:0.58;animation-delay:0s,6.1s;animation-duration:20s,2.2s"></div>
+  </div>
+
+  <div class="shooting-star ss1"></div>
+  <div class="shooting-star ss2"></div>
+  <div class="shooting-star ss3"></div>
+  <div class="shooting-star ss4"></div>
+  <div class="shooting-star ss5"></div>
+  <div class="cloud-shape" style="width: 500px; height: 280px; top: 2%; left: -8%; opacity: 0.05; background: linear-gradient(135deg, #C8B6E2, #A8D8EA);"></div>
+  <div class="cloud-shape" style="width: 400px; height: 200px; top: 35%; right: -10%; opacity: 0.04; background: linear-gradient(135deg, #FFDAB9, #F4D1CB);"></div>
+  <div class="cloud-shape" style="width: 550px; height: 280px; bottom: 10%; left: 15%; opacity: 0.04; background: linear-gradient(135deg, #A8D8EA, #C5D5CB);"></div>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="../" class="nav-logo">kathryn.</a>
+  <ul class="nav-links">
+    <li class="has-dropdown"><a href="../#projects">Projects
+      <span class="sparkles"><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span></span>
+      <span class="nav-butterfly"><svg width="16" height="14" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#7c5db8" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#7c5db8" opacity="0.7"/></svg></span>
+    </a>
+      <ul class="dropdown">
+        <li><a href="../alienation/" class="dropdown-active">Alienation</a></li>
+        <li><a href="../path-at-penn/">Path@Penn</a></li>
+        <li><a href="../collatch/">Collatch</a></li>
+        <li><a href="../piggus-nimbus/">Piggus Nimbus</a></li>
+      </ul>
+    </li>
+    <li class="has-dropdown"><a href="../#work-section">Work
+      <span class="sparkles"><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span></span>
+      <span class="nav-butterfly"><svg width="16" height="14" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#c75d8f" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#c75d8f" opacity="0.7"/></svg></span>
+    </a>
+      <ul class="dropdown">
+        <li><a href="../rituals/">Rituals Cosmetics</a></li>
+      </ul>
+    </li>
+    <li><a href="../outside-of-work/">Outside of Work
+      <span class="sparkles"><span class="sparkle"></span><span class="sparkle"></span><span class="sparkle"></span></span>
+      <span class="nav-butterfly"><svg width="16" height="14" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#E8735A" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#E8735A" opacity="0.7"/></svg></span>
+    </a></li>
+  </ul>
+  <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Section Progress Nav -->
+<div class="section-nav" id="sectionNav">
+  <a href="#sec-overview">Overview</a>
+  <a href="#sec-research">Research</a>
+  <a href="#sec-concept">Ideation</a>
+  <a href="#sec-prototype">Prototyping</a>
+  <a href="#sec-hifi">Design</a>
+  <a href="#sec-reflection">Reflection</a>
+</div>
+
+<!-- Back Link -->
+<a href="../" class="back-link">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+  Back
+</a>
+
+<!-- ============================================ -->
+<!-- PROJECT HERO -->
+<!-- ============================================ -->
+<section class="project-hero">
+  <div class="project-hero-inner">
+    <div class="project-badge">
+      <svg width="14" height="12" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#7c5db8" opacity="0.6"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#7c5db8" opacity="0.6"/></svg>
+      App Design · AI-Assisted Build
+    </div>
+    <h1 class="project-hero-title">Alienation</h1>
+    <p class="project-hero-subtitle">Galaxies apart? Not on this app. A world-building game where family members create their own characters, earn coins, and grow a shared planet that keeps them connected.</p>
+  </div>
+
+  <!-- Thumbnail -->
+  <div class="content-wide">
+    <div class="hero-thumbnail">
+      <img src="images/hero.png" alt="Alienation app screens: the family planet, today's challenge, the character customizer, and the family score reveal">
+    </div>
+  </div>
+
+  <!-- Project meta -->
+  <div class="project-hero-inner" style="padding-top: 40px;">
+    <div class="project-meta">
+      <div class="meta-item">
+        <span class="meta-label">Role</span>
+        <span class="meta-value">Product Manager, Product Designer</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Duration</span>
+        <span class="meta-value">6 weeks</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Tools</span>
+        <span class="meta-value">Figma, Claude Code</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Team</span>
+        <span class="meta-value">Sonali Chandy &amp; Eve Fan</span>
+      </div>
+      <div class="meta-item meta-skills">
+        <span class="meta-label">Skills</span>
+        <div class="skill-pills">
+          <span class="skill-pill-sm"><span class="pill-emoji">✨</span> AI-Assisted Prototyping</span>
+          <span class="skill-pill-sm"><span class="pill-emoji">🧭</span> Problem Framing</span>
+          <span class="skill-pill-sm"><span class="pill-emoji">🔍</span> UX Research</span>
+          <span class="skill-pill-sm"><span class="pill-emoji">🗺️</span> Product Strategy</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- OVERVIEW -->
+<!-- ============================================ -->
+<section class="case-section" id="sec-overview">
+  <div class="section-aura" style="width: 400px; height: 400px; background: radial-gradient(circle, var(--lavender), transparent); top: -50px; right: -150px;"></div>
+  <div class="content">
+    <div class="reveal">
+      <p class="case-section-label"><span class="sec-num">01</span>Overview</p>
+      <h2 class="case-section-title">Keeping families close when they can't be in the same room</h2>
+      <div class="case-body">
+        <p>Families who live apart don't fall out of touch on purpose. The group chat goes quiet for a week, nobody is free at the same hour, and the video call slowly turns into something you schedule instead of something you look forward to.</p>
+        <p>So we built <strong style="color: var(--text);">Alienation</strong>, a daily family check-in hiding inside a game. Everyone designs their own alien, and all of those aliens live together on one shared planet. Each day there is one small thing to do: dress your alien for today's theme. Nobody gets to see how it turned out until the last person has played.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: 8px;">
+      <figure class="research-artifact" style="max-width: 620px; margin-left: auto; margin-right: auto;">
+        <img src="images/family-apart.png?v=1" alt="A brainstorm board mapping every kind of family that lives physically apart. Sticky notes branch out from a centre card reading Families who are Physically Apart into split families, military families, long-distanced married couples, grandparents, international students, blended families and parallel generations living across borders, several of them carrying vote stickers.">
+        <figcaption>Topics we were exploring around family connections across distance.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="butterfly-divider">
+  <span class="dot"></span><span class="dot"></span>
+  <svg width="20" height="17" viewBox="0 0 48 40" fill="none" opacity="0.5"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C8B6E2" opacity="0.6"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C8B6E2" opacity="0.6"/></svg>
+  <span class="dot"></span><span class="dot"></span>
+</div>
+
+<!-- ============================================ -->
+<!-- RESEARCH -->
+<!-- ============================================ -->
+<section class="case-section" id="sec-research">
+  <div class="content">
+    <div class="reveal">
+      <p class="case-section-label"><span class="sec-num">02</span>Interviews &amp; Research</p>
+      <h2 class="case-section-title">We started with families where one parent is always travelling</h2>
+      <div class="case-body">
+        <p>To understand this family dynamic better, we spoke to <span class="num">8</span> people across <span class="num">3</span> groups: children who grew up with a parent on the road, travelling parents, and the stationary parents who stayed home with them.</p>
+        <p>We went in assuming that families where one parent travels a lot would want more time together and miss the family bond. Both groups corrected us, but they did it in completely different ways.</p>
+      </div>
+    </div>
+
+    <div class="quote-columns reveal">
+      <div class="quote-col">
+        <p class="quote-col-label">The parents</p>
+        <p class="quote-col-intro">Blunt, and completely logical once we sat with it. They talked about logistics and load.</p>
+        <div class="user-stories">
+          <div class="user-story">"Looking back, it was taxing and tiring to call. At the end of the day you just want to wind down and sleep."
+            <span class="user-story-attr">Michelle, travelling parent</span>
+          </div>
+          <div class="user-story">"When my husband came back from his travels, yes we would miss him, but it always felt like it messed up the routine we had going on."
+            <span class="user-story-attr">Sarah, stationary parent</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quote-col">
+        <p class="quote-col-label">The children</p>
+        <p class="quote-col-intro">Something different entirely. They talked about absence, and about waiting for the weekend.</p>
+        <div class="user-stories">
+          <div class="user-story">"When my body started changing during puberty, I didn't know who to talk to; I couldn't really talk to my mom about it."
+            <span class="user-story-attr">Jackson, child of a travelling parent</span>
+          </div>
+          <div class="user-story">"My mom was the 'disciplining' parent since she was home, so my dad was kind of the neutralizer, and I would always look forward to him returning."
+            <span class="user-story-attr">Abinash, child of a travelling parent</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <figure class="research-artifact">
+        <img src="images/research-email.png?v=1" alt="An email a child sent to her travelling father in 2012, subject line SSSSSSAAAAAADDDD AND UNHAPPPY, filled with rows of sad-face and heart emoji.">
+        <figcaption>One of the people we interviewed still had this in her inbox, sent to her dad in 2012 while he was away.</figcaption>
+      </figure>
+    </div>
+
+    <div class="reveal process-block">
+      <p class="case-section-label">Synthesis</p>
+      <p class="version-desc">After the interviews we put every quote on a board and moved them around until we discovered common themes. We used this to aid our ideation process further and look for gaps which we could fill.</p>
+      <div class="process-wide">
+        <figure class="research-artifact">
+          <img src="images/process-affinity.png?v=1" alt="An affinity map of interview quotes grouped under headings including Traveling parent's absence during the weekdays, Weekends as moments for reset, Burden on the stationary parent as the villain, and Takeaways from Travels.">
+        </figure>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: 48px;">
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; margin-bottom: 8px;">Our assumptions vs. the realities</h3>
+      <p class="version-desc">These themes also revealed a valuable contrast with our initial assumptions, which opened up our ideation even further.</p>
+
+      <div class="ab-labels">
+        <span>What we assumed</span><span></span><span>What we heard</span>
+      </div>
+      <div class="assumption-list">
+        <div class="assumption-row">
+          <div class="assumption-card">Families want to spend as much time together as possible while apart.</div>
+          <div class="assumption-arrow">→</div>
+          <div class="reality-card">The long calls felt <strong>tiring for the travelling parent</strong> after an exhausting travel work day.</div>
+        </div>
+        <div class="assumption-row">
+          <div class="assumption-card">The stationary parent is burdened with responsibilities while the other is away.</div>
+          <div class="assumption-arrow">→</div>
+          <div class="reality-card">The travelling parent coming home <strong>messes up the routine</strong> everyone else had settled into.</div>
+        </div>
+        <div class="assumption-row">
+          <div class="assumption-card">Homecoming is filled with joy and happiness.</div>
+          <div class="assumption-arrow">→</div>
+          <div class="reality-card">The travelling parent arrives <strong>exhausted, and feeling like the "odd one out."</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal process-block">
+      <p class="case-section-label">Competitor Research</p>
+      <div class="case-body">
+        <p>We also looked at what other products existed in the market and what families already keep on their phones. Many options surrounded logistical planning, things like location tracking or shared calendars. We wanted to think out of the box on what we could create in this saturated space.</p>
+      </div>
+      <div class="insight-grid">
+        <div class="insight-card">
+          <div class="competitor-shot"><img src="images/competitor-trackers.png?v=1" alt="A family location-tracking app on a phone, showing a map with a family member pinned at school, her battery level, an ETA home and buttons to message or call her."></div>
+          <div class="insight-text"><strong>Family trackers &amp; alerts</strong><br>There are dozens of them. They can tell you where somebody is, but never how they are doing.</div>
+        </div>
+        <div class="insight-card">
+          <div class="competitor-shot"><img src="images/competitor-calendars.png?v=1" alt="A shared family calendar app on a phone, with a row of family member avatars across the top and a day packed with colour-coded ballet, soccer, dentist and birthday entries."></div>
+          <div class="insight-text"><strong>Family calendars &amp; organizers</strong><br>A crowded category, and one more chore for whichever parent is already carrying the schedule.</div>
+        </div>
+        <div class="insight-card">
+          <div class="competitor-shot"><img src="images/competitor-help.png?v=1" alt="The Care.com website, headline Find Trusted Tutors Near Me, with a postcode field and a Get started button."></div>
+          <div class="insight-text"><strong>Niche help-finding apps</strong><br>More need-basis and only used by parents who do not have access to immediate help.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hmw-block reveal">
+      <div class="hmw-inner">
+        <p class="hmw-label">How Might We</p>
+        <p class="hmw-text">create a <em>low-barrier, playful shared experience</em> that bridges the emotional gap between traveling and stationary family members?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="butterfly-divider">
+  <span class="dot"></span>
+  <svg width="16" height="14" viewBox="0 0 48 40" fill="none" opacity="0.45"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#F4D1CB" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#F4D1CB" opacity="0.7"/></svg>
+  <span class="dot"></span>
+</div>
+
+<!-- ============================================ -->
+<!-- CONCEPT -->
+<!-- ============================================ -->
+<section class="case-section" id="sec-concept">
+  <div class="section-aura" style="width: 500px; height: 500px; background: radial-gradient(circle, var(--sky), transparent); top: 100px; left: -200px;"></div>
+  <div class="content">
+    <div class="reveal">
+      <p class="case-section-label"><span class="sec-num">03</span>Ideation</p>
+      <h2 class="case-section-title" style="font-size: 28px;">Brainstorming</h2>
+      <div class="case-body">
+        <p>We explored a wide range of topics, covering everything from calendars to messaging systems to parental controls, but felt that everything touched too closely on existing products.</p>
+      </div>
+      <div class="process-narrow">
+        <figure class="research-artifact">
+          <img src="images/process-ideation.png?v=1" alt="A board of green sticky notes holding app ideas, including a homecoming countdown calendar, a time-released messaging system, a lovebox-style app, and an app where the family keeps a shared plant alive, several carrying vote stickers.">
+        </figure>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: 56px;">
+      <p class="case-section-label">App Components</p>
+      <h2 class="case-section-title" style="font-size: 28px;">Landing on our idea</h2>
+      <div class="insights-stack" style="margin-top: 24px;">
+        <p class="insights-stack-header">After looking at our competitors and initial brainstorming, we decided we wanted to make a fun, thematic alternative to what already existed. We knew these were some of the features we wanted to include:</p>
+        <div class="insight-row">
+          <span class="insight-svg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="12" cy="12" r="6.25"/><ellipse cx="12" cy="12" rx="11.1" ry="4.1" transform="rotate(-22 12 12)"/></svg></span>
+          <strong>A unique base environment.</strong> A place where everyone has some sort of character and exists together, rather than a feed to scroll or a thread to answer.
+        </div>
+        <div class="insight-row">
+          <span class="insight-svg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3h11M6.5 21h11"/><path d="M8.2 3v3.1c0 2.1 3.8 3.9 3.8 5.9s-3.8 3.8-3.8 5.9V21"/><path d="M15.8 3v3.1c0 2.1-3.8 3.9-3.8 5.9s3.8 3.8 3.8 5.9V21"/></svg></span>
+          <strong>Minimal time spent, maximum effectiveness.</strong> If you have a minute, you log in, do your bit and go. We realized that different family members have different time commitments.
+        </div>
+        <div class="insight-row">
+          <span class="insight-svg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="12" cy="5.2" r="2.6"/><circle cx="5.4" cy="17.4" r="2.6"/><circle cx="18.6" cy="17.4" r="2.6"/><path d="M10.4 7.6 7 14.9M13.6 7.6 17 14.9M8 17.4h8"/></svg></span>
+          <strong>Combined effort for the family.</strong> Nothing moves unless everyone contributes, so the small things each person does add up into something the family owns.
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal process-block">
+      <p class="case-section-label">Feature Prioritization</p>
+      <p class="version-desc">We also brainstormed features and categorized them into must, should, could and won't. After visualizing our features, we realized that we were shifting towards a game-like product instead of a utility app.</p>
+      <div class="process-narrow">
+        <figure class="research-artifact">
+          <img src="images/process-prioritization.png?v=1" alt="A MoSCoW prioritisation board with columns for Must Have, Should Have, Could Have and Won't Have. Must Have includes a base environment and daily challenges; Won't Have includes calendar and calling or voice interaction.">
+        </figure>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="butterfly-divider">
+  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  <svg width="22" height="18" viewBox="0 0 48 40" fill="none" opacity="0.5"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#A8D8EA" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#A8D8EA" opacity="0.7"/></svg>
+  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+</div>
+
+<!-- ============================================ -->
+<!-- ============================================ -->
+<!-- HI-FI PROTOTYPE -->
+<!-- ============================================ -->
+<section class="case-section" id="sec-prototype">
+  <div class="content">
+    <div class="reveal">
+      <p class="case-section-label"><span class="sec-num">04</span>Prototyping &amp; User Testing</p>
+      <h2 class="case-section-title" style="font-size: 28px;">Initial Prototypes</h2>
+      <div class="case-body">
+        <p>Since we wanted something cute and thematic to keep the whole thing fun, we landed on a space theme with alien characters living on a shared planet. We started by drawing out our ideas, then proceeded to lo-fi mockups with Figma. We used these to test and get feedback on the flow through an iterative process.</p>
+      </div>
+
+      <figure class="research-artifact" style="max-width: 440px; margin-left: auto; margin-right: auto;">
+        <img src="images/sketch.jpg?v=1" alt="A hand-drawn paper sketch of the first flow, with frames for Create Family, Name Family, Character Customization, a galaxy homeland showing numbered days, and a Yay Family screen with four aliens.">
+        <figcaption>First sketch of the concept, where users can create their own character and add their family members.</figcaption>
+      </figure>
+
+      <div class="process-block">
+        <p class="case-section-label">Iterative User Testing</p>
+        <p class="version-desc">We wanted to get through as many rounds of feedback as we could with our lo-fi Figma prototypes, so we went through <span class="num">5</span> rounds of iterative user testing to figure out the user flow.</p>
+        <div class="artifact-stack">
+          <figure class="research-artifact">
+            <img src="images/lo-fi-flow.png?v=1" alt="Six lo-fi screens in a row: picking an outfit, shoes and an accessory, confirming your final look, the family grid showing who has completed the challenge with a nudge button, and the results screen with a score of 80 and a shareable family photo.">
+            <figcaption>The first flow we prototyped for the main game component.</figcaption>
+          </figure>
+          <figure class="research-artifact">
+            <img src="images/process-testing.png?v=3" alt="Written summaries of the lo-fi user testing rounds, each paired with the wireframes tested and before-and-after comparisons, plus photographs of participants clicking through the prototype on a laptop.">
+            <figcaption>Every round written up the same way, so the notes could be compared rather than just collected.</figcaption>
+          </figure>
+          <figure class="research-artifact">
+            <img src="images/lofiprototypes.png?v=1" alt="The full Figma canvas of lo-fi frames, five rows of screens covering onboarding, building the planet, adding family, the daily dress-up challenge, the waiting and submitted states, and the shop.">
+            <figcaption>We did a total of <strong>5</strong> rounds of testing, iterating along the way to figure out the entire flow, from character creation to a single day's activity.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="butterfly-divider">
+  <span class="dot"></span><span class="dot"></span>
+  <svg width="20" height="17" viewBox="0 0 48 40" fill="none" opacity="0.5"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#A8D8EA" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#A8D8EA" opacity="0.7"/></svg>
+  <span class="dot"></span><span class="dot"></span>
+</div>
+
+<!-- ============================================ -->
+<!-- HIGH-FIDELITY DESIGN -->
+<!-- ============================================ -->
+<section class="case-section" id="sec-hifi">
+  <div class="content">
+    <div class="reveal">
+      <p class="case-section-label"><span class="sec-num">05</span>High-Fidelity Design</p>
+      <h2 class="case-section-title">Designing with AI</h2>
+
+      <!-- ============================================================
+           FEATURE SCREENS — one horizontal carousel per feature, sized and
+           spaced to match collatch's .screen-carousel (220px, 16px gap).
+           ============================================================ -->
+      <div class="process-block">
+        <p class="case-section-label">Finding the vibe</p>
+        <p class="version-desc">For the look and feel of the app, we prompted Claude that we wanted a dark, space galaxy theme.</p>
+        <p class="version-desc">After the first round, the legibility was poor and the design felt a little flat, so we asked for more pink to pop out and really tie into the space pop theme. Each pass taught us to name the exact change we wanted instead of describing a vibe.</p>
+        <div class="vibe-row">
+          <figure>
+            <span class="vibe-step">01 · What we gave it</span>
+            <img src="images/iteration-ui-figma.png?v=1" alt="The greyscale Figma wireframe of the daily challenge screen, with plain grey boxes for the artwork and buttons.">
+            <figcaption>The initial Figma wireframe to visualize the layout, concept, and flow.</figcaption>
+          </figure>
+          <figure>
+            <span class="vibe-step">02 · First pass</span>
+            <img src="images/iteration-ui-before.png?v=1" alt="The first AI-generated version, dark purple with a pink gradient button, but very low contrast throughout.">
+            <figcaption>The first version we got, but the legibility was poor and the whole thing felt flat. The icons were also inaccurate.</figcaption>
+          </figure>
+          <figure>
+            <span class="vibe-step">03 · Where we landed</span>
+            <img src="images/iteration-ui-after.png?v=1" alt="The final version, higher contrast, a solid pink call to action, and a legible navigation bar with labels.">
+            <figcaption>So we asked for more pink to pop out, stronger contrast, and a navigation bar with the correct respective icons.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="reveal" style="margin-top: 56px;">
+        <p class="case-section-label">Character Design</p>
+        <div class="case-body">
+          <p>We also needed a base character that everyone could customize, so we turned to Claude again, starting from references and correcting the shape across a few rounds until it felt like ours.</p>
+        </div>
+
+        <div class="character-evolution">
+        <div class="character-step">
+          <span class="vibe-step">01 · What we fed in</span>
+          <p class="version-desc">We started by feeding Claude similar images and characters of what we were going for. Something nostalgic, but also friendly looking.</p>
+          <figure class="research-artifact">
+            <img src="images/characters-1.png?v=1" alt="A reference board of cute character art collected as inspiration: the Doodle Jump alien, Pou, Sumikko Gurashi, Kakao Friends, the Duolingo owl, Tiny Planets, and sets of friendly one-eyed monster illustrations.">
+          </figure>
+        </div>
+
+        <div class="character-step">
+          <span class="vibe-step">02 · The first pass</span>
+          <p class="version-desc">What came back first was simple. One shape, one colour each, and a single eye. We still felt the characters were too flat, and we wanted a more fluid shape.</p>
+          <figure class="research-artifact">
+            <img src="images/characters-2.png?v=1" alt="Four early aliens side by side, each a flat rounded shape in a single colour: blue, green, purple and orange.">
+          </figure>
+        </div>
+
+        <div class="character-step">
+          <span class="vibe-step">03 · Final base character</span>
+          <p class="version-desc">After a few rounds of prompting, we arrived at our final base character. We asked for an onigiri-like shape so it would have a silhouette of its own.</p>
+          <figure class="research-artifact on-dark">
+            <img src="images/character-design.png?v=1" alt="Three purple alien body shapes side by side, labelled A Compact Onigiri, B Standard Onigiri and C Tall Onigiri, each with a note about how much outfit and shoe room it gives.">
+          </figure>
+        </div>
+        </div>
+      </div>
+
+      <div class="process-block" style="margin-top: 52px;">
+        <p class="case-section-label">Core Mechanics</p>
+        <p class="version-desc">After we got the theme and characters right, we then proceeded to convert all of the wireframes, iterating continuously until every screen matched the vibe, and fixing bugs that came up during our sessions.</p>
+
+        <div class="feature-block" style="margin-top: 44px;">
+          <div class="version-label feature">01. Character Customization</div>
+          <p class="version-desc">Users can first choose and customize their own alien, stepping through the body, eyes, antennae, tail and wings, then naming what they made.</p>
+          <div class="compare-rows">
+            <div class="compare-scroll">
+              <div class="compare-row">
+                <div><img src="images/creator-1.png" alt="Alienation splash screen"><p class="phone-caption">Splash</p></div>
+                <div><img src="images/creator-7.png" alt="Choosing a body colour"><p class="phone-caption">Body</p></div>
+                <div><img src="images/creator-2.png" alt="Picking your eyes"><p class="phone-caption">Eyes</p></div>
+                <div><img src="images/creator-3.png" alt="Choosing an antenna"><p class="phone-caption">Antenna</p></div>
+                <div><img src="images/creator-6.png" alt="Adding a tail"><p class="phone-caption">Tail</p></div>
+                <div><img src="images/creator-5.png" alt="Sprouting wings"><p class="phone-caption">Wings</p></div>
+                <div><img src="images/creator-4.png" alt="Naming and confirming your alien"><p class="phone-caption">Reveal</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-block" style="margin-top: 44px;">
+          <div class="version-label v2">02. A unique base environment</div>
+          <p class="version-desc">Every family gets its own corner of the galaxy, and the aim is to build it up by checking in each day to do the challenge. The first user would name the planet, then pull everyone else onto it with an invite code.</p>
+          <div class="compare-rows">
+            <div class="compare-scroll">
+              <div class="compare-row">
+                <div><img src="images/planet-2.png" alt="Name it"><p class="phone-caption">Name it</p></div>
+                <div><img src="images/planet-3.png" alt="Confirm"><p class="phone-caption">Confirm</p></div>
+                <div><img src="images/planet-4.png" alt="Invite"><p class="phone-caption">Invite</p></div>
+                <div><img src="images/planet-5.png" alt="Meet the crew"><p class="phone-caption">Meet the crew</p></div>
+                <div><img src="images/home-1.png" alt="The family planet home screen, titled The Milky Way-ters, with You, Stella, Cosmo and Nova orbiting the planet and a button to view today's challenge"><p class="phone-caption">The planet</p></div>
+                <div><img src="images/home-2.png" alt="A family member's sheet on the planet, showing Nova offline with options to send love, nudge them to do today's challenge, view their challenge status, or see recent activity"><p class="phone-caption">Family member</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-block" style="margin-top: 44px;">
+          <div class="version-label final">03. The daily dress-up challenge</div>
+          <p class="version-desc">Every day brings a new theme. Everyone dresses their alien in what they think the rest of the family will pick, matching as many of them as possible.</p>
+          <div class="compare-rows">
+            <div class="compare-scroll">
+              <div class="compare-row">
+                <div><img src="images/challenge-1.png" alt="Today's theme"><p class="phone-caption">Today's theme</p></div>
+                <div><img src="images/challenge-2.png" alt="Hair"><p class="phone-caption">Hair</p></div>
+                <div><img src="images/challenge-3.png" alt="Outfit"><p class="phone-caption">Outfit</p></div>
+                <div><img src="images/challenge-4.png" alt="Shoes"><p class="phone-caption">Shoes</p></div>
+                <div><img src="images/challenge-5.png" alt="Accessory"><p class="phone-caption">Accessory</p></div>
+                <div><img src="images/challenge-6.png" alt="Submitted"><p class="phone-caption">Submitted</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-block" style="margin-top: 44px;">
+          <div class="version-label v1">04. Reveal and scoring</div>
+          <p class="version-desc">Everyone's choices stay hidden until the last person has submitted, which encourages every family member to keep up the daily streak and show up for each other. Users can also nudge whoever is holding it up with a notification.</p>
+          <p class="version-desc">Once everyone has played, the looks are revealed together as a family photo day, ready to share. Each item is then scored against what everyone else picked, and those matches add up to a score that pays out as coins.</p>
+          <div class="compare-rows">
+            <div class="compare-scroll">
+              <div class="compare-row">
+                <div><img src="images/reveal-1.png" alt="The waiting state: 2 of 4 players have completed the challenge, with Mom and Lisa still hidden behind question marks and a Nudge button beside each of them"><p class="phone-caption">Nudge</p></div>
+                <div><img src="images/reveal-2.png" alt="The full reveal: 4 of 4 players have completed the challenge, every alien's look now visible, and an 80% match result"><p class="phone-caption">Full reveal</p></div>
+                <div><img src="images/reveal-3.png" alt="The results screen: Congratulations, you guys scored 80% for today's Valentine's Day themed challenge, 80 coins earned, the four aliens inside a heart, and buttons to share to Facebook, Instagram or elsewhere"><p class="phone-caption">Score &amp; share</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-block" style="margin-top: 44px;">
+          <div class="version-label feature">05. The shop and building your world</div>
+          <p class="version-desc">Coins from each day's challenge are spent in the shop, where families expand their planet with pets, plants and buildings. A streak slowly turns into a place the family built together.</p>
+          <div class="compare-rows">
+            <div class="compare-scroll">
+              <div class="compare-row">
+                <div><img src="images/shop-2.png" alt="The shop, with categories for pets, plants, infrastructure, space tools, food and activities"><p class="phone-caption">Shop</p></div>
+                <div><img src="images/shop-1.png" alt="The pets category, showing Space Dog, Space Cat, Moon Rabbit and Star Hamster with their coin prices, and an unlock button"><p class="phone-caption">Pets</p></div>
+                <div><img src="images/shop-3.png" alt="The unlock celebration screen for Space Dog, with confetti and buttons to continue to the shop or head back home"><p class="phone-caption">Unlocked</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- REFLECTION -->
+<!-- ============================================ -->
+<section class="case-section" id="sec-reflection">
+  <div class="content">
+    <div class="reveal">
+      <p class="case-section-label"><span class="sec-num">06</span>Outcomes &amp; Reflection</p>
+      <div class="conclusion-block" style="margin-top: 16px;">
+        <h3 class="conclusion-title">Why the design works</h3>
+        <p class="conclusion-text">Family apps are oversaturated with calendars and trackers, so going the other way made ours playful and low-pressure. On the planet, nobody is the person who is away, and that reaches past families to friend groups and long-distance couples.</p>
+        <p class="conclusion-text" style="margin-top: 20px;">Looking back, vibe coding the hi-fi got us to something clickable far faster than we could have built by hand, so we were testing a real interaction instead of a static flow. Prototyping in Figma first was what made that possible. The wireframes became a clear blueprint we handed to Claude Code, so every prompt could point at a concrete screen and state instead of describing one from scratch. This made our entire iterative testing and feedback process much easier.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- NEXT PROJECT -->
+<!-- ============================================ -->
+<section class="next-project">
+  <div class="content">
+    <p class="next-label">Next Project</p>
+    <h2 class="next-title"><a href="../path-at-penn/">Improving Path@Penn →</a></h2>
+    <p class="next-blurb">Redesigning class registration at the University of Pennsylvania.</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="position: relative; z-index: 2;">
+  <div style="display: flex; justify-content: center; align-items: center; gap: 8px; padding: 32px 0;">
+    <p style="font-size: 12px; color: var(--text-light); opacity: 0.5; letter-spacing: 0.5px;">Kathryn Chiew · 2026</p>
+    <svg width="18" height="15" viewBox="0 0 48 40" fill="none" opacity="0.4">
+      <path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#F4D1CB" opacity="0.7"/>
+      <path d="M24 20C22 26 16 36 10 34C4 32 8 22 14 20C20 18 23 19 24 20Z" fill="#FFDAB9" opacity="0.5"/>
+      <path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#F4D1CB" opacity="0.7"/>
+      <path d="M24 20C26 26 32 36 38 34C44 32 40 22 34 20C28 18 25 19 24 20Z" fill="#FFDAB9" opacity="0.5"/>
+    </svg>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Section nav
+  const sectionNav = document.getElementById('sectionNav');
+  const sectionLinks = sectionNav.querySelectorAll('a');
+  const sections = [
+    { id: 'sec-overview', el: document.getElementById('sec-overview') },
+    { id: 'sec-research', el: document.getElementById('sec-research') },
+    { id: 'sec-concept', el: document.getElementById('sec-concept') },
+    { id: 'sec-prototype', el: document.getElementById('sec-prototype') },
+    { id: 'sec-hifi', el: document.getElementById('sec-hifi') },
+    { id: 'sec-reflection', el: document.getElementById('sec-reflection') },
+  ].filter(s => s.el);
+
+  function updateSectionNav() {
+    const scrollY = window.scrollY;
+    const heroBottom = document.querySelector('.project-hero').offsetTop + document.querySelector('.project-hero').offsetHeight;
+    if (scrollY > heroBottom - 100) {
+      sectionNav.classList.add('visible');
+    } else {
+      sectionNav.classList.remove('visible');
+    }
+    let current = '';
+    for (const section of sections) {
+      const top = section.el.getBoundingClientRect().top;
+      if (top < window.innerHeight * 0.4) {
+        current = section.id;
+      }
+    }
+    sectionLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+  }
+
+  window.addEventListener('scroll', updateSectionNav, { passive: true });
+  updateSectionNav();
+
+  sectionLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+
+<script src="../cursor.js?v=4"></script>
+
+</body>
+</html>

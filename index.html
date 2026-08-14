@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" style="cursor:none">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kathryn's Portfolio</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <style>*,*::before,*::after,*:hover,*:active,*:focus,svg,svg *{cursor:none!important}</style>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #FAFAF8;
@@ -1670,6 +1669,18 @@
     .skills-grid { grid-template-columns: 1fr; }
   }
 </style>
+<style id="cursor-css">
+/* The original arrow cursor: 32x34, #FF9575 over #D45A38, flat, no outline.
+   One cursor everywhere, exactly as the old cursor.js drew it.
+   Inlined on purpose: it used to be injected by cursor.js, and a stale cached
+   copy of that file made it impossible to tell whether a fix had reached the
+   browser. Inline always ships with the page.
+   ONE plain url() per rule, never image-set(): Chrome accepts image-set in the
+   cursor property, wins the cascade with it, then paints nothing.
+   The trailing , auto is the safety net: a rejected image falls back to the
+   system cursor instead of leaving no cursor at all. */
+html, body, * { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAiCAYAAAA+stv/AAABqklEQVR4nOyXPVLDMBCFdz25AnSEC5DeHc4pmAncgKFMhs52y9DCCQjXsNK5DxeI6cIdLLx25LEVyT+KYlPwmtiy1vvN7tMmcWBkOTCySoDtg+vBCCoBkIO/f77j/G0VwIAqATiHzT7Zwc/3zufvy2goEKdyxegjh0gSL0Pyh4DA6s3XwuXi+nJ6DRdXU7EtxMeXAM6gOsC9GwEHTwcBacrw6ZWBRTUew8ITyeGO++CgdW/UKkBHEVOI5E31SpShVtrSaRDVKyFkx6QoL1SNKEtdifw1xtU4BpCM2BkCs2PMcdMX5KgFNJCaAtTtoECC7t8WR7HCWmL0EAVJBrHsPNInYCiCIKk9IUBW0DY7ULXY5oOq9MaspdGa9OTfA83tENJ7QwnAEUKwDqGWsQdUEKS+c0JZgdlHzMAQoqgEFhWk2ZDyedNsQN2DPkaU3shu1vG863ZrLRBqG2SytKegrxHzGIBw9hkHfWKsVMAksRA2PWz6ZjxEM6qUqWlJk7YESiNaSNwJgJKgBJCXe21WbpWwbcN24QaIcEvuNu3zSQDn1t/5c/oPMJZ+AQAA//+NeKn2AAAABklEQVQDAFjBz2wg0FamAAAAAElFTkSuQmCC") 2 2, auto; }
+</style>
 </head>
 <body>
 
@@ -1749,8 +1760,9 @@
       <span class="nav-butterfly"><svg width="16" height="14" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#7c5db8" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#7c5db8" opacity="0.7"/><path d="M24 20C22 26 16 36 10 34C4 32 8 22 14 20C20 18 23 19 24 20Z" fill="#C8B6E2" opacity="0.5"/><path d="M24 20C26 26 32 36 38 34C44 32 40 22 34 20C28 18 25 19 24 20Z" fill="#C8B6E2" opacity="0.5"/></svg></span>
     </a>
       <ul class="dropdown">
-        <li><a href="collatch/">Collatch</a></li>
+        <li><a href="alienation/">Alienation</a></li>
         <li><a href="path-at-penn/">Path@Penn</a></li>
+        <li><a href="collatch/">Collatch</a></li>
         <li><a href="piggus-nimbus/">Piggus Nimbus</a></li>
       </ul>
     </li>
@@ -1942,19 +1954,20 @@
 
   <div class="projects-grid">
 
-    <!-- Collatch -->
-    <a class="project-card reveal" href="collatch/">
+    <!-- Alienation -->
+    <a class="project-card reveal" href="alienation/">
       <div class="project-img">
-        <img src="images/home-collatch-thumbnail.png" alt="Collatch" style="width:100%;height:100%;object-fit:cover;">
+        <img src="images/home-alienation-thumbnail.png" alt="Alienation" style="width:100%;height:100%;object-fit:cover;">
         <span class="project-type-badge badge-tech">App Design</span>
       </div>
       <div class="project-info">
-        <h3 class="project-title">Collatch</h3>
-        <p class="project-desc">A college-matching app that centralizes information for international students and personalizes school recommendations based on their goals, priorities, and realities.</p>
+        <h3 class="project-title">Alienation</h3>
+        <p class="project-desc">A world-building game where family members create their own characters, earn coins, and grow a shared planet that keeps them connected.</p>
         <div class="skill-pills">
-          <span class="skill-pill-sm"><span class="pill-emoji">🎨</span> High-Fidelity Design</span>
+          <span class="skill-pill-sm"><span class="pill-emoji">✨</span> AI-Assisted Prototyping</span>
+          <span class="skill-pill-sm"><span class="pill-emoji">🧭</span> Problem Framing</span>
           <span class="skill-pill-sm"><span class="pill-emoji">🔍</span> UX Research</span>
-          <span class="skill-pill-sm"><span class="pill-emoji">▶️</span> Interactive Prototyping</span>
+          <span class="skill-pill-sm"><span class="pill-emoji">🗺️</span> Product Strategy</span>
         </div>
         <div class="project-arrow">View Project <span>→</span></div>
       </div>
@@ -1978,6 +1991,24 @@
       </div>
     </a>
 
+    <!-- Collatch -->
+    <a class="project-card reveal" href="collatch/">
+      <div class="project-img">
+        <img src="images/home-collatch-thumbnail.png" alt="Collatch" style="width:100%;height:100%;object-fit:cover;">
+        <span class="project-type-badge badge-tech">App Design</span>
+      </div>
+      <div class="project-info">
+        <h3 class="project-title">Collatch</h3>
+        <p class="project-desc">A college-matching app that centralizes information for international students and personalizes school recommendations based on their goals, priorities, and realities.</p>
+        <div class="skill-pills">
+          <span class="skill-pill-sm"><span class="pill-emoji">🎨</span> High-Fidelity Design</span>
+          <span class="skill-pill-sm"><span class="pill-emoji">🔍</span> UX Research</span>
+          <span class="skill-pill-sm"><span class="pill-emoji">▶️</span> Interactive Prototyping</span>
+        </div>
+        <div class="project-arrow">View Project <span>→</span></div>
+      </div>
+    </a>
+
     <!-- Piggus Nimbus -->
     <a class="project-card reveal" href="piggus-nimbus/">
       <div class="project-img">
@@ -1991,7 +2022,7 @@
           <span class="skill-pill-sm"><span class="pill-emoji">⚡</span> Circuit Design</span>
           <span class="skill-pill-sm"><span class="pill-emoji">💻</span> Embedded Systems</span>
           <span class="skill-pill-sm"><span class="pill-emoji">🔧</span> Rapid Prototyping</span>
-          <span class="skill-pill-sm"><span class="pill-emoji"><img src="images/claude-code.png" alt="Claude Code" style="width:12px;height:12px;"></span> Claude Code</span>
+          <span class="skill-pill-sm"><span class="pill-emoji">🤖</span> AI-Assisted Development</span>
         </div>
         <div class="project-arrow">View Project <span>→</span></div>
       </div>
@@ -2448,7 +2479,8 @@
   }
 })();
 </script>
-<script src="cursor.js"></script>
+
+<script src="cursor.js?v=4"></script>
 
 </body>
 </html>

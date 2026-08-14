@@ -15,7 +15,8 @@ running "Next up" list.
 - **Each page repeats the shared CSS.** There is no shared stylesheet. When a
   token or shared component changes, it must be updated in *every* page. This is
   the site's main maintenance hazard — see "Cross-page consistency" below.
-- **`cursor.js` is the only shared script**, loaded by every page.
+- **`cursor.js` is the only shared script**, loaded by every page. It draws the
+  click sparkle only; the cursor artwork is inlined per page (see Cursor below).
 - Open the file in a browser to check work. There's nothing to compile or serve.
 
 ## Structure
@@ -29,7 +30,7 @@ rituals/              Work case study (Valiram → Rituals Cosmetics)
 outside-of-work/      Personal page (foodieforthebelly)
 images/               Home-page images only (thumbnails, logos, headshot)
 <page>/images/        That page's own images
-cursor.js             Custom cursor, shared by all pages
+cursor.js             Click sparkle, shared by all pages
 favicon.svg           Shared favicon
 CNAME                 Custom domain
 ```
@@ -54,6 +55,18 @@ raw hex, for anything that maps to a token:
 --lavender: #C8B6E2;  --sky: #A8D8EA;       --peach: #FFDAB9;
 --sage: #C5D5CB;      --cream: #FFF8F0;     --cloud: rgba(200,182,226,0.08);
 ```
+
+**Alienation is the one dark page.** `alienation/` carries the shared light CSS
+block like every other page, then overrides it with a **galaxy theme** in a final
+`<style>` block that must stay last in `<head>` — it redefines the `:root` tokens
+(`--bg: #0D0620`, `--text: #FFD4E0`, `--accent: #FF8FA8`, …) plus every hardcoded
+light surface (`background: white` on `.insight-card`, `.feedback-card`,
+`.conclusion-block`, `.hmw-block`, `.user-story`, `.gallery-item`, `.learning-item`,
+`.dropdown`, `.skill-pill-sm`, and `#f4f4f2` on `.ba-row`). If you add a component
+to that page, give it a dark override there too, or it will render as a white card
+on a purple background. The star field, nebulae and shooting stars come from the
+Alienation prototype and live inside the existing `.floating-elements` fixed layer,
+so they stay put while the page scrolls.
 
 **Fonts** — Playfair Display (headings, and italic for emphasis) + DM Sans (body),
 both from Google Fonts via one `<link>` in the `<head>`. Copy the existing link
@@ -98,10 +111,39 @@ blobs positioned absolutely behind sections, `.reveal` scroll-in animation drive
 by an IntersectionObserver at the bottom of each page. New sections should use
 `.reveal` so they animate in like everything else.
 
-**Cursor** — the site hides the native cursor and draws its own. Every page needs
-all three pieces or the cursor breaks or flashes on load:
-`<html lang="en" style="cursor:none">`, the `*{cursor:none!important}` style
-block in `<head>`, and `<script src="../cursor.js">` before `</body>`.
+**Cursor** — Kathryn's original arrow: 32x34, `#FF9575` light face over `#D45A38`
+dark face, flat, no outline, **one cursor everywhere**. Shipped as a single CSS rule
+`html, body, * { cursor: url(<png data-uri>) 2 2, auto; }`, **inlined into every
+page** as `<style id="cursor-css">`, kept last in `<head>` so it wins ties on source
+order. Hotspot `2 2` is the arrow tip. `cursor.js` no longer owns the cursor at all;
+it only draws the click sparkle, and pages load it as
+`<script src="../cursor.js?v=4"></script>` (no `../` on the home page).
+
+The PNG is the original SVG rasterised through headless Chrome with a transparent
+background override. Keep the design as-is unless Kathryn asks: a white halo and a
+heavier outline were tried during debugging and she wanted the original back.
+
+It is inline rather than in the shared script for a reason: `file://` subresources
+can survive a hard reload, so a stale cached `cursor.js` made it impossible to tell
+whether a fix had reached the browser. Inline CSS always ships with the page.
+Changing the artwork means editing all seven pages, which matches how the rest of
+this site already works.
+
+Three rules, learned expensively in Aug 2026:
+
+1. **Never hide the native cursor first.** The original design put `cursor: none`
+   on `<html>` plus a global `!important` block and drew a `<div>` arrow from JS.
+   Any failure in that chain left *no cursor at all*. Every rule now ends in
+   `, auto` or `, pointer`, so a rejected image degrades to the system cursor.
+2. **One plain `url()` per rule, never `image-set()`.** Chrome accepts
+   `cursor: image-set(...)` as valid syntax, so it beats a plain `url()` before it
+   and then paints nothing.
+3. **A computed `cursor` of `url(...)` does not prove the cursor renders.** It only
+   proves the declaration won. Confirm with a human looking at the screen; headless
+   Chrome cannot show you a cursor at all.
+
+`outside-of-work` still has a `setupBeholdCursorHide()` helper that looks for
+`#cur-arrow`; that element no longer exists, so it null-checks and no-ops.
 
 ## Case study page template
 
