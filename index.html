@@ -439,6 +439,13 @@
     background: #d4a276;
   }
 
+  .hl-ai {
+    color: var(--accent);
+  }
+  .hl-ai::after {
+    background: var(--accent);
+  }
+
   .hero-highlight-wrap {
     position: relative;
   }
@@ -1821,7 +1828,7 @@ html, body, * { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAA
           <span class="mf-hint">hover me!</span>
         </div>
       </div>
-      <p class="hero-desc">My experience lies in product strategy, building brands, and driving growth across global CPG and beauty markets. I am passionate about connecting consumer insights with compelling narratives and the stories behind why people make the decisions they do.<br><br>Now at UPenn bridging <span class="hero-highlight-wrap" id="hlWrap"><span class="hero-highlight hl-business" id="hlBusiness">business</span>, <span class="hero-highlight hl-engineering" id="hlEngineering">engineering</span>, and <span class="hero-highlight hl-design" id="hlDesign">design</span></span> to bring that same human-centered approach to building consumer tech products.</p>
+      <p class="hero-desc">My experience lies in product strategy, building brands, and driving growth across global CPG and beauty markets. I am passionate about connecting consumer insights with compelling narratives and the stories behind why people make the decisions they do.<br><br>Now at Penn, I&rsquo;m bridging <span class="hero-highlight-wrap" id="hlWrap"><span class="hero-highlight hl-business" id="hlBusiness">business</span>, <span class="hero-highlight hl-engineering" id="hlEngineering">engineering</span>, <span class="hero-highlight hl-design" id="hlDesign">design</span>, and <span class="hero-highlight hl-ai" id="hlAi">AI</span></span> to build consumer tech products with that same human-centered approach.</p>
       <div class="hero-scroll-prompt">
         <div class="scroll-text">
           scroll down to explore my works!
@@ -1851,6 +1858,23 @@ html, body, * { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAA
     <p class="section-label">My Experience</p>
   </div>
   <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-logo">
+        <img src="images/gr-logo.png" alt="Garde-Robe">
+      </div>
+      <div class="timeline-content">
+      <div class="timeline-date">Summer 2026</div>
+      <div class="timeline-role">Product Management Intern</div>
+      <div class="timeline-company">Garde-Robe Inc.</div>
+      <div class="timeline-skills">
+        <span class="timeline-skill">AI Product Development</span>
+        <span class="timeline-skill">Product Discovery</span>
+        <span class="timeline-skill">Feature Prioritization</span>
+        <span class="timeline-skill">Rapid Prototyping</span>
+        <span class="timeline-skill">User Flows</span>
+      </div>
+      </div>
+    </div>
     <div class="timeline-item reveal">
       <div class="timeline-logo">
         <img src="images/upenn-logo.png" alt="University of Pennsylvania">
@@ -2118,7 +2142,8 @@ html, body, * { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAA
     var highlights = [
       { el: document.getElementById('hlDesign'), color: '#C8B6E2' },
       { el: document.getElementById('hlEngineering'), color: '#A8D8EA' },
-      { el: document.getElementById('hlBusiness'), color: '#d4a276' }
+      { el: document.getElementById('hlBusiness'), color: '#d4a276' },
+      { el: document.getElementById('hlAi'), color: '#E8735A' }
     ];
 
     function addSparkles(el, color) {
