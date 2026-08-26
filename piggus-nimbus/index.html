@@ -1752,49 +1752,6 @@ html, body, * { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAA
   });
 </script>
 
-<style>
-#work-popup {
-  position: fixed;
-  top: 60px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-6px);
-  background: #fff;
-  border: 1px solid rgba(0,0,0,0.08);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.10);
-  border-radius: 24px;
-  padding: 7px 16px;
-  font-size: 12.5px;
-  font-weight: 500;
-  color: #444;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  z-index: 9999;
-  white-space: nowrap;
-}
-#work-popup.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-</style>
-<div id="work-popup">updates in progress ✨</div>
-<script>
-(function() {
-  var popup = document.getElementById('work-popup');
-  var workLink = document.querySelector('a[href*="work-section"]');
-  if (workLink && popup) {
-    workLink.addEventListener('click', function(e) {
-      e.preventDefault();
-      var dest = workLink.getAttribute('href');
-      popup.classList.add('show');
-      setTimeout(function() {
-        popup.classList.remove('show');
-      }, 1800);
-    });
-  }
-})();
-</script>
-
 <script src="../cursor.js?v=4"></script>
 
 </body>
