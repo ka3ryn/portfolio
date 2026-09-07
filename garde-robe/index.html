@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rituals Cosmetics — Kathryn's Portfolio</title>
-<meta name="description" content="Go-to-market and market expansion for Rituals Cosmetics across Southeast Asia.">
-<meta property="og:title" content="Rituals Cosmetics — Go-to-market and market expansion">
-<meta property="og:description" content="Go-to-market and market expansion for Rituals Cosmetics across Southeast Asia.">
+<title>Garde-Robe — Kathryn's Portfolio</title>
+<meta name="description" content="Product management internship at Garde-Robe, a fashion social commerce app. Onboarding, personalized discovery, referral surfaces and checkout to closet.">
+<meta property="og:title" content="Garde-Robe — Product management internship">
+<meta property="og:description" content="Product management internship at Garde-Robe, a fashion social commerce app. Onboarding, personalized discovery, referral surfaces and checkout to closet.">
 <meta property="og:type" content="article">
 <meta property="og:image" content="https://kathryn-portfolio.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Kathryn Chiew — Product Management, Go-to-Market, Building with AI">
 <meta name="twitter:card" content="summary_large_image">
-<meta property="og:url" content="https://kathryn-portfolio.com/rituals/">
+<meta property="og:url" content="https://kathryn-portfolio.com/garde-robe/">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -1259,6 +1259,161 @@
     .skill-pills { gap: 6px; }
     .gallery-row.cols-3 { grid-template-columns: 1fr; }
   }
+</style><style>
+  /* ===== Numbered phase labels ===== */
+  /* Numbered section labels, following the alienation pattern. */
+  .sec-num {
+    display: inline-block;
+    margin-right: 12px;
+    padding-right: 12px;
+    border-right: 1px solid var(--accent-soft);
+    color: var(--accent);
+  }
+  /* Figures stay in the body face and just gain weight, so they read as emphasis
+     rather than as a different typographic voice. */
+  .num {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* ===== Phase module =====
+     Text left, artifact right. One uniform shape repeated six times so the page
+     scans as a rhythm rather than six different layouts. */
+  .phase {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 48px;
+    align-items: start;
+  }
+  .phase.is-wide { grid-template-columns: 1fr 420px; }
+
+  /* Alternating sides: odd phases put the artifact right, even phases put it
+     left, so the eye zig-zags down the page instead of tracking one rail. */
+  .phase.is-flipped { grid-template-columns: 300px 1fr; }
+  .phase.is-flipped.is-wide { grid-template-columns: 420px 1fr; }
+  .phase.is-flipped .phase-media { order: -1; }
+  .phase.is-solo { grid-template-columns: 1fr; }
+
+  .phase-decision {
+    font-family: 'Playfair Display', serif;
+    font-size: 27px;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -0.3px;
+    margin-bottom: 16px;
+    text-wrap: balance;
+  }
+  .phase-body {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-light);
+  }
+
+  /* The problem each section answers. Sits between title and body so a reader
+     sees the judgement, not just the build. */
+  .phase-problem {
+    font-size: 16px;
+    line-height: 1.8;
+    font-style: italic;
+    color: var(--text-light);
+    margin-bottom: 14px;
+  }
+
+  /* Process tags: which part of the PM lifecycle this phase touched, readable
+     without reading the prose. */
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .tag {
+    padding: 5px 14px;
+    border-radius: 100px;
+    font-size: 12.5px;
+    letter-spacing: 0.2px;
+    background: var(--cream);
+    color: var(--text-light);
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  /* Phone captures: contained, never cropped, on their own soft ground. */
+  .shot {
+    width: 100%;
+    display: block;
+    border-radius: 14px;
+    border: 1px solid rgba(0,0,0,0.07);
+    background: white;
+  }
+  .shot-caption {
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--text-light);
+    opacity: 0.85;
+    margin-top: 10px;
+  }
+
+  /* ===== Supervisor quote =====
+     Centred and card-less, so it breaks the left-aligned rhythm of every other
+     block on the page and reads as a pause rather than another panel. */
+  .quote-block { text-align: center; padding: 8px 0; }
+  .quote-rule {
+    width: 46px; height: 1px; margin: 0 auto 30px;
+    background: var(--accent); opacity: 0.5;
+  }
+  .quote-text {
+    font-style: italic;
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.75;
+    color: var(--text-light);
+    max-width: 62ch;
+    margin: 0 auto 24px;
+    text-wrap: pretty;
+  }
+  .quote-attrib {
+    font-size: 12px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+  .quote-attrib strong { color: var(--accent); font-weight: 500; }
+
+  @media (max-width: 768px) {
+    .quote-text { font-size: 19px; }
+  }
+
+  /* ===== At a glance ===== */
+  /* Body copy classes all resolve to the site standard: 16px, --text-light, 1.8.
+     Matches .case-body on collatch, rituals and path-at-penn. */
+  .glance-lead {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-light);
+  }
+
+  /* ===== One centred column =====
+     The inherited block caps .project-hero-inner at 960px but .content at 1200px,
+     so the sections ran wider than the hero. Everything narrows to the hero's
+     960px, which is also the site standard outside rituals. */
+  .content { max-width: 960px; }
+  .back-link { margin-left: max(48px, calc((100vw - 960px) / 2 + 48px)); }
+
+  /* .section-aura is absolutely positioned with a negative `right`, so it pokes
+     past its section edge. The inherited block already sets `overflow-x: hidden`
+     on body, so this only stops the aura widening the page inside that clip. */
+  .case-section, .next-project { overflow-x: clip; }
+
+  @media (max-width: 768px) {
+    /* Stacked on a phone, so the alternation collapses and text always leads. */
+    .phase, .phase.is-wide,
+    .phase.is-flipped, .phase.is-flipped.is-wide { grid-template-columns: 1fr; gap: 24px; }
+    .phase.is-flipped .phase-media { order: 0; }
+    .back-link { margin-left: 24px; }
+    .phase-media { max-width: 340px; }
+    .phase-decision { font-size: 23px; }
+    .gallery-row.cols-2 { grid-template-columns: 1fr; }
+    .phase-body, .glance-lead, .conclusion-text { overflow-wrap: break-word; }
+  }
 </style>
 <style id="cursor-css">
 /* The original arrow cursor: 32x34, #FF9575 over #D45A38, flat, no outline.
@@ -1271,11 +1426,275 @@
    The trailing , auto is the safety net: a rejected image falls back to the
    system cursor instead of leaving no cursor at all. */
 html, body, * { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAiCAYAAAA+stv/AAABqklEQVR4nOyXPVLDMBCFdz25AnSEC5DeHc4pmAncgKFMhs52y9DCCQjXsNK5DxeI6cIdLLx25LEVyT+KYlPwmtiy1vvN7tMmcWBkOTCySoDtg+vBCCoBkIO/f77j/G0VwIAqATiHzT7Zwc/3zufvy2goEKdyxegjh0gSL0Pyh4DA6s3XwuXi+nJ6DRdXU7EtxMeXAM6gOsC9GwEHTwcBacrw6ZWBRTUew8ITyeGO++CgdW/UKkBHEVOI5E31SpShVtrSaRDVKyFkx6QoL1SNKEtdifw1xtU4BpCM2BkCs2PMcdMX5KgFNJCaAtTtoECC7t8WR7HCWmL0EAVJBrHsPNInYCiCIKk9IUBW0DY7ULXY5oOq9MaspdGa9OTfA83tENJ7QwnAEUKwDqGWsQdUEKS+c0JZgdlHzMAQoqgEFhWk2ZDyedNsQN2DPkaU3shu1vG863ZrLRBqG2SytKegrxHzGIBw9hkHfWKsVMAksRA2PWz6ZjxEM6qUqWlJk7YESiNaSNwJgJKgBJCXe21WbpWwbcN24QaIcEvuNu3zSQDn1t/5c/oPMJZ+AQAA//+NeKn2AAAABklEQVQDAFjBz2wg0FamAAAAAElFTkSuQmCC") 2 2, auto; }
-</style>
-</head>
+
+  /* ===== TL;DR =====
+     Three cards, so problem, action and result read as separate claims rather
+     than one paragraph a scanner has to unpick. */
+  .tldr { display: grid; gap: 16px; }
+  .tldr-card {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 20px;
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 20px;
+    align-items: baseline;
+    transition: all 0.3s ease;
+  }
+  .tldr-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
+  .tldr-key {
+    font-size: 11.5px; letter-spacing: 1.6px; text-transform: uppercase;
+    color: var(--accent); font-weight: 500;
+  }
+  .tldr-val { font-size: 16px; line-height: 1.8; color: var(--text-light); }
+
+  /* Section headings sit smaller than the shared 32-44px, so the hero title
+     stays the page's only large type and the arc headings read as subheads. */
+  .case-section-title { font-size: clamp(26px, 2.4vw, 32px); letter-spacing: -0.6px; }
+
+  /* Confidentiality note, sits quietly under the hero meta. */
+  .disclaimer {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-light);
+    opacity: 0.75;
+    margin-top: 30px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+
+  /* Cards stretch to equal height. Align contents to the top so every number
+     sits on the same line and every label starts on the same line, rather than
+     centring, which floats each number to a different height. */
+  .stat-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 38px;
+  }
+  .stat-label { max-width: 22ch; margin-left: auto; margin-right: auto; }
+
+  /* ===== Section divider =====
+     Same construction as alienation: hairline gradient rules either side of a
+     butterfly, tinted for this page's light palette. */
+  .butterfly-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 34px 48px;
+  }
+  .butterfly-divider::before,
+  .butterfly-divider::after { content: ''; flex: 1; height: 1px; }
+  .butterfly-divider::before {
+    background: linear-gradient(90deg, transparent 0%, rgba(200,182,226,0.18) 18%, rgba(200,182,226,0.45) 100%);
+  }
+  .butterfly-divider::after {
+    background: linear-gradient(90deg, rgba(200,182,226,0.45) 0%, rgba(200,182,226,0.18) 82%, transparent 100%);
+  }
+  .butterfly-divider .dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--lavender); opacity: 0.7;
+  }
+
+  /* More air around each section than the inherited 48px. */
+  .case-section { padding: 76px 0; }
+
+  @media (max-width: 768px) {
+    .case-section { padding: 48px 0; }
+    .butterfly-divider { padding: 24px 24px; }
+  }
+
+  /* Inline underline for named organizations in body copy. */
+  .uline {
+    border-bottom: 1.5px solid var(--accent-soft);
+    padding-bottom: 1px;
+  }
+
+  /* Empty image slot, waiting on an asset. Delete .slot when the image lands. */
+  .slot {
+    border: 1.5px dashed var(--accent-soft);
+    border-radius: 14px;
+    aspect-ratio: 3 / 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-light);
+    opacity: 0.75;
+  }
+
+  /* ===== Goals ===== */
+  .goal-list { display: grid; gap: 12px; margin-top: 22px; }
+  .goal-item {
+    display: grid; grid-template-columns: 26px 1fr; gap: 12px;
+    font-size: 16px; line-height: 1.8; color: var(--text-light);
+  }
+  .goal-item span:first-child {
+    font-family: 'Playfair Display', serif; font-weight: 600; color: var(--accent);
+  }
+  /* The action each point starts with, so a scanner reads the five verbs first
+     and the detail only if they stop. */
+  .goal-hl { color: var(--text); font-weight: 500; }
+
+  /* App-store style lockup opening the context section: the icon earns its place
+     by naming the product rather than floating on its own above the prose. */
+  .ctx-lockup {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 26px;
+  }
+  .ctx-logo {
+    width: 58px; height: 58px; flex-shrink: 0; display: block;
+    border-radius: 13px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .ctx-lockup-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; color: var(--text); line-height: 1.2;
+  }
+  .ctx-lockup-meta {
+    font-size: 12px; letter-spacing: 1.6px; text-transform: uppercase;
+    color: var(--text-light); margin-top: 6px;
+  }
+
+  /* ===== AI build box =====
+     The largest single block on the page, because this was the largest single
+     part of the internship. Tinted ground sets it apart from the sections
+     around it without needing a heavier border. */
+  .ai-box { margin-top: 56px; }
+  .ai-box-label {
+    font-size: 11.5px; letter-spacing: 1.6px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 10px;
+  }
+  .ai-box-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 2.2vw, 30px); font-weight: 400;
+    letter-spacing: -0.5px; line-height: 1.25; margin-bottom: 14px;
+  }
+  .ai-box-body { font-size: 16px; line-height: 1.8; color: var(--text-light); }
+
+  .highlight-label {
+    font-size: 11.5px; letter-spacing: 1.6px; text-transform: uppercase;
+    color: var(--accent); margin: 34px 0 18px;
+  }
+  .mini-grid { display: grid; gap: 20px; }
+  .mini {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 18px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    align-items: stretch;
+    transition: all 0.3s ease;
+  }
+  .mini:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.09); }
+
+  /* Even cards put the artifact on the right, so the column zig-zags. */
+  /* Zigzag, same pattern as piggus-nimbus: order set on both children. */
+  .mini.is-flipped { grid-template-columns: 1fr 210px; }
+  .mini.is-flipped .mini-text { order: 1; }
+  .mini.is-flipped .mini-shot, .mini.is-flipped .mini-slot { order: 2; }
+  .mini.is-flipped .mini-slot { border-right: 0; border-left: 1px dashed var(--accent-soft); }
+  .mini-shot { width: 100%; height: 100%; min-height: 150px; object-fit: cover; object-position: top center; display: block; }
+  .mini-slot {
+    min-height: 150px; display: flex; align-items: center; justify-content: center;
+    text-align: center; font-size: 12px; color: var(--text-light);
+    border-right: 1px dashed var(--accent-soft); opacity: 0.7; padding: 12px;
+  }
+  .mini-text { padding: 22px 26px; display: flex; flex-direction: column; gap: 7px; justify-content: center; }
+  .mini-n { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 600; color: var(--accent); opacity: 0.6; }
+  .mini-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    color: var(--text);
+    line-height: 1.3;
+    /* Sets the title apart from the copy below it; the flex gap alone left them
+       reading as one block. */
+    margin-bottom: 12px;
+  }
+  /* Key phrase in each card: weight plus the same soft underline used for
+     named organizations, rather than bold alone. */
+  .mini-hl {
+    color: var(--text);
+    font-weight: 500;
+    border-bottom: 1.5px solid var(--accent-soft);
+    padding-bottom: 1px;
+  }
+  .mini-line { font-size: 15px; line-height: 1.7; color: var(--text-light); }
+  .mini-line + .mini-line { margin-top: 12px; }
+
+  @media (max-width: 768px) {
+    .mini, .mini.is-flipped { grid-template-columns: 1fr; }
+    .mini.is-flipped .mini-shot, .mini.is-flipped .mini-slot { order: 1; }
+    .mini.is-flipped .mini-text { order: 2; }
+    .mini.is-flipped .mini-slot { border-left: 0; border-bottom: 1px dashed var(--accent-soft); }
+    .mini-slot { border-right: 0; border-bottom: 1px dashed var(--accent-soft); }
+  }
+
+  /* ===== Vibe-coded flow strip =====
+     Names the flows and nothing else. Shows breadth at a glance without
+     publishing what any individual flow does. */
+  .flow-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 26px;
+  }
+  .flow-chip {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 14px;
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.3s ease;
+  }
+  .flow-chip:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(0,0,0,0.05); }
+  .flow-chip-n {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px; font-weight: 600; color: var(--accent); opacity: 0.6;
+  }
+  .flow-chip-name { font-size: 14px; line-height: 1.5; color: var(--text); }
+  .flow-note { font-size: 13.5px; color: var(--text-light); margin-top: 14px; opacity: 0.9; }
+
+  @media (max-width: 768px) {
+    .flow-strip { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ===== Surfaces inside the overhaul ===== */
+  .surface { display: grid; grid-template-columns: 1fr 280px; gap: 44px; align-items: start; margin-top: 52px; }
+  .surface.is-flipped { grid-template-columns: 280px 1fr; }
+  .surface.is-flipped .surface-media { order: -1; }
+  .surface-label {
+    font-size: 11.5px; letter-spacing: 1.6px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  .surface-title {
+    font-family: 'Playfair Display', serif; font-size: 21px; font-weight: 400;
+    margin-bottom: 8px; letter-spacing: -0.2px;
+  }
+  .surface-body { font-size: 16px; line-height: 1.8; color: var(--text-light); }
+
+  @media (max-width: 768px) {
+    .tldr-card { grid-template-columns: 1fr; gap: 6px; padding: 22px 22px; }
+    .surface, .surface.is-flipped { grid-template-columns: 1fr; gap: 20px; }
+    .surface.is-flipped .surface-media { order: 0; }
+    .surface-media { max-width: 320px; }
+  }
+</style></head>
 <body>
 
-<!-- Floating Background Elements -->
 <div class="floating-elements">
   <div class="butterfly-svg" style="opacity: 0.10;">
     <svg width="40" height="34" viewBox="0 0 48 40" fill="none">
@@ -1291,7 +1710,6 @@ html, body, * { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAA
   <div class="cloud-shape" style="width: 400px; height: 200px; top: 35%; right: -10%; opacity: 0.04; background: linear-gradient(135deg, #FFDAB9, #F4D1CB);"></div>
   <div class="cloud-shape" style="width: 550px; height: 280px; bottom: 10%; left: 15%; opacity: 0.04; background: linear-gradient(135deg, #A8D8EA, #C5D5CB);"></div>
 </div>
-
 <!-- Navigation -->
 <nav id="navbar">
   <a href="../" class="nav-logo">kathryn.</a>
@@ -1312,8 +1730,9 @@ html, body, * { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAA
       <span class="nav-butterfly"><svg width="16" height="14" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#c75d8f" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#c75d8f" opacity="0.7"/></svg></span>
     </a>
       <ul class="dropdown">
-        <li><a href="../garde-robe/">Garde-Robe</a></li>
-        <li><a href="../rituals/" class="dropdown-active">Rituals Cosmetics</a></li>
+        <li><a href="../garde-robe/" class="dropdown-active">Garde-Robe</a></li>
+        <li><a href="../garde-robe/" class="dropdown-active">Garde-Robe</a></li>
+        <li><a href="../rituals/">Rituals Cosmetics</a></li>
       </ul>
     </li>
     <li><a href="../outside-of-work/">Outside of Work
@@ -1328,10 +1747,12 @@ html, body, * { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAA
 
 <!-- Section Progress Nav -->
 <div class="section-nav" id="sectionNav">
-  <a href="#sec-overview">Strategy</a>
-  <a href="#sec-expansion">Expansion</a>
-  <a href="#sec-digital">Digital</a>
-  <a href="#sec-impact">Impact</a>
+  <a href="#sec-tldr">Summary</a>
+  <a href="#sec-problem">Problem</a>
+  <a href="#sec-research">Research</a>
+  <a href="#sec-overhaul">Build</a>
+  <a href="#sec-tradeoffs">Tradeoffs</a>
+  <a href="#sec-learnings">Learnings</a>
 </div>
 
 <!-- Back Link -->
@@ -1339,7 +1760,6 @@ html, body, * { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAA
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
   Back
 </a>
-
 <!-- ============================================ -->
 <!-- PROJECT HERO -->
 <!-- ============================================ -->
@@ -1347,39 +1767,67 @@ html, body, * { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAA
   <div class="project-hero-inner">
     <div class="project-badge">
       <svg width="14" height="12" viewBox="0 0 48 40" fill="none"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#E8735A" opacity="0.6"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#E8735A" opacity="0.6"/></svg>
-      Go-to-Market · Market Expansion
+      Product Management · Social Commerce
     </div>
-    <h1 class="project-hero-title">Bringing <em>Rituals</em> to Southeast Asia</h1>
-    <p class="project-hero-subtitle" style="max-width: 100%;">Part of the core pioneer team that took Rituals from zero to 4 stores across Southeast Asia in under 6 months.</p>
+    <h1 class="project-hero-title">Garde-Robe</h1>
+    <p class="project-hero-subtitle" style="max-width: 100%;">Product Management Intern at a fashion tech startup, overhauling the product into an AI-powered social commerce discovery platform.</p>
   </div>
 
   <div class="content-wide">
     <div class="hero-thumbnail">
-      <img src="images/rituals-thumbnail.jpg" alt="Rituals storefront on opening day, framed with cherry blossom, with the launch team at the entrance">
+      <img src="images/garde-robe-thumbnail.png" alt="Three Garde-Robe prototype screens: closet sync onboarding, the curated discovery feed, and shared wishlists">
     </div>
   </div>
 
-  <div class="project-hero-inner" style="padding-top: 40px;">
+  <div class="project-hero-inner" style="padding-top: 30px;">
     <div class="project-meta">
       <div class="meta-item">
         <span class="meta-label">Role</span>
-        <span class="meta-value">Intern → Marketing Executive</span>
+        <span class="meta-value">Product Management Intern</span>
       </div>
       <div class="meta-item">
         <span class="meta-label">Company</span>
-        <span class="meta-value">Rituals Cosmetics (Under Valiram Group)</span>
+        <span class="meta-value">Garde-Robe Inc.</span>
       </div>
       <div class="meta-item">
         <span class="meta-label">Duration</span>
-        <span class="meta-value">3-Month Internship → 6-Month Full-Time</span>
+        <span class="meta-value">Summer 2026</span>
       </div>
       <div class="meta-item">
         <span class="meta-label">Skills</span>
         <div class="skill-pills">
-          <span class="skill-pill-sm"><span class="pill-emoji">🚀</span> Go-to-Market Strategy</span>
-          <span class="skill-pill-sm"><span class="pill-emoji">📊</span> Market Research</span>
-          <span class="skill-pill-sm"><span class="pill-emoji">🛒</span> Omnichannel Retail Strategy</span>
-          <span class="skill-pill-sm"><span class="pill-emoji">📣</span> Marketing &amp; PR</span>
+          <span class="skill-pill-sm"><span class="pill-emoji">✦</span> AI Product Development</span>
+          <span class="skill-pill-sm"><span class="pill-emoji">🔍</span> Product Discovery</span>
+          <span class="skill-pill-sm"><span class="pill-emoji">📐</span> Rapid Prototyping</span>
+          <span class="skill-pill-sm"><span class="pill-emoji">🧠</span> Personalization Systems</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="project-hero-inner">
+    <p class="disclaimer">Screens shown are prototypes. Details have been generalized and simplified for confidentiality.</p>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- TL;DR -->
+<!-- ============================================ -->
+<section class="case-section" id="sec-tldr">
+  <div class="section-aura" style="width: 400px; height: 400px; background: radial-gradient(circle, var(--lavender), transparent); top: -50px; right: -150px;"></div>
+  <div class="content">
+    <div class="reveal">
+      <div class="stat-grid" style="margin-top: 0;">
+        <div class="stat-card">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">user flows designed and prototyped with Claude Code across 50+ screens</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">50%+</div>
+          <div class="stat-label">fewer bug reports from user testing</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">features going into the next version of the app</div>
         </div>
       </div>
     </div>
@@ -1387,78 +1835,225 @@ html, body, * { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAA
 </section>
 
 <!-- ============================================ -->
-<!-- GO-TO-MARKET STRATEGY -->
+<!-- CONTEXT -->
 <!-- ============================================ -->
-<section class="case-section" id="sec-overview">
-  <div class="section-aura" style="width: 400px; height: 400px; background: radial-gradient(circle, var(--lavender), transparent); top: -50px; right: -150px;"></div>
+<section class="case-section" id="sec-context">
   <div class="content">
-    <div class="reveal hero-aligned">
-      <h2 class="case-section-title">From Europe to Southeast Asia</h2>
-      <div class="case-body">
-        <p>My time at Rituals Cosmetics was one of the most formative experiences in my career as I saw the brand come to life from the ground up, first scoping the market opportunity as an intern and then returning full-time to manage the launch.</p>
-      </div>
-    </div>
-
-    <div class="reveal hero-aligned" style="margin-top: 28px;">
-      <p style="font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 18px;">My Role</p>
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-        <div class="role-card">
-          <p class="role-text">Part of the <em>core pioneer team</em> that built the brand in Southeast Asia from scratch</p>
-        </div>
-        <div class="role-card">
-          <p class="role-text"><em>Lead marketing representative</em> supporting the Regional General Manager</p>
-        </div>
-        <div class="role-card">
-          <p class="role-text">Owned <em>brand and launch execution end to end</em>, aligning marketing, PR, retail, and merchandising teams.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="rule-divider"></div>
-
-    <!-- Label sits inside the left column, so the photo spans the full height
-         of the block rather than starting level with card 01 -->
     <div class="reveal">
-      <!-- Label and description sit above the row at full section width, matching
-           how the Digital section is built. Inside the left column they wrapped at
-           ~600px while the same paragraph in Digital wrapped at 1104px. -->
-      <div class="section-label-row" style="margin-bottom: 18px;">
-        <p class="case-section-label">Go-to-Market Strategy</p>
-        <span class="phase-badge intern">Internship</span>
+      <p class="case-section-label"><span class="sec-num">01</span>Context</p>
+      <div class="ctx-lockup">
+        <img class="ctx-logo" src="images/gr-logo.png" alt="Garde-Robe app icon">
+        <div>
+          <div class="ctx-lockup-name">Garde-Robe</div>
+          <div class="ctx-lockup-meta">Fashion &middot; Shopping &middot; Social commerce</div>
+        </div>
       </div>
-      <div class="case-body" style="margin-bottom: 28px;">
-        <p>Rituals was already an established and iconic European bath and beauty brand, with a recognized identity and a large consumer base familiar with its products. Entering Southeast Asia meant protecting that identity while accounting for local regulations, product requirements, and a market that shops differently from Europe.</p>
+      <p class="glance-lead">Garde-Robe is a fashion and social commerce app that builds your digital closet automatically from your shopping receipts, tracks what you want with wishlists that alert you to sales, and helps you resell what you no longer wear.</p>
+      <p class="glance-lead" style="margin-top: 16px;">I first led a 10 week client project with Garde-Robe during the Spring 2026 semester through <span class="uline">Product Space @ Penn</span>, a student product management club, beta testing the app and pitching recommendations to the founder. That earned an internship offer, and I joined for the summer as their Product Management Intern, reporting directly to the CEO.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PROBLEM -->
+<div class="butterfly-divider">
+  <span class="dot"></span><span class="dot"></span>
+  <svg width="20" height="17" viewBox="0 0 48 40" fill="none" opacity="0.5"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C8B6E2" opacity="0.6"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C8B6E2" opacity="0.6"/></svg>
+  <span class="dot"></span><span class="dot"></span>
+</div>
+
+<!-- ============================================ -->
+<section class="case-section" id="sec-problem">
+  <div class="content">
+    <div class="reveal phase" style="align-items: center;">
+      <div>
+        <p class="case-section-label"><span class="sec-num">02</span>Problem</p>
+        <h2 class="case-section-title" style="margin-bottom: 16px;">Finding its space in the category</h2>
+        <p class="glance-lead">Garde-Robe had trouble finding which space in the fashion app category it wanted to be in. Beta testers found it confusing, it read as one more manual closet catalogue, and it asked for a lot of work before returning any value.</p>
+        <p class="glance-lead" style="margin-top: 16px;">The same complaint surfaced under several different headings. The core value was not clear on first open, some of the most useful features were undiscoverable, and others felt dated to the Gen Z audience it was built for.</p>
       </div>
-      <div class="media-row" style="display: flex; gap: 24px; align-items: stretch;">
-        <div style="flex: 1.1;">
-          <div class="key-insights-list cols-1">
-            <div class="key-insight-item">
-              <span class="key-insight-num">01</span>
-              <div class="key-insight-content">
-                <strong>Built the go-to-market strategy</strong>
-                <span>Sized the market, mapped the competitive landscape, and defined the segmentation and channel strategy behind Rituals' Southeast Asia entry.</span>
-              </div>
-            </div>
-            <div class="key-insight-item">
-              <span class="key-insight-num">02</span>
-              <div class="key-insight-content">
-                <strong>Mapped Southeast Asian consumer behavior</strong>
-                <span>Benchmarked how the region shops for beauty, online and in store, against Rituals' 1,000+ store European base.</span>
-              </div>
-            </div>
-            <div class="key-insight-item">
-              <span class="key-insight-num">03</span>
-              <div class="key-insight-content">
-                <strong>Presented findings to the global strategy team</strong>
-                <span>Shaped the regional launch approach around local regulations, product certifications, labeling, and campaign messaging adapted within global brand guidelines.</span>
-              </div>
-            </div>
+      <div class="phase-media">
+        <img class="shot" src="images/garde-robe-problem.png" alt="Collage of saved fashion images with user avatars, the pinboard-style layout the feed used before the overhaul" style="border: 0; background: transparent;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- RESEARCH -->
+<div class="butterfly-divider">
+  <span class="dot"></span><span class="dot"></span>
+  <svg width="20" height="17" viewBox="0 0 48 40" fill="none" opacity="0.5"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C8B6E2" opacity="0.6"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C8B6E2" opacity="0.6"/></svg>
+  <span class="dot"></span><span class="dot"></span>
+</div>
+
+<!-- ============================================ -->
+<section class="case-section" id="sec-research">
+  <div class="content">
+    <div class="reveal phase">
+      <div>
+        <p class="case-section-label"><span class="sec-num">03</span>Research</p>
+        <h2 class="case-section-title" style="margin-bottom: 16px;">What makes an app sticky</h2>
+        <p class="phase-body">I tore down <span class="num">8+</span> categories of apps across <span class="num">20+</span> competitors, from books and music to closet and resale, to study what makes apps sticky and the social mechanics that Gen-Zs want to use.</p>
+        <p class="phase-body" style="margin-top: 14px;">That research produced the main concept proposal I gave to the founder, which shaped the overhaul of the app into something users would want from a fashion app.</p>      </div>
+      <div class="phase-media">
+        <img class="shot" src="images/competitors.png" alt="App icons for four of the products studied in the teardown" style="border: 0; background: transparent;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- THE OVERHAUL -->
+<div class="butterfly-divider">
+  <span class="dot"></span><span class="dot"></span>
+  <svg width="20" height="17" viewBox="0 0 48 40" fill="none" opacity="0.5"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C8B6E2" opacity="0.6"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C8B6E2" opacity="0.6"/></svg>
+  <span class="dot"></span><span class="dot"></span>
+</div>
+
+<!-- ============================================ -->
+<section class="case-section" id="sec-overhaul">
+  <div class="section-aura" style="width: 500px; height: 500px; background: radial-gradient(circle, var(--sky), transparent); top: 200px; left: -200px;"></div>
+  <div class="content">
+    <div class="reveal">
+      <p class="case-section-label"><span class="sec-num">04</span>The overhaul</p>
+      <h2 class="case-section-title">Proposal and prototypes</h2>
+      <p class="glance-lead">In my proposal process, I would put together lo-fidelity prototypes in Figma to visualize the components and features I wanted to change. It gave the founder a much better grasp of what I wanted to build.</p>
+      <p class="glance-lead" style="margin-top: 16px;">These prototypes also acted as the starting point and reference for building workable versions in Claude Code.</p>
+      <img class="shot" src="images/lo-fi-garde-robe.png" alt="Lo-fidelity Figma wireframes of the shared wishlist and feed screens" style="margin-top: 26px;">
+    </div>
+
+                        <div class="ai-box reveal">
+      <h3 class="ai-box-title">Building the features</h3>
+      <p class="ai-box-body">Throughout the summer I built <span class="num">15+</span> clickable end-to-end user flows across <span class="num">50+</span> screens in React and TypeScript using Claude Code, iterating on screens and adding features directly based on user and founder feedback loops. I extracted the designer's design system into reusable tokens and shared components, which let me build prototypes that matched the production UI.</p>
+      <p class="ai-box-body" style="margin-top: 16px;">It changed how the team worked. Instead of handing the designer and engineering team a document to interpret, I passed over a working starting point, which cut the interpretation work on their end down significantly.</p>
+
+      <p class="highlight-label">Selected feature highlights</p>
+      <div class="mini-grid">
+<div class="mini">
+          <img class="mini-shot" src="images/gr-vibe-coded-feed.png" alt="Home feed">
+          <div class="mini-text">
+            <span class="mini-n">01</span>
+            <span class="mini-name">Curated home feed</span>
+            <span class="mini-line">The home feed read like a generic pinboard, a grid of saved images from every user on the platform, and testers said it felt too close to Pinterest.</span>
+            <span class="mini-line">I took that feedback and <strong class="mini-hl">rebuilt it as an AI-powered discovery feed</strong> that recommends people with a similar style, items matched to what a user already saves, activity from friends they follow, brands in their closet, among other in-feed recommendations.</span>
           </div>
         </div>
-              <div class="media-col">
-          <img class="photo is-square" src="images/rituals-expansion-3.jpg" alt="Rituals brand philosophy standee at the launch event">
+        
+<div class="mini is-flipped">
+          <img class="mini-shot" src="images/gr-vibe-coded-onboarding.png" alt="Onboarding and closet sync">
+          <div class="mini-text">
+            <span class="mini-n">02</span>
+            <span class="mini-name">Onboarding and closet sync</span>
+            <span class="mini-line">Users were not using the one-click closet sync, which parses receipts from their inbox to build a digital wardrobe for them.</span>
+            <span class="mini-line">I proposed and <strong class="mini-hl">rebuilt a <span class="num">12+</span> screen onboarding flow</strong> that carries a new user from app introduction to building their digital closet. This rebuild was crucial as it doubles as the data layer for personalization. Every imported purchase becomes a signal the recommendation engine reads, so how complete a closet is directly determines how well the curated feed performs.</span>
+          </div>
         </div>
+        
+<div class="mini">
+          <img class="mini-shot" src="images/gr-vibe-coded-referral.png" alt="Invite friends screen with tiered referral unlocks">
+          <div class="mini-text">
+            <span class="mini-n">03</span>
+            <span class="mini-name">Referral mechanic</span>
+            <span class="mini-line">During my 10 week client project with Garde-Robe, I found that the app had no natural moment to ask a user to bring a friend in. I proposed a growth lever the product could pull, bringing new users in through the people already on the platform.</span>
+            <span class="mini-line">I <strong class="mini-hl">built a 3-tier referral system</strong> that unlocks a different part of the app each time a friend joins. I nested the mechanic under 3 main sections across the app, including in the onboarding, so it appears at moments a user is already engaged.</span>
+          </div>
+        </div>
+        
+<div class="mini is-flipped">
+          <img class="mini-shot" src="images/gr-vibe-coded-jointwishlists.png" alt="Joint wishlist view previewing several saved items">
+          <div class="mini-text">
+            <span class="mini-n">04</span>
+            <span class="mini-name">Wishlists and joint wishlists</span>
+            <span class="mini-line">Each wishlist showed a single cover thumbnail, and users said it felt dated, closer to the apps they had moved on from than the ones they used currently.</span>
+            <span class="mini-line">I <strong class="mini-hl">redesigned the wishlist and joint wishlist views</strong> so a list previews several saved items at once instead of one image, which makes it read as a collection rather than a folder. I also made joint wishlists one of the referral unlocks, tying the feature into the growth loop among other features.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- TRADEOFFS -->
+<div class="butterfly-divider">
+  <span class="dot"></span><span class="dot"></span>
+  <svg width="20" height="17" viewBox="0 0 48 40" fill="none" opacity="0.5"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C8B6E2" opacity="0.6"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C8B6E2" opacity="0.6"/></svg>
+  <span class="dot"></span><span class="dot"></span>
 </div>
+
+<!-- ============================================ -->
+<section class="case-section" id="sec-tradeoffs">
+  <div class="content">
+    <div class="reveal">
+      <p class="case-section-label"><span class="sec-num">05</span>Tradeoffs</p>
+      <p class="glance-lead">Since we only had the summer to ship a new version, I sequenced work by how many new users a surface would touch rather than how interesting it was to build.</p>
+      <p class="glance-lead" style="margin-top: 16px;">That meant deprioritizing <strong class="mini-hl">delight features</strong>, the ones that make the app feel distinct but do not bring new users in. I had already proposed and built several of them, including the style personalities, fun micro-interactions and a new design identity for the app, but we decided together to move them to a later cycle so we could prioritize user acquisition and activation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- OUTCOME -->
+<div class="butterfly-divider">
+  <span class="dot"></span><span class="dot"></span>
+  <svg width="20" height="17" viewBox="0 0 48 40" fill="none" opacity="0.5"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C8B6E2" opacity="0.6"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C8B6E2" opacity="0.6"/></svg>
+  <span class="dot"></span><span class="dot"></span>
+</div>
+
+<!-- ============================================ -->
+<section class="case-section" id="sec-outcome">
+  <div class="content">
+    <div class="reveal">
+      <p class="case-section-label">Other key deliverables</p>
+      <div class="goal-list">
+        <div class="goal-item"><span>&mdash;</span><span><strong class="goal-hl">Mapped and built the Shopify checkout-to-closet experience</strong>, spanning 6+ flows across new and returning user scenarios (mobile-web, in-app, desktop).</span></div>
+        <div class="goal-item"><span>&mdash;</span><span><strong class="goal-hl">Redesigned the website's main landing page</strong> around a new product message, driven by beta feedback and the overhauled product positioning.</span></div>
+        <div class="goal-item"><span>&mdash;</span><span><strong class="goal-hl">Ran frequent QA sessions across successive TestFlight builds</strong>, maintaining a structured feedback log that paired every bug and usability issue with a proposed fix, and escalated priorities to engineering.</span></div>
+        <div class="goal-item"><span>&mdash;</span><span><strong class="goal-hl">Designed a feedback loop</strong> that converts negative signals into structured data, replacing silent dismissals with a reason picker that feeds the recommendation engine.</span></div>
+        <div class="goal-item"><span>&mdash;</span><span><strong class="goal-hl">Rebuilt the user profile as a style identity page</strong>, giving each user a style archetype and the social surfaces relevant to the target user group's interests.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- QUOTE -->
+<!-- ============================================ -->
+<!-- LEARNINGS -->
+<div class="butterfly-divider">
+  <span class="dot"></span><span class="dot"></span>
+  <svg width="20" height="17" viewBox="0 0 48 40" fill="none" opacity="0.5"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C8B6E2" opacity="0.6"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C8B6E2" opacity="0.6"/></svg>
+  <span class="dot"></span><span class="dot"></span>
+</div>
+
+<!-- ============================================ -->
+<section class="case-section" id="sec-learnings" style="padding-top: 16px;">
+  <div class="content">
+    <div class="reveal">
+      <div class="conclusion-block">
+        <p class="case-section-label" style="margin-bottom: 16px;"><span class="sec-num">06</span>Learnings</p>
+        <div class="goal-list">
+          <div class="goal-item"><span>&bull;</span><span>Came away with much sharper prototyping skills and a better sense of how the PM role is widening, from defining what should get built to using AI tools to build a working version and put the vision in front of stakeholders early.</span></div>
+          <div class="goal-item"><span>&bull;</span><span>Learned how to synthesize feedback from beta testing and QA, turning scattered individual complaints into a clear picture of what the product should be.</span></div>
+          <div class="goal-item"><span>&bull;</span><span>After a few years in large, structured companies, saw what it takes to work at an early-stage startup, where there is no internal process to inherit but the creative freedom to propose a direction and build it yourself.</span></div>
+          <div class="goal-item"><span>&bull;</span><span>Learned how to build a case strong enough to change a founder's mind about their own product, and that evidence moves people where opinions do not.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<section class="case-section" id="sec-quote" style="padding-top: 0;">
+  <div class="content">
+    <div class="reveal">
+      <div class="quote-block">
+        <p class="quote-text">&ldquo;I had the pleasure of managing Kathryn this summer as a Product Manager. Throughout her internship, Kathryn demonstrated strong product instincts, attention to detail, and an impressive ability to take ownership of projects from initial research through execution. She was thoughtful about the user experience, asked the right questions, and was able to work effectively across product, design, and engineering.</p>
+        <p class="quote-text">What stood out most was her willingness to jump into ambiguous problems, learn quickly, and turn feedback into action. She was dependable, proactive, and genuinely invested in making the product better. I would highly recommend Kathryn to any team looking for a skilled PM!&rdquo;</p>
+        <p class="quote-attrib"><strong>Sarah Findlay</strong>, CEO and Founder, Garde-Robe Inc.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1469,203 +2064,14 @@ html, body, * { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAA
   <span class="dot"></span><span class="dot"></span>
 </div>
 
-<!-- ============================================ -->
-<!-- BRAND EXPANSION -->
-<!-- ============================================ -->
-<section class="case-section" id="sec-expansion">
-  <div class="content">
-    <div class="reveal">
-      <!-- Frame to frame: copy left, stats + photos right -->
-      <div class="panel-split">
-        <div class="panel-left">
-          <div class="section-label-row">
-            <p class="case-section-label">Brand Expansion</p>
-            <span class="phase-badge fulltime">Marketing Executive</span>
-          </div>
-          <h2 class="case-section-title" style="margin-bottom: 28px;">4 store openings in under 6 months</h2>
-
-          <div class="key-insights-list cols-1">
-            <div class="key-insight-item">
-              <span class="key-insight-num">01</span>
-              <div class="key-insight-content">
-                <strong>Launched 4 retail locations</strong>
-                <span>Across Malaysia and Singapore.</span>
-              </div>
-            </div>
-            <div class="key-insight-item">
-              <span class="key-insight-num">02</span>
-              <div class="key-insight-content">
-                <strong>Elevated the in-store customer experience</strong>
-                <span>Worked with the merchandising team on how each store looked and felt to customers.</span>
-              </div>
-            </div>
-            <div class="key-insight-item">
-              <span class="key-insight-num">03</span>
-              <div class="key-insight-content">
-                <strong>Secured sites and in-mall visibility</strong>
-                <span>Partnered with mall leasing teams on site selection and negotiated in-mall advertising space for launches.</span>
-              </div>
-            </div>
-            <div class="key-insight-item">
-              <span class="key-insight-num">04</span>
-              <div class="key-insight-content">
-                <strong>Planned and executed 2 PR launch events</strong>
-                <span>In East Malaysia and Singapore.</span>
-              </div>
-            </div>
-            <div class="key-insight-item">
-              <span class="key-insight-num">05</span>
-              <div class="key-insight-content">
-                <strong>Drove influencer, press, and publication campaigns</strong>
-                <span>Generated buzz around new store openings and sustained brand visibility across channels, highlighting different beauty collections monthly.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="panel-right">
-          <div class="panel-photos">
-            <figure class="photo-metric" tabindex="0">
-              <img class="photo is-portrait" src="images/rituals-expansion-1.jpg" alt="Rituals storefront ahead of opening day, Malaysia">
-              <figcaption class="metric">
-                <span class="metric-number">2x</span>
-                <span class="metric-label">event attendance vs. target at launches</span>
-              </figcaption>
-            </figure>
-            <figure class="photo-metric" tabindex="0">
-              <img class="photo is-portrait" src="images/rituals-product.jpg" alt="Ritual of Ayurveda rose and product vial in store">
-              <figcaption class="metric">
-                <span class="metric-number">110%</span>
-                <span class="metric-label">of sales target during the launch period</span>
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="butterfly-divider">
-  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-  <svg width="22" height="18" viewBox="0 0 48 40" fill="none" opacity="0.5"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#A8D8EA" opacity="0.7"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#A8D8EA" opacity="0.7"/></svg>
-  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-</div>
-
-<!-- ============================================ -->
-<!-- DIGITAL & E-COMMERCE -->
-<!-- ============================================ -->
-<section class="case-section" id="sec-digital">
-  <div class="section-aura" style="width: 400px; height: 400px; background: radial-gradient(circle, var(--peach), transparent); top: 0; right: -100px;"></div>
-  <div class="content">
-    <div class="reveal">
-      <div class="section-label-row">
-        <p class="case-section-label">Digital &amp; E-Commerce</p>
-        <span class="phase-badge fulltime">Marketing Executive</span>
-      </div>
-      <h2 class="case-section-title">Building Rituals' presence online</h2>
-      <div class="case-body">
-        <p>Beyond opening physical stores, we launched localized websites for Malaysia and Singapore and laid the foundation for an omnichannel path-to-purchase strategy across both markets.</p>
-      </div>
-    </div>
-
-    <!-- What I did — numbered points beside an image, matching the other sections -->
-    <div class="reveal" style="margin-top: 28px;">
-      <div class="media-row" style="display: flex; flex-direction: row-reverse; gap: 24px; align-items: stretch;">
-        <div style="flex: 1.1;">
-          <div class="key-insights-list cols-1">
-            <div class="key-insight-item">
-              <span class="key-insight-num">01</span>
-              <div class="key-insight-content">
-                <strong>Launched localized e-commerce sites</strong>
-                <span>Worked with engineering, e-commerce, and merchandising to ship sites for Malaysia and Singapore.</span>
-              </div>
-            </div>
-            <div class="key-insight-item">
-              <span class="key-insight-num">02</span>
-              <div class="key-insight-content">
-                <strong>Localized content, pricing, and currency</strong>
-                <span>Managed the per-market setup with the Regional General Manager.</span>
-              </div>
-            </div>
-            <div class="key-insight-item">
-              <span class="key-insight-num">03</span>
-              <div class="key-insight-content">
-                <strong>Ran A/B testing on ads and newsletters</strong>
-                <span>Optimized for both ongoing brand marketing and store launch campaigns.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-              <div class="media-col media-col-sm">
-          <img class="photo is-portrait" src="images/rituals-expansion-4.jpg" alt="Guests and the team at the Rituals launch event backdrop">
-        </div>
-</div>
-    </div>
-
-    <!-- Approach — three cards. Short measure reads far better than full-width bullets. -->
-    <div class="reveal approach-block" style="margin-top: 72px;">
-      <p class="case-section-label">Approach</p>
-      <div class="insight-grid" style="margin-top: 22px;">
-        <div class="insight-card">
-          <p class="insight-text"><strong>Two distinct audiences.</strong> Tailored messaging for brand-aware European travelers and new-to-Rituals shoppers.</p>
-        </div>
-        <div class="insight-card">
-          <p class="insight-text"><strong>Awareness and conversion.</strong> Targeted campaigns to build awareness with new customers and convert existing ones.</p>
-        </div>
-        <div class="insight-card">
-          <p class="insight-text"><strong>Online into in-store.</strong> Bridged digital and physical touchpoints so online discovery drove store visits and purchases.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Where online discovery landed: the physical store.
-         Held to 960px to match the team photo in the Impact card below, which
-         spans its 864px card plus a 48px bleed each side. -->
-    <div class="reveal" style="margin-top: 72px; max-width: 864px; margin-left: auto; margin-right: auto;">
-      <img class="photo is-wide" src="images/rituals-expansion-2.jpg" alt="Rituals store interior with the full product range merchandised">
-    </div>
-
-  </div>
-</section>
-
-<div class="butterfly-divider">
-  <span class="dot"></span>
-  <svg width="18" height="15" viewBox="0 0 48 40" fill="none" opacity="0.45"><path d="M24 20C20 12 10 2 4 6C-2 10 6 22 12 24C18 26 22 22 24 20Z" fill="#C8B6E2" opacity="0.6"/><path d="M24 20C28 12 38 2 44 6C50 10 42 22 36 24C30 26 26 22 24 20Z" fill="#C8B6E2" opacity="0.6"/></svg>
-  <span class="dot"></span>
-</div>
-
-
-<!-- ============================================ -->
-<!-- IMPACT & REFLECTION -->
-<!-- ============================================ -->
-<section class="case-section" id="sec-impact" style="padding-top: 16px;">
-  <div class="content">
-    <div class="reveal">
-      <div class="conclusion-block with-photo">
-        <div class="conclusion-photo">
-          <img class="photo is-wide" src="images/rituals-footer.jpg" alt="The full Rituals Malaysia store team at a launch">
-        </div>
-        <p class="case-section-label" style="margin-bottom: 16px;">Impact &amp; Reflection</p>
-        <h3 class="conclusion-title">From 0 to 10+ stores across three countries</h3>
-        <p class="conclusion-text">Today, Rituals has more than 10 store locations across Malaysia, Singapore, and Thailand — built on the go-to-market strategy and launch playbook developed during the initial expansion. This experience taught me what it means to own a product from zero: deeply understanding your market, aligning cross-functional stakeholders around a shared vision, and moving fluidly between research, strategy, and execution to deliver results under real constraints.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- NEXT PROJECT -->
-<!-- ============================================ -->
 <section class="next-project">
   <div class="content">
-    <p class="next-label">Next Project</p>
-    <h2 class="next-title"><a href="../alienation/">Alienation →</a></h2>
-    <p class="next-blurb">A world-building game where family members create their own characters, earn coins, and grow a shared planet that keeps them connected.</p>
+    <p class="next-label">Next</p>
+    <h2 class="next-title"><a href="../rituals/">Rituals Cosmetics →</a></h2>
+    <p class="next-blurb">Go-to-market and market expansion, taking a European beauty brand from zero to four stores across Southeast Asia in under six months.</p>
   </div>
 </section>
 
-<!-- Footer -->
 <footer style="position: relative; z-index: 2;">
   <div style="display: flex; justify-content: center; align-items: center; gap: 8px; padding: 32px 0;">
     <p style="font-size: 12px; color: var(--text-light); opacity: 0.5; letter-spacing: 0.5px;">Kathryn Chiew · 2026</p>
@@ -1677,7 +2083,6 @@ html, body, * { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAA
     </svg>
   </div>
 </footer>
-
 <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
@@ -1690,16 +2095,14 @@ html, body, * { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAA
 
   const sectionNav = document.getElementById('sectionNav');
   const sectionLinks = sectionNav.querySelectorAll('a');
-  const sections = [
-    { id: 'sec-overview', el: document.getElementById('sec-overview') },
-    { id: 'sec-expansion', el: document.getElementById('sec-expansion') },
-    { id: 'sec-digital', el: document.getElementById('sec-digital') },
-    { id: 'sec-impact', el: document.getElementById('sec-impact') },
-  ].filter(s => s.el);
+  const sections = ['sec-tldr', 'sec-problem', 'sec-research', 'sec-overhaul', 'sec-tradeoffs', 'sec-learnings']
+    .map(id => ({ id, el: document.getElementById(id) }))
+    .filter(s => s.el);
 
   function updateSectionNav() {
     const scrollY = window.scrollY;
-    const heroBottom = document.querySelector('.project-hero').offsetTop + document.querySelector('.project-hero').offsetHeight;
+    const hero = document.querySelector('.project-hero');
+    const heroBottom = hero.offsetTop + hero.offsetHeight;
     sectionNav.classList.toggle('visible', scrollY > heroBottom - 100);
     let current = '';
     for (const section of sections) {
